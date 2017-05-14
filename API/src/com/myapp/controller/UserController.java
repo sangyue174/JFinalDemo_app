@@ -1,8 +1,5 @@
 package com.myapp.controller;
 
-import java.io.UnsupportedEncodingException;
-import java.net.URLDecoder;
-
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.jfinal.core.Controller;
@@ -16,10 +13,9 @@ import com.myapp.service.LoginService;
  * @author zhang
  *
  */
-public class LoginController extends Controller {
+public class UserController extends Controller {
 	/**
 	 * 登录动作
-	 * @throws UnsupportedEncodingException 
 	 */
 	public void LoginAction() {
 		String user = this.getPara("username");
@@ -55,5 +51,9 @@ public class LoginController extends Controller {
 			object.put("data", data);
 			this.renderJson(object);
 		}
+	}
+	
+	public void registerAction() {
+		
 	}
 }

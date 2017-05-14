@@ -13,8 +13,8 @@ import com.jfinal.plugin.druid.DruidPlugin;
 import com.jfinal.render.ViewType;
 import com.jfinal.template.Engine;
 import com.myapp.controller.IndexController;
-import com.myapp.controller.LoginController;
 import com.myapp.controller.RegisterController;
+import com.myapp.controller.UserController;
 import com.myapp.module.User;
 
 /**
@@ -37,8 +37,7 @@ public class MyAppConfig extends JFinalConfig {
 
 	@Override
 	public void configRoute(Routes me) {
-		me.add("/login", LoginController.class);
-		me.add("/register", RegisterController.class);
+		me.add("/user", UserController.class);
 		me.add("/", IndexController.class);
 	}
 
