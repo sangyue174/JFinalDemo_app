@@ -13,9 +13,8 @@ import com.jfinal.plugin.druid.DruidPlugin;
 import com.jfinal.render.ViewType;
 import com.jfinal.template.Engine;
 import com.myapp.controller.IndexController;
-import com.myapp.controller.RegisterController;
 import com.myapp.controller.UserController;
-import com.myapp.module.User;
+import com.myapp.utils._MappingKit;
 
 /**
  * 配置类
@@ -47,10 +46,10 @@ public class MyAppConfig extends JFinalConfig {
 		DruidPlugin druidPlugin = createDruidPlugin();
 		plugins.add(druidPlugin);
 
-		ActiveRecordPlugin activeRecordPlugin = new ActiveRecordPlugin(druidPlugin);
-		// 添加Model类和数据库表的映射。
-		activeRecordPlugin.addMapping("tb_user", "id", User.class);
-		plugins.add(activeRecordPlugin);
+		ActiveRecordPlugin arp = new ActiveRecordPlugin(druidPlugin);
+		// 添加Model类和数据库表的映射,所有映射在 MappingKit 中自动化搞定
+		_MappingKit.mapping(arp);
+		plugins.add(arp);
 	}
 
 	// 创建Druid插件
