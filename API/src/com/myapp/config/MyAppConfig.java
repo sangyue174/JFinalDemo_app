@@ -14,7 +14,7 @@ import com.jfinal.render.ViewType;
 import com.jfinal.template.Engine;
 import com.myapp.controller.IndexController;
 import com.myapp.controller.UserController;
-import com.myapp.utils._MappingKit;
+import com.myapp.module._MappingKit;
 
 /**
  * 配置类

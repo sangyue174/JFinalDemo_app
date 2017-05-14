@@ -3,7 +3,6 @@ package com.myapp.utils;
 import javax.sql.DataSource;
 
 import com.jfinal.kit.PathKit;
-import com.jfinal.kit.PropKit;
 import com.jfinal.plugin.activerecord.generator.Generator;
 import com.jfinal.plugin.druid.DruidPlugin;
 import com.myapp.config.MyAppConfig;
@@ -17,7 +16,6 @@ import com.myapp.config.MyAppConfig;
 public class _JFinalDemoGenerator {
 	
 	public static DataSource getDataSource() {
-		PropKit.use("a_little_config.txt");
 		DruidPlugin druidPlugin = MyAppConfig.createDruidPlugin();
 		druidPlugin.start();
 		return druidPlugin.getDataSource();
@@ -27,10 +25,10 @@ public class _JFinalDemoGenerator {
 		// base model 所使用的包名
 		String baseModelPackageName = "com.myapp.module.base";
 		// base model 文件保存路径
-		String baseModelOutputDir = PathKit.getWebRootPath() + "/../src/com/demo/common/model/base";
+		String baseModelOutputDir = PathKit.getWebRootPath() + "/../src/com/myapp/module/base";
 		
 		// model 所使用的包名 (MappingKit 默认使用的包名)
-		String modelPackageName = "com.demo.common.model";
+		String modelPackageName = "com.myapp.module";
 		// model 文件保存路径 (MappingKit 与 DataDictionary 文件默认保存路径)
 		String modelOutputDir = baseModelOutputDir + "/..";
 		
@@ -47,7 +45,7 @@ public class _JFinalDemoGenerator {
 		// 设置是否生成字典文件
 		generator.setGenerateDataDictionary(false);
 		// 设置需要被移除的表名前缀用于生成modelName。例如表名 "osc_user"，移除前缀 "osc_"后生成的model名为 "User"而非 OscUser
-		generator.setRemovedTableNamePrefixes("t_");
+		generator.setRemovedTableNamePrefixes("tb_");
 		// 生成
 		generator.generate();
 	}
