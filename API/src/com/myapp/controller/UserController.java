@@ -52,8 +52,15 @@ public class UserController extends Controller {
 			this.renderJson(object);
 		}
 	}
-	
+
 	public void registerAction() {
-		
+		String identityType = getPara("identityType") == null ? "phone"
+				: getPara("identityType").toLowerCase();// 验证类型:phone,qq,weixin
+		String identifier = getPara("identifier");// 验证账号
+		String credential = getPara("credential");// 验证凭证
+		String code = getPara("code");// 验证码
+		if(identifier ){
+			
+		}
 	}
 }
