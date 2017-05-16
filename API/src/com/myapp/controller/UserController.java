@@ -1,10 +1,14 @@
 package com.myapp.controller;
 
+import org.apache.commons.lang.StringUtils;
+
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.jfinal.core.Controller;
 import com.myapp.module.User;
 import com.myapp.service.LoginService;
+import com.myapp.utils.response.DataResponse;
+import com.myapp.utils.response.LevelEnum;
 
 /**
  * 登录动作
@@ -17,7 +21,7 @@ public class UserController extends Controller {
 	/**
 	 * 登录动作
 	 */
-	public void LoginAction() {
+	public void loginAction() {
 		String user = this.getPara("username");
 		String pwd = this.getPara("password");
 		User userModule = LoginService.getUserInfo(user, pwd);
@@ -29,7 +33,8 @@ public class UserController extends Controller {
 			object.put("msg", "用户名或密码错误");
 			object.put("data", data);
 			this.renderJson(object);
-		} else if (userModule != null && !userModule.get("password").equals(pwd)) {// 密码错误，请核对
+		} else if (userModule != null
+				&& !userModule.get("password").equals(pwd)) {// 密码错误，请核对
 			object.put("errorCode", 0);
 			object.put("msg", "密码错误，请核对");
 			object.put("data", data);
@@ -59,8 +64,33 @@ public class UserController extends Controller {
 		String identifier = getPara("identifier");// 验证账号
 		String credential = getPara("credential");// 验证凭证
 		String code = getPara("code");// 验证码
-		if(identifier ){
-			
+		if (StringUtils.isEmpty(identifier)) {
+			this.renderJson(new DataResponse(LevelEnum.ERROR, "账号不可为空，请填写"));
+			return;
 		}
+		if(StringUtils.isEmpty(credential)){
+			this.renderJson(new DataResponse(LevelEnum.ERROR, "密码不可为空，请填写"));
+			return;
+		}
+		if
+		
+	}
+	
+	public void registerAction() {
+		String identityType = getPara("identityType") == null ? "phone"
+				: getPara("identityType").toLowerCase();// 验证类型:phone,qq,weixin
+		String identifier = getPara("identifier");// 验证账号
+		String credential = getPara("credential");// 验证凭证
+		String code = getPara("code");// 验证码
+		if (StringUtils.isEmpty(identifier)) {
+			this.renderJson(new DataResponse(LevelEnum.ERROR, "账号不可为空，请填写"));
+			return;
+		}
+		if(StringUtils.isEmpty(credential)){
+			this.renderJson(new DataResponse(LevelEnum.ERROR, "密码不可为空，请填写"));
+			return;
+		}
+		if
+		
 	}
 }
