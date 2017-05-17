@@ -1,4 +1,4 @@
-package com.myapp.module.base;
+package com.myapp.bean.base;
 
 import com.jfinal.plugin.activerecord.Model;
 import com.jfinal.plugin.activerecord.IBean;

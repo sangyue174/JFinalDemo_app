@@ -1,12 +1,12 @@
-package com.myapp.controller;
+package com.myapp.module.user.controller;
 
 import org.apache.commons.lang.StringUtils;
 
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.jfinal.core.Controller;
-import com.myapp.module.User;
-import com.myapp.service.LoginService;
+import com.myapp.bean.User;
+import com.myapp.module.user.service.UserService;
 import com.myapp.utils.response.DataResponse;
 import com.myapp.utils.response.LevelEnum;
 
@@ -24,7 +24,7 @@ public class UserController extends Controller {
 	public void loginAction() {
 		String user = this.getPara("username");
 		String pwd = this.getPara("password");
-		User userModule = LoginService.getUserInfo(user, pwd);
+		User userModule = UserService.getUserInfo(user, pwd);
 		JSONObject object = new JSONObject();// 外层json
 		JSONObject infos = new JSONObject();// 成功以后的用户信息
 		JSONArray data = new JSONArray();// 承载用户信息的array
@@ -50,7 +50,7 @@ public class UserController extends Controller {
 			infos.put("nickname", userModule.get("nickname"));
 			infos.put("mobile", userModule.get("mobile"));
 			infos.put("score", userModule.getInt("score"));
-			infos.put("token", LoginService.insertTOKEN(user));
+			infos.put("token", UserService.insertTOKEN(user));
 			// 添加值data数组中
 			data.add(infos);
 			object.put("data", data);
@@ -72,25 +72,7 @@ public class UserController extends Controller {
 			this.renderJson(new DataResponse(LevelEnum.ERROR, "密码不可为空，请填写"));
 			return;
 		}
-		if
 		
 	}
 	
-	public void registerAction() {
-		String identityType = getPara("identityType") == null ? "phone"
-				: getPara("identityType").toLowerCase();// 验证类型:phone,qq,weixin
-		String identifier = getPara("identifier");// 验证账号
-		String credential = getPara("credential");// 验证凭证
-		String code = getPara("code");// 验证码
-		if (StringUtils.isEmpty(identifier)) {
-			this.renderJson(new DataResponse(LevelEnum.ERROR, "账号不可为空，请填写"));
-			return;
-		}
-		if(StringUtils.isEmpty(credential)){
-			this.renderJson(new DataResponse(LevelEnum.ERROR, "密码不可为空，请填写"));
-			return;
-		}
-		if
-		
-	}
 }

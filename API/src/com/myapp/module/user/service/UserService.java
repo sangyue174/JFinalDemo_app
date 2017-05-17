@@ -1,14 +1,14 @@
-package com.myapp.service;
+package com.myapp.module.user.service;
 
 import com.jfinal.plugin.activerecord.Db;
-import com.myapp.module.User;
-import com.myapp.utils.TokenUtil;
+import com.myapp.bean.User;
+import com.myapp.utils.PasswordUtil;
 
 /**
  * 登录的动作
  *
  */
-public class LoginService {
+public class UserService {
 	/**
 	 * 获取用户信息
 	 * 
@@ -26,7 +26,7 @@ public class LoginService {
 	 * @return
 	 */
 	public static String insertTOKEN(String username) {
-		String key = TokenUtil.generalKey();
+		String key = PasswordUtil.generalTokenKey();
 		String sql = " UPDATE tb_user SET token=? WHERE username=?";
 		Db.update(sql, key, username);//不关联任何实体类的方法，其中有增删改查方法，可以自己来实现下看看
 		return key;

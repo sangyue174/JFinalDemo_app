@@ -12,9 +12,9 @@ import com.jfinal.plugin.activerecord.ActiveRecordPlugin;
 import com.jfinal.plugin.druid.DruidPlugin;
 import com.jfinal.render.ViewType;
 import com.jfinal.template.Engine;
-import com.myapp.controller.IndexController;
-import com.myapp.controller.UserController;
-import com.myapp.module._MappingKit;
+import com.myapp.bean._MappingKit;
+import com.myapp.module.index.controller.IndexController;
+import com.myapp.module.user.controller.UserController;
 
 /**
  * 配置类

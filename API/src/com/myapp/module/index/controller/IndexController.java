@@ -1,4 +1,4 @@
-package com.myapp.controller;
+package com.myapp.module.index.controller;
 
 import com.jfinal.core.Controller;
 

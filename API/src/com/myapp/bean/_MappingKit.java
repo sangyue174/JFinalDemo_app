@@ -1,4 +1,4 @@
-package com.myapp.module;
+package com.myapp.bean;
 
 import com.jfinal.plugin.activerecord.ActiveRecordPlugin;
 

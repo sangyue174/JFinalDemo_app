@@ -23,12 +23,12 @@ public class _JFinalDemoGenerator {
 	
 	public static void main(String[] args) {
 		// base model 所使用的包名
-		String baseModelPackageName = "com.myapp.module.base";
+		String baseModelPackageName = "com.myapp.bean.base";
 		// base model 文件保存路径
-		String baseModelOutputDir = PathKit.getWebRootPath() + "/../src/com/myapp/module/base";
+		String baseModelOutputDir = PathKit.getWebRootPath() + "/../src/com/myapp/bean/base";
 		
 		// model 所使用的包名 (MappingKit 默认使用的包名)
-		String modelPackageName = "com.myapp.module";
+		String modelPackageName = "com.myapp.bean";
 		// model 文件保存路径 (MappingKit 与 DataDictionary 文件默认保存路径)
 		String modelOutputDir = baseModelOutputDir + "/..";
 		
