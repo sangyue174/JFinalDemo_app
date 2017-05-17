@@ -5,8 +5,11 @@ import org.apache.commons.lang.StringUtils;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.jfinal.core.Controller;
+import com.jfinal.log.Log4jLog;
 import com.myapp.bean.User;
 import com.myapp.module.user.service.UserService;
+import com.myapp.utils.IdentityTypeEnum;
+import com.myapp.utils.PasswordUtil;
 import com.myapp.utils.response.DataResponse;
 import com.myapp.utils.response.LevelEnum;
 
@@ -18,6 +21,7 @@ import com.myapp.utils.response.LevelEnum;
  *
  */
 public class UserController extends Controller {
+	private static Log4jLog log = Log4jLog.getLog(UserController.class);
 	/**
 	 * 登录动作
 	 */
@@ -63,7 +67,7 @@ public class UserController extends Controller {
 				: getPara("identityType").toLowerCase();// 验证类型:phone,qq,weixin
 		String identifier = getPara("identifier");// 验证账号
 		String credential = getPara("credential");// 验证凭证
-		String code = getPara("code");// 验证码
+		String authCode = getPara("authCode");// 验证码
 		if (StringUtils.isEmpty(identifier)) {
 			this.renderJson(new DataResponse(LevelEnum.ERROR, "账号不可为空，请填写"));
 			return;
@@ -72,6 +76,14 @@ public class UserController extends Controller {
 			this.renderJson(new DataResponse(LevelEnum.ERROR, "密码不可为空，请填写"));
 			return;
 		}
+		if (IdentityTypeEnum.PHONE.getValue().equals(identityType) && StringUtils.isEmpty(authCode)) {
+			this.renderJson(new DataResponse(LevelEnum.ERROR, "验证码不可为空，请填写"));
+			return;
+		}
+		
+		// 生产tokenKey
+		String tokenKey = PasswordUtil.generalTokenKey();
+		
 		
 	}
 	

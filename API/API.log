@@ -1,0 +1,48 @@
+
+2017-05-17 23:31:17
+[INFO]-[Thread: main]-[com.alibaba.druid.pool.DruidDataSource.init()]: {dataSource-1} inited
+
+2017-05-17 23:31:17
+[INFO]-[Thread: main]-[com.alibaba.druid.pool.DruidDataSource.close()]: {dataSource-1} closed
+
+2017-05-17 23:52:26
+[INFO]-[Thread: main]-[com.alibaba.druid.pool.DruidDataSource.init()]: {dataSource-1} inited
+
+2017-05-17 23:52:26
+[INFO]-[Thread: main]-[com.alibaba.druid.pool.DruidDataSource.close()]: {dataSource-1} closed
+
+2017-05-18 00:28:40
+[INFO]-[Thread: main]-[com.alibaba.druid.pool.DruidDataSource.init()]: {dataSource-1} inited
+
+2017-05-18 00:28:40
+[INFO]-[Thread: main]-[com.alibaba.druid.pool.DruidDataSource.close()]: {dataSource-1} closed
+
+2017-05-18 00:29:00
+[INFO]-[Thread: main]-[com.alibaba.druid.pool.DruidDataSource.init()]: {dataSource-1} inited
+
+2017-05-18 00:29:00
+[INFO]-[Thread: main]-[com.alibaba.druid.pool.DruidDataSource.close()]: {dataSource-1} closed
+
+2017-05-18 00:30:38
+[INFO]-[Thread: main]-[com.alibaba.druid.pool.DruidDataSource.init()]: {dataSource-1} inited
+
+2017-05-18 00:30:38
+[INFO]-[Thread: main]-[com.alibaba.druid.pool.DruidDataSource.close()]: {dataSource-1} closed
+
+2017-05-18 00:30:55
+[INFO]-[Thread: main]-[com.alibaba.druid.pool.DruidDataSource.init()]: {dataSource-1} inited
+
+2017-05-18 00:31:26
+[INFO]-[Thread: main]-[com.alibaba.druid.pool.DruidDataSource.close()]: {dataSource-1} closed
+
+2017-05-18 00:32:45
+[INFO]-[Thread: main]-[com.alibaba.druid.pool.DruidDataSource.init()]: {dataSource-1} inited
+
+2017-05-18 00:32:45
+[INFO]-[Thread: main]-[com.alibaba.druid.pool.DruidDataSource.close()]: {dataSource-1} closed
+
+2017-05-18 00:46:33
+[INFO]-[Thread: main]-[com.alibaba.druid.pool.DruidDataSource.init()]: {dataSource-1} inited
+
+2017-05-18 00:46:33
+[INFO]-[Thread: main]-[com.alibaba.druid.pool.DruidDataSource.close()]: {dataSource-1} closed

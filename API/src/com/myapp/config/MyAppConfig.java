@@ -10,11 +10,13 @@ import com.jfinal.ext.handler.ContextPathHandler;
 import com.jfinal.kit.PropKit;
 import com.jfinal.plugin.activerecord.ActiveRecordPlugin;
 import com.jfinal.plugin.druid.DruidPlugin;
+import com.jfinal.plugin.ehcache.EhCachePlugin;
 import com.jfinal.render.ViewType;
 import com.jfinal.template.Engine;
 import com.myapp.bean._MappingKit;
 import com.myapp.module.index.controller.IndexController;
 import com.myapp.module.user.controller.UserController;
+import com.myapp.utils.interceptor.ExceptionIntoLogInterceptor;
 
 /**
  * 配置类
@@ -50,6 +52,8 @@ public class MyAppConfig extends JFinalConfig {
 		// 添加Model类和数据库表的映射,所有映射在 MappingKit 中自动化搞定
 		_MappingKit.mapping(arp);
 		plugins.add(arp);
+		// ehcache缓存插件
+		plugins.add(new EhCachePlugin());
 	}
 
 	// 创建Druid插件
@@ -71,7 +75,11 @@ public class MyAppConfig extends JFinalConfig {
 
 	@Override
 	public void configInterceptor(Interceptors me) {
-
+		// 全局拦截器，对所有请求拦截
+		// 添加控制层全局拦截器
+		me.addGlobalActionInterceptor(new ExceptionIntoLogInterceptor());
+		// 添加业务层全局拦截器
+		me.addGlobalServiceInterceptor(new ExceptionIntoLogInterceptor());
 	}
 
 	@Override
