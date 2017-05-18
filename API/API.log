@@ -46,3 +46,12 @@
 
 2017-05-18 00:46:33
 [INFO]-[Thread: main]-[com.alibaba.druid.pool.DruidDataSource.close()]: {dataSource-1} closed
+
+2017-05-18 21:32:51
+[INFO]-[Thread: main]-[com.alibaba.druid.pool.DruidDataSource.init()]: {dataSource-1} inited
+
+2017-05-18 21:35:11
+[INFO]-[Thread: main]-[com.alibaba.druid.pool.DruidDataSource.init()]: {dataSource-1} inited
+
+2017-05-18 21:39:42
+[INFO]-[Thread: main]-[com.alibaba.druid.pool.DruidDataSource.init()]: {dataSource-1} inited

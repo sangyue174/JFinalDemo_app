@@ -79,7 +79,7 @@ public class MyAppConfig extends JFinalConfig {
 		// 添加控制层全局拦截器
 		me.addGlobalActionInterceptor(new ExceptionIntoLogInterceptor());
 		// 添加业务层全局拦截器
-		me.addGlobalServiceInterceptor(new ExceptionIntoLogInterceptor());
+//		me.addGlobalServiceInterceptor(exceptionInt);
 	}
 
 	@Override

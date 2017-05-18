@@ -18,7 +18,7 @@ public class JnuitTest extends JFinalTest {
 	private UserController usercon;
 	@Before
 	public void init() {
-		usercon = UserController.getInstance();
+		UserController.class.get;
 		getController("/account");
 		
         Map<String, Class<? extends Model<?>>> modelMap = new HashMap<String, Class<? extends Model<?>>>(); //建立表与实体的映射
@@ -35,42 +35,5 @@ public class JnuitTest extends JFinalTest {
 		// String body = "";
 	}
 	
-	
 
-	public static void main(String[] args) {
-		// System.out.println(JnuitTest.class.getResource(""));
-		// System.out.println(JnuitTest.class.getResource("/"));
-		//
-		// System.out.println(JnuitTest.class.getClassLoader().getResource(""));
-		// System.out.println(JnuitTest.class.getClassLoader().getResource("/"));
-
-		// Class[] types = types(new Object[0]);
-		// Reflect.on("com.myapp.module.user.controller.UserController").call(
-		// "registerAction");
-		Class<?> c;
-		try {
-			c = Class.forName("com.myapp.module.user.controller.UserController");
-			Method m = c.getMethod("registerAction", new Class[] {});
-			// Object obj=c.newInstance();
-			m.invoke(c.newInstance(), null);
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	}
-
-	private static Class<?>[] types(Object[] values) {
-		if (values == null) {
-			return new Class[0];
-		}
-
-		Class[] result = new Class[values.length];
-
-		for (int i = 0; i < values.length; ++i) {
-			Object value = values[i];
-			result[i] = ((value == null) ? Object.class : value.getClass());
-		}
-
-		return result;
-	}
 }
