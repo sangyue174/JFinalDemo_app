@@ -1,10 +1,6 @@
 package com.myapp.utils.response;
 
-import java.util.Collection;
-import java.util.HashMap;
 import java.util.Map;
-
-import org.apache.commons.collections.CollectionUtils;
 
 /**
  * @className: DataResponse
