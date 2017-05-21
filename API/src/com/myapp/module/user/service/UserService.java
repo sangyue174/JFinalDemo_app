@@ -2,6 +2,7 @@ package com.myapp.module.user.service;
 
 import com.jfinal.plugin.activerecord.Db;
 import com.myapp.bean.User;
+import com.myapp.bean.UserAuth;
 import com.myapp.utils.PasswordUtil;
 
 /**
@@ -28,7 +29,33 @@ public class UserService {
 	public static String insertTOKEN(String username) {
 		String key = PasswordUtil.generalTokenKey();
 		String sql = " UPDATE tb_user SET token=? WHERE username=?";
-		Db.update(sql, key, username);//不关联任何实体类的方法，其中有增删改查方法，可以自己来实现下看看
+		Db.update(sql, key, username);// 不关联任何实体类的方法，其中有增删改查方法，可以自己来实现下看看
 		return key;
+	}
+	
+	/**
+	 * 保存user
+	 * @title: saveUser
+	 * @author sangyue
+	 * @date May 21, 2017 11:38:41 AM
+	 * @param user
+	 * @return 
+	 * @version V1.0
+	 */
+	public static boolean saveUser(User user) {
+		return user.save();
+	}
+	
+	/**
+	 * 保存userAuth
+	 * @title: saveUserAuth
+	 * @author sangyue
+	 * @date May 21, 2017 11:38:53 AM
+	 * @param userAuth
+	 * @return 
+	 * @version V1.0
+	 */
+	public static boolean saveUserAuth(UserAuth userAuth) {
+		return userAuth.save();
 	}
 }

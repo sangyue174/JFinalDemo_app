@@ -1,15 +1,23 @@
 package com.myapp.module.user.controller;
 
+import java.sql.SQLException;
+import java.util.Date;
+
 import org.apache.commons.lang.StringUtils;
 
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.jfinal.core.Controller;
 import com.jfinal.log.Log4jLog;
+import com.jfinal.plugin.activerecord.Db;
+import com.jfinal.plugin.activerecord.IAtom;
+import com.jfinal.plugin.ehcache.CacheKit;
 import com.myapp.bean.User;
+import com.myapp.bean.UserAuth;
 import com.myapp.module.user.service.UserService;
 import com.myapp.utils.IdentityTypeEnum;
 import com.myapp.utils.PasswordUtil;
+import com.myapp.utils.PhoneMessage;
 import com.myapp.utils.response.DataResponse;
 import com.myapp.utils.response.LevelEnum;
 
@@ -63,28 +71,71 @@ public class UserController extends Controller {
 	}
 
 	public void registerAction() {
-		String identityType = getPara("identityType") == null ? "phone"
+		final String identityType = getPara("identityType") == null ? "phone"
 				: getPara("identityType").toLowerCase();// 验证类型:phone,qq,weixin
-		String identifier = getPara("identifier");// 验证账号
-		String credential = getPara("credential");// 验证凭证
-		String authCode = getPara("authCode");// 验证码
+		final String identifier = getPara("identifier");// 验证账号
+		final String credential = getPara("credential");// 验证凭证
+		final String authCode = getPara("authCode");// 验证码
 		if (StringUtils.isEmpty(identifier)) {
 			this.renderJson(new DataResponse(LevelEnum.ERROR, "账号不可为空，请填写"));
 			return;
 		}
-		if(StringUtils.isEmpty(credential)){
+		if (StringUtils.isEmpty(credential)) {
 			this.renderJson(new DataResponse(LevelEnum.ERROR, "密码不可为空，请填写"));
 			return;
 		}
-		if (IdentityTypeEnum.PHONE.getValue().equals(identityType) && StringUtils.isEmpty(authCode)) {
-			this.renderJson(new DataResponse(LevelEnum.ERROR, "验证码不可为空，请填写"));
-			return;
+		if (IdentityTypeEnum.PHONE.getValue().equals(identityType)) {
+			// 获取session中的验证码信息
+			PhoneMessage pm = (PhoneMessage)getSessionAttr(identifier);
+			if(pm == null || pm.getAuthCode() == null){
+				this.renderJson(new DataResponse(LevelEnum.ERROR, "请先获取验证码"));
+				return;
+			}
+			if(StringUtils.isEmpty(authCode)){
+				this.renderJson(new DataResponse(LevelEnum.ERROR, "验证码不可为空，请填写"));
+				return;
+			}
+			String authCodeDB = pm.getAuthCode();
+			long sendTime = pm.getSendTime().getTime();
+			if(new Date().getTime() - sendTime > 1000 * 60 * 5){// 验证码时限5分钟
+				this.renderJson(new DataResponse(LevelEnum.ERROR, "验证码已过期，请重新获取"));
+				return;
+			}
+			if(!authCodeDB.equals(authCode)){
+				this.renderJson(new DataResponse(LevelEnum.ERROR, "验证码不正确，请检查"));
+				return;
+			}
 		}
+		// 生成用户验证盐
+		final String salt = PasswordUtil.getSalt().toString();
+		final String md5Pass = PasswordUtil.md5(credential + salt);
 		
-		// 生产tokenKey
-		String tokenKey = PasswordUtil.generalTokenKey();
-		
-		
+		// 事务保存用户和用户权限信息
+		Db.tx(new IAtom() {
+			@Override
+			public boolean run() throws SQLException {
+				// 
+				User user = new User();
+				user.setIsactive("1");
+				boolean userFlag = UserService.saveUser(user);
+				
+				UserAuth userAuth = new UserAuth();
+				userAuth.setUserid(user.getId());// 用户id
+				userAuth.setIdentityType(identityType);
+				userAuth.setIdentifier(identifier);
+				userAuth.setCredential(md5Pass);
+				userAuth.setRegisterTime(new Date());
+				userAuth.setSalt(salt);
+				userAuth.setVerified("1");
+				boolean userAuthFlag = UserService.saveUserAuth(userAuth);
+				
+				// 生成tokenKey，保存在ehcache中
+				String tokenKey = PasswordUtil.generalTokenKey();
+				CacheKit.put("tokenCache", "userAuth:"+userAuth.getId(), tokenKey);
+				return userFlag && userAuthFlag;
+			}
+		});
+
 	}
 	
 }
