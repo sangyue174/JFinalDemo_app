@@ -8,6 +8,7 @@ import org.apache.commons.lang.StringUtils;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.jfinal.core.Controller;
+import com.jfinal.core.JFinal;
 import com.jfinal.log.Log4jLog;
 import com.jfinal.plugin.activerecord.Db;
 import com.jfinal.plugin.activerecord.IAtom;
@@ -17,7 +18,7 @@ import com.myapp.bean.UserAuth;
 import com.myapp.module.user.service.UserService;
 import com.myapp.utils.IdentityTypeEnum;
 import com.myapp.utils.PasswordUtil;
-import com.myapp.utils.PhoneMessage;
+import com.myapp.utils.PhoneFormatCheckUtils;
 import com.myapp.utils.response.DataResponse;
 import com.myapp.utils.response.LevelEnum;
 
@@ -78,6 +79,9 @@ public class UserController extends Controller {
 	 * @version V1.0
 	 */
 	public void registerAction() {
+		System.out.println(JFinal.me().getContextPath());
+		System.out.println(getRequest().getServletPath());
+		System.out.println("class name:"+this.getClass().getName()+",method name:"+Thread.currentThread().getStackTrace()[1].getMethodName());
 		final String identityType = getPara("identityType") == null ? "phone"
 				: getPara("identityType").toLowerCase();// 验证类型:phone,qq,weixin
 		final String identifier = getPara("identifier");// 验证账号
@@ -91,6 +95,18 @@ public class UserController extends Controller {
 			this.renderJson(new DataResponse(LevelEnum.ERROR, "密码不可为空，请填写"));
 			return;
 		}
+		// 校验手机号是否合法
+		if(IdentityTypeEnum.PHONE.getValue().equals(identityType) && !PhoneFormatCheckUtils.isChinaPhoneLegal(identifier)){
+			this.renderJson(new DataResponse(LevelEnum.ERROR, "手机号不合法，请修改"));
+			return;
+		}
+		// 校验是否存在用户
+		UserAuth checkUser = UserService.checkUserAuth(identityType, identifier);
+		if(checkUser != null){
+			this.renderJson(new DataResponse(LevelEnum.ERROR, "已经存在该用户，请修改账号"));
+			return;
+		}
+		
 //		if (IdentityTypeEnum.PHONE.getValue().equals(identityType)) {
 //			// 获取session中的验证码信息
 //			PhoneMessage pm = (PhoneMessage)getSessionAttr(identifier);
@@ -117,17 +133,18 @@ public class UserController extends Controller {
 		final String salt = PasswordUtil.getSalt().toString();
 		final String md5Pass = PasswordUtil.md5(credential + salt);
 		
-		// 事务保存用户和用户权限信息
+		// 事务保存用户和用户验证信息
 		Db.tx(new IAtom() {
 			@Override
 			public boolean run() throws SQLException {
-				// 
+				// 先保存用户基本信息
 				User user = new User();
 				user.setIsactive("1");
 				boolean userFlag = UserService.saveUser(user);
 				
+				// 再保存用户验证信息
 				UserAuth userAuth = new UserAuth();
-				userAuth.setUserid(user.getId());// 用户id
+				userAuth.setUserid(user.getId());// 用户id，可以从上一步拿到刚保存的用户信息
 				userAuth.setIdentityType(identityType);
 				userAuth.setIdentifier(identifier);
 				userAuth.setCredential(md5Pass);
@@ -136,10 +153,16 @@ public class UserController extends Controller {
 				userAuth.setVerified("1");
 				boolean userAuthFlag = UserService.saveUserAuth(userAuth);
 				
-				// 生成tokenKey，保存在ehcache中
-				String tokenKey = PasswordUtil.generalTokenKey();
-				CacheKit.put("tokenCache", "userAuth:"+userAuth.getId(), tokenKey);
-				return userFlag && userAuthFlag;
+				boolean tokenFlag = true;
+				try {
+					// 生成tokenKey，保存在ehcache中
+					String tokenKey = PasswordUtil.generalTokenKey();
+					CacheKit.put("tokenCache", "userAuth:"+userAuth.getId(), tokenKey);
+				} catch (Exception e) {
+					tokenFlag = false;
+					log.error("ehcache中保存tokenCache失败，",e);
+				}
+				return userFlag && userAuthFlag && tokenFlag;
 			}
 		});
 		

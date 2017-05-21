@@ -17,7 +17,7 @@ public class JunitTest extends ControllerTestCase<MyAppConfig> {
 		String url = "/user/registerAction?identityType=phone&identifier=testname&credential=testpassword";
 		// String body = "<root>中文</root>";
 		// use(url).post(body).invoke();
-		use(url).invoke();
+		System.out.println(use(url).invoke());
 	}
 	
 	public static void main(String[] args) {

@@ -7,6 +7,7 @@ import com.myapp.utils.PasswordUtil;
 
 /**
  * 用户service
+ * 
  * @className: UserService
  * @author sangyue
  * @date May 21, 2017 3:41:08 PM
@@ -35,30 +36,50 @@ public class UserService {
 		Db.update(sql, key, username);// 不关联任何实体类的方法，其中有增删改查方法，可以自己来实现下看看
 		return key;
 	}
-	
+
 	/**
 	 * 保存user
+	 * 
 	 * @title: saveUser
 	 * @author sangyue
 	 * @date May 21, 2017 11:38:41 AM
 	 * @param user
-	 * @return 
+	 * @return
 	 * @version V1.0
 	 */
 	public static boolean saveUser(User user) {
 		return user.save();
 	}
-	
+
 	/**
 	 * 保存userAuth
+	 * 
 	 * @title: saveUserAuth
 	 * @author sangyue
 	 * @date May 21, 2017 11:38:53 AM
 	 * @param userAuth
-	 * @return 
+	 * @return
 	 * @version V1.0
 	 */
 	public static boolean saveUserAuth(UserAuth userAuth) {
 		return userAuth.save();
+	}
+
+	/**
+	 * 验证用户是否存在
+	 * 
+	 * @title: checkUserAuth
+	 * @author sangyue
+	 * @date May 21, 2017 7:45:20 PM
+	 * @param identityType
+	 * @param identifier
+	 * @return
+	 * @version V1.0
+	 */
+	public static UserAuth checkUserAuth(String identityType, String identifier) {
+		String sql = "select * from tb_user_auth where identityType = ? and identifier = ?";
+		UserAuth userAuth = new UserAuth().findFirst(sql, identityType,
+				identifier);
+		return userAuth;
 	}
 }
