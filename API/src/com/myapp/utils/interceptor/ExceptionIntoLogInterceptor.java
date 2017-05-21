@@ -20,6 +20,7 @@ public class ExceptionIntoLogInterceptor implements Interceptor {
 	@Override
 	public void intercept(Invocation inv) {
 		try {
+			inv.getController().setAttr("actionKey", inv.getActionKey());
 			inv.invoke(); // 一定要注意，把处理放在invoke之后，因为放在之前的话，是会空指针
 		} catch (Exception e) {
 			// log 处理

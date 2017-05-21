@@ -1,10 +1,5 @@
 package com.myapp.utils.test;
 
-import java.security.SecureRandom;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-
 import org.junit.Test;
 
 import com.jfinal.ext.test.ControllerTestCase;
@@ -14,7 +9,9 @@ import com.myapp.utils.PasswordUtil;
 public class JunitTest extends ControllerTestCase<MyAppConfig> {
 	@Test
 	public void test3() {
-		String url = "/user/registerAction?identityType=phone&identifier=testname&credential=testpassword";
+		String url = "";
+		url = "/user/registerAction?identityType=phone&identifier=testname&credential=testpassword";
+		url = "/user/registerAction?identityType=phone&identifier=18615566651&credential=testpassword";
 		// String body = "<root>中文</root>";
 		// use(url).post(body).invoke();
 		System.out.println(use(url).invoke());

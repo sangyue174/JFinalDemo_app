@@ -12,7 +12,7 @@ public class DataResponse {
 	/** 发生源 */
 	protected String method;
 
-	/** 错误级别 "Success":成功，"Error":异常 */
+	/** 错误级别 "success":成功，"error":异常 */
 	protected String level;
 
 	/** 错误代码 */
@@ -22,23 +22,31 @@ public class DataResponse {
 	protected String description;
 
 	/** 业务数据 */
-	protected Map<String, Object> data;
+	protected Object data;
 
 	public DataResponse(LevelEnum level, String description) {
-		this(level, description, null);
+		this("", level, "", description, null);
 	}
 
-	public DataResponse(LevelEnum level, Map<String, Object> data) {
+	public DataResponse(LevelEnum level, Object data) {
 		this(level, "", data);
 	}
 
-	public DataResponse(LevelEnum level, String description,
-			Map<String, Object> data) {
+	public DataResponse(LevelEnum level, String description, Object data) {
 		this("", level, "", description, data);
 	}
 
+	public DataResponse(LevelEnum level, String description, String method) {
+		this(method, level, "", description, null);
+	}
+
+	public DataResponse(LevelEnum level, String description, String method,
+			Object data) {
+		this(method, level, "", description, data);
+	}
+
 	public DataResponse(String method, LevelEnum level, String code,
-			String description, Map<String, Object> data) {
+			String description, Object data) {
 		this.method = method;
 		this.level = level.getValue();
 		this.code = code;
@@ -109,7 +117,7 @@ public class DataResponse {
 	/**
 	 * @return the data
 	 */
-	public Map<String, Object> getData() {
+	public Object getData() {
 		return data;
 	}
 
@@ -117,7 +125,7 @@ public class DataResponse {
 	 * @param data
 	 *            the data to set
 	 */
-	public void setData(Map<String, Object> data) {
+	public void setData(Object data) {
 		this.data = data;
 	}
 

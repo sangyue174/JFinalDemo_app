@@ -7,6 +7,7 @@ import org.apache.commons.lang.StringUtils;
 
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
+import com.jfinal.aop.Before;
 import com.jfinal.core.Controller;
 import com.jfinal.core.JFinal;
 import com.jfinal.log.Log4jLog;
@@ -79,31 +80,30 @@ public class UserController extends Controller {
 	 * @version V1.0
 	 */
 	public void registerAction() {
-		System.out.println(JFinal.me().getContextPath());
-		System.out.println(getRequest().getServletPath());
-		System.out.println("class name:"+this.getClass().getName()+",method name:"+Thread.currentThread().getStackTrace()[1].getMethodName());
+//		System.out.println("class name:"+this.getClass().getName()+",method name:"+Thread.currentThread().getStackTrace()[1].getMethodName());
+		final String actionKey = getAttr("actionKey").toString();// 获取actionKey
 		final String identityType = getPara("identityType") == null ? "phone"
 				: getPara("identityType").toLowerCase();// 验证类型:phone,qq,weixin
 		final String identifier = getPara("identifier");// 验证账号
 		final String credential = getPara("credential");// 验证凭证
 		final String authCode = getPara("authCode");// 验证码
 		if (StringUtils.isEmpty(identifier)) {
-			this.renderJson(new DataResponse(LevelEnum.ERROR, "账号不可为空，请填写"));
+			this.renderJson(new DataResponse(LevelEnum.ERROR, "账号不可为空，请填写", actionKey));
 			return;
 		}
 		if (StringUtils.isEmpty(credential)) {
-			this.renderJson(new DataResponse(LevelEnum.ERROR, "密码不可为空，请填写"));
+			this.renderJson(new DataResponse(LevelEnum.ERROR, "密码不可为空，请填写", actionKey));
 			return;
 		}
 		// 校验手机号是否合法
 		if(IdentityTypeEnum.PHONE.getValue().equals(identityType) && !PhoneFormatCheckUtils.isChinaPhoneLegal(identifier)){
-			this.renderJson(new DataResponse(LevelEnum.ERROR, "手机号不合法，请修改"));
+			this.renderJson(new DataResponse(LevelEnum.ERROR, "手机号不合法，请修改", actionKey));
 			return;
 		}
 		// 校验是否存在用户
 		UserAuth checkUser = UserService.checkUserAuth(identityType, identifier);
 		if(checkUser != null){
-			this.renderJson(new DataResponse(LevelEnum.ERROR, "已经存在该用户，请修改账号"));
+			this.renderJson(new DataResponse(LevelEnum.ERROR, "已经存在该用户，请修改账号", actionKey));
 			return;
 		}
 		
@@ -111,28 +111,28 @@ public class UserController extends Controller {
 //			// 获取session中的验证码信息
 //			PhoneMessage pm = (PhoneMessage)getSessionAttr(identifier);
 //			if(pm == null || pm.getAuthCode() == null){
-//				this.renderJson(new DataResponse(LevelEnum.ERROR, "请先获取验证码"));
+//				this.renderJson(new DataResponse(LevelEnum.ERROR, "请先获取验证码", actionKey));
 //				return;
 //			}
 //			if(StringUtils.isEmpty(authCode)){
-//				this.renderJson(new DataResponse(LevelEnum.ERROR, "验证码不可为空，请填写"));
+//				this.renderJson(new DataResponse(LevelEnum.ERROR, "验证码不可为空，请填写", actionKey));
 //				return;
 //			}
 //			String authCodeDB = pm.getAuthCode();
 //			long sendTime = pm.getSendTime().getTime();
 //			if(new Date().getTime() - sendTime > 1000 * 60 * 5){// 验证码时限5分钟
-//				this.renderJson(new DataResponse(LevelEnum.ERROR, "验证码已过期，请重新获取"));
+//				this.renderJson(new DataResponse(LevelEnum.ERROR, "验证码已过期，请重新获取", actionKey));
 //				return;
 //			}
 //			if(!authCodeDB.equals(authCode)){
-//				this.renderJson(new DataResponse(LevelEnum.ERROR, "验证码不正确，请检查"));
+//				this.renderJson(new DataResponse(LevelEnum.ERROR, "验证码不正确，请检查", actionKey));
 //				return;
 //			}
 //		}
 		// 生成用户验证盐
 		final String salt = PasswordUtil.getSalt().toString();
 		final String md5Pass = PasswordUtil.md5(credential + salt);
-		
+
 		// 事务保存用户和用户验证信息
 		Db.tx(new IAtom() {
 			@Override
@@ -141,7 +141,7 @@ public class UserController extends Controller {
 				User user = new User();
 				user.setIsactive("1");
 				boolean userFlag = UserService.saveUser(user);
-				
+
 				// 再保存用户验证信息
 				UserAuth userAuth = new UserAuth();
 				userAuth.setUserid(user.getId());// 用户id，可以从上一步拿到刚保存的用户信息
@@ -152,22 +152,22 @@ public class UserController extends Controller {
 				userAuth.setSalt(salt);
 				userAuth.setVerified("1");
 				boolean userAuthFlag = UserService.saveUserAuth(userAuth);
-				
+
 				boolean tokenFlag = true;
 				try {
 					// 生成tokenKey，保存在ehcache中
 					String tokenKey = PasswordUtil.generalTokenKey();
-					CacheKit.put("tokenCache", "userAuth:"+userAuth.getId(), tokenKey);
+					CacheKit.put("tokenCache", "userAuth:" + userAuth.getId(), tokenKey);
 				} catch (Exception e) {
 					tokenFlag = false;
-					log.error("ehcache中保存tokenCache失败，",e);
+					log.error("ehcache中保存tokenCache失败，", e);
 				}
 				return userFlag && userAuthFlag && tokenFlag;
 			}
 		});
-		
-		this.renderJson(new DataResponse(LevelEnum.SUCCESS, "注册成功"));
+
+		this.renderJson(new DataResponse(LevelEnum.SUCCESS, "注册成功", actionKey, tokenKey));
 		return;
 	}
-	
+
 }
