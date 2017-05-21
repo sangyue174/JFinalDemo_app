@@ -70,6 +70,13 @@ public class UserController extends Controller {
 		}
 	}
 
+	/**
+	 * 用户注册
+	 * @title: registerAction
+	 * @author sangyue
+	 * @date May 21, 2017 4:00:58 PM 
+	 * @version V1.0
+	 */
 	public void registerAction() {
 		final String identityType = getPara("identityType") == null ? "phone"
 				: getPara("identityType").toLowerCase();// 验证类型:phone,qq,weixin
@@ -84,28 +91,28 @@ public class UserController extends Controller {
 			this.renderJson(new DataResponse(LevelEnum.ERROR, "密码不可为空，请填写"));
 			return;
 		}
-		if (IdentityTypeEnum.PHONE.getValue().equals(identityType)) {
-			// 获取session中的验证码信息
-			PhoneMessage pm = (PhoneMessage)getSessionAttr(identifier);
-			if(pm == null || pm.getAuthCode() == null){
-				this.renderJson(new DataResponse(LevelEnum.ERROR, "请先获取验证码"));
-				return;
-			}
-			if(StringUtils.isEmpty(authCode)){
-				this.renderJson(new DataResponse(LevelEnum.ERROR, "验证码不可为空，请填写"));
-				return;
-			}
-			String authCodeDB = pm.getAuthCode();
-			long sendTime = pm.getSendTime().getTime();
-			if(new Date().getTime() - sendTime > 1000 * 60 * 5){// 验证码时限5分钟
-				this.renderJson(new DataResponse(LevelEnum.ERROR, "验证码已过期，请重新获取"));
-				return;
-			}
-			if(!authCodeDB.equals(authCode)){
-				this.renderJson(new DataResponse(LevelEnum.ERROR, "验证码不正确，请检查"));
-				return;
-			}
-		}
+//		if (IdentityTypeEnum.PHONE.getValue().equals(identityType)) {
+//			// 获取session中的验证码信息
+//			PhoneMessage pm = (PhoneMessage)getSessionAttr(identifier);
+//			if(pm == null || pm.getAuthCode() == null){
+//				this.renderJson(new DataResponse(LevelEnum.ERROR, "请先获取验证码"));
+//				return;
+//			}
+//			if(StringUtils.isEmpty(authCode)){
+//				this.renderJson(new DataResponse(LevelEnum.ERROR, "验证码不可为空，请填写"));
+//				return;
+//			}
+//			String authCodeDB = pm.getAuthCode();
+//			long sendTime = pm.getSendTime().getTime();
+//			if(new Date().getTime() - sendTime > 1000 * 60 * 5){// 验证码时限5分钟
+//				this.renderJson(new DataResponse(LevelEnum.ERROR, "验证码已过期，请重新获取"));
+//				return;
+//			}
+//			if(!authCodeDB.equals(authCode)){
+//				this.renderJson(new DataResponse(LevelEnum.ERROR, "验证码不正确，请检查"));
+//				return;
+//			}
+//		}
 		// 生成用户验证盐
 		final String salt = PasswordUtil.getSalt().toString();
 		final String md5Pass = PasswordUtil.md5(credential + salt);
@@ -135,7 +142,9 @@ public class UserController extends Controller {
 				return userFlag && userAuthFlag;
 			}
 		});
-
+		
+		this.renderJson(new DataResponse(LevelEnum.SUCCESS, "注册成功"));
+		return;
 	}
 	
 }

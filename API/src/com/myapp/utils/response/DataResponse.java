@@ -1,6 +1,10 @@
 package com.myapp.utils.response;
 
+import java.util.Collection;
+import java.util.HashMap;
 import java.util.Map;
+
+import org.apache.commons.collections.CollectionUtils;
 
 /**
  * @className: DataResponse
@@ -45,4 +49,80 @@ public class DataResponse {
 		this.description = description;
 		this.data = data;
 	}
+
+	/**
+	 * @return the method
+	 */
+	public String getMethod() {
+		return method;
+	}
+
+	/**
+	 * @param method
+	 *            the method to set
+	 */
+	public void setMethod(String method) {
+		this.method = method;
+	}
+
+	/**
+	 * @return the level
+	 */
+	public String getLevel() {
+		return level;
+	}
+
+	/**
+	 * @param level
+	 *            the level to set
+	 */
+	public void setLevel(String level) {
+		this.level = level;
+	}
+
+	/**
+	 * @return the code
+	 */
+	public String getCode() {
+		return code;
+	}
+
+	/**
+	 * @param code
+	 *            the code to set
+	 */
+	public void setCode(String code) {
+		this.code = code;
+	}
+
+	/**
+	 * @return the description
+	 */
+	public String getDescription() {
+		return description;
+	}
+
+	/**
+	 * @param description
+	 *            the description to set
+	 */
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
+	/**
+	 * @return the data
+	 */
+	public Map<String, Object> getData() {
+		return data;
+	}
+
+	/**
+	 * @param data
+	 *            the data to set
+	 */
+	public void setData(Map<String, Object> data) {
+		this.data = data;
+	}
+
 }

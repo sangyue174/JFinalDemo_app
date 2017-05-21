@@ -6,8 +6,11 @@ import com.myapp.bean.UserAuth;
 import com.myapp.utils.PasswordUtil;
 
 /**
- * 登录的动作
- *
+ * 用户service
+ * @className: UserService
+ * @author sangyue
+ * @date May 21, 2017 3:41:08 PM
+ * @version V1.0
  */
 public class UserService {
 	/**

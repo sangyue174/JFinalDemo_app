@@ -2,9 +2,9 @@ package com.myapp.utils.response;
 
 public enum LevelEnum {
 	/** 成功 */
-	SUCCESS("Success"),
+	SUCCESS("success"),
 	/** 异常 */
-	ERROR("Error");
+	ERROR("error");
 
 	private String value;
 

@@ -1,5 +1,8 @@
 package com.myapp.config;
 
+import com.alibaba.druid.filter.logging.Log4jFilter;
+import com.alibaba.druid.filter.stat.StatFilter;
+import com.alibaba.druid.wall.WallFilter;
 import com.jfinal.config.Constants;
 import com.jfinal.config.Handlers;
 import com.jfinal.config.Interceptors;
@@ -49,6 +52,8 @@ public class MyAppConfig extends JFinalConfig {
 		plugins.add(druidPlugin);
 
 		ActiveRecordPlugin arp = new ActiveRecordPlugin(druidPlugin);
+		// 打印sql语句
+		arp.setShowSql(true);
 		// 添加Model类和数据库表的映射,所有映射在 MappingKit 中自动化搞定
 		_MappingKit.mapping(arp);
 		plugins.add(arp);
@@ -69,7 +74,31 @@ public class MyAppConfig extends JFinalConfig {
 
 		DruidPlugin druidPlugin = new DruidPlugin(jdbcUrl, username, password);
 		druidPlugin.set(initialSize, minIdle, maxActive);
-		druidPlugin.setFilters("stat,wall");
+		
+		/**增强配置**/
+		druidPlugin.setValidationQuery("select 'x'");
+		druidPlugin.setTestOnBorrow(false);
+		druidPlugin.setTestWhileIdle(false);
+		druidPlugin.setTestOnReturn(false);
+
+		WallFilter wallFilter = new WallFilter();
+		wallFilter.setDbType("mysql");
+		druidPlugin.addFilter(wallFilter);
+
+		Log4jFilter log4jFilter = new Log4jFilter();
+		log4jFilter.setDataSourceLogEnabled(false);
+		log4jFilter.setConnectionLogEnabled(false);
+		log4jFilter.setStatementLogEnabled(false);
+		log4jFilter.setStatementExecutableSqlLogEnable(true);
+		log4jFilter.setResultSetLogEnabled(false);
+		druidPlugin.addFilter(log4jFilter);
+
+		StatFilter statFilter = new StatFilter();
+		statFilter.setLogSlowSql(true);
+		statFilter.setDbType("mysql");
+		statFilter.setSlowSqlMillis(3000);
+		druidPlugin.addFilter(statFilter);
+		
 		return druidPlugin;
 	}
 
