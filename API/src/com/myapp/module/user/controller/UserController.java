@@ -25,11 +25,12 @@ import com.myapp.utils.response.DataResponse;
 import com.myapp.utils.response.LevelEnum;
 
 /**
- * 登录动作
- * http://localhost:8080/API/login/LoginAction?username=zhangsan&password=123
+ * 用户相关controller
  * 
- * @author zhang
- *
+ * @className: UserController
+ * @author sangyue
+ * @date May 22, 2017 11:32:02 PM
+ * @version V1.0
  */
 public class UserController extends Controller {
 	private static Log4jLog log = Log4jLog.getLog(UserController.class);
@@ -37,8 +38,8 @@ public class UserController extends Controller {
 	 * 登录动作
 	 */
 	public void loginAction() {
-		String user = this.getPara("username");
-		String pwd = this.getPara("password");
+		String user = getPara("username");
+		String pwd = getPara("password");
 		User userModule = UserService.getUserInfo(user, pwd);
 		JSONObject object = new JSONObject();// 外层json
 		JSONObject infos = new JSONObject();// 成功以后的用户信息
@@ -152,6 +153,7 @@ public class UserController extends Controller {
 				userAuth.setCredential(md5Pass);
 				userAuth.setRegisterTime(new Date());
 				userAuth.setSalt(salt);
+				userAuth.setLoginTime(new Date());
 				userAuth.setVerified("1");
 				boolean userAuthFlag = UserService.saveUserAuth(userAuth);
 

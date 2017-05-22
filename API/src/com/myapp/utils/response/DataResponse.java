@@ -1,6 +1,5 @@
 package com.myapp.utils.response;
 
-import java.util.Map;
 
 /**
  * @className: DataResponse
@@ -18,39 +17,38 @@ public class DataResponse {
 	/** 错误代码 */
 	protected String code;
 
-	/** 错误描述 */
-	protected String description;
+	/** 返回信息 */
+	protected String msg;
 
 	/** 业务数据 */
 	protected Object data;
 
-	public DataResponse(LevelEnum level, String description) {
-		this("", level, "", description, null);
+	public DataResponse(LevelEnum level, String msg) {
+		this("", level, "", msg, null);
 	}
 
 	public DataResponse(LevelEnum level, Object data) {
 		this(level, "", data);
 	}
 
-	public DataResponse(LevelEnum level, String description, Object data) {
-		this("", level, "", description, data);
+	public DataResponse(LevelEnum level, String msg, Object data) {
+		this("", level, "", msg, data);
 	}
 
-	public DataResponse(LevelEnum level, String description, String method) {
-		this(method, level, "", description, null);
+	public DataResponse(LevelEnum level, String msg, String method) {
+		this(method, level, "", msg, null);
 	}
 
-	public DataResponse(LevelEnum level, String description, String method,
-			Object data) {
-		this(method, level, "", description, data);
+	public DataResponse(LevelEnum level, String msg, String method, Object data) {
+		this(method, level, "", msg, data);
 	}
 
 	public DataResponse(String method, LevelEnum level, String code,
-			String description, Object data) {
+			String msg, Object data) {
 		this.method = method;
 		this.level = level.getValue();
 		this.code = code;
-		this.description = description;
+		this.msg = msg;
 		this.data = data;
 	}
 
@@ -100,18 +98,18 @@ public class DataResponse {
 	}
 
 	/**
-	 * @return the description
+	 * @return the msg
 	 */
-	public String getDescription() {
-		return description;
+	public String getMsg() {
+		return msg;
 	}
 
 	/**
-	 * @param description
-	 *            the description to set
+	 * @param msg
+	 *            the msg to set
 	 */
-	public void setDescription(String description) {
-		this.description = description;
+	public void setMsg(String msg) {
+		this.msg = msg;
 	}
 
 	/**

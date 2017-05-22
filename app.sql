@@ -1,7 +1,7 @@
 /*
 Navicat MySQL Data Transfer
 
-Source Server         : 本地
+Source Server         : localhost
 Source Server Version : 50622
 Source Host           : localhost:3306
 Source Database       : app
@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50622
 File Encoding         : 65001
 
-Date: 2017-05-22 14:21:58
+Date: 2017-05-22 21:45:18
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -31,10 +31,6 @@ CREATE TABLE `tb_equipment` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
--- Records of tb_equipment
--- ----------------------------
-
--- ----------------------------
 -- Table structure for tb_kid
 -- ----------------------------
 DROP TABLE IF EXISTS `tb_kid`;
@@ -49,10 +45,6 @@ CREATE TABLE `tb_kid` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
--- Records of tb_kid
--- ----------------------------
-
--- ----------------------------
 -- Table structure for tb_temp_record
 -- ----------------------------
 DROP TABLE IF EXISTS `tb_temp_record`;
@@ -63,10 +55,6 @@ CREATE TABLE `tb_temp_record` (
   `temperature` decimal(10,2) unsigned DEFAULT NULL COMMENT '温度',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
--- ----------------------------
--- Records of tb_temp_record
--- ----------------------------
 
 -- ----------------------------
 -- Table structure for tb_tip
@@ -80,10 +68,6 @@ CREATE TABLE `tb_tip` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
--- Records of tb_tip
--- ----------------------------
-
--- ----------------------------
 -- Table structure for tb_user
 -- ----------------------------
 DROP TABLE IF EXISTS `tb_user`;
@@ -92,10 +76,6 @@ CREATE TABLE `tb_user` (
   `isactive` varchar(5) DEFAULT '1' COMMENT '是否有效(0:无效 1：有效)',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
--- ----------------------------
--- Records of tb_user
--- ----------------------------
 
 -- ----------------------------
 -- Table structure for tb_user_auth
@@ -107,13 +87,10 @@ CREATE TABLE `tb_user_auth` (
   `identityType` varchar(15) DEFAULT 'phone' COMMENT '验证类型(username,phone,qq,weixin)',
   `identifier` varchar(50) DEFAULT NULL COMMENT '验证账号',
   `credential` varchar(100) DEFAULT NULL COMMENT '验证凭证',
-  `registerTime` datetime DEFAULT NULL COMMENT '注册时间',
+  `registerTime` datetime DEFAULT CURRENT_TIMESTAMP COMMENT '注册时间',
   `salt` varchar(50) DEFAULT NULL COMMENT '验证盐',
   `tokenKey` varchar(255) DEFAULT NULL COMMENT 'token',
+  `loginTime` datetime DEFAULT CURRENT_TIMESTAMP COMMENT '上次登录时间',
   `verified` varchar(5) DEFAULT '1' COMMENT '是否验证通过(0:无效1:有效)',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
--- ----------------------------
--- Records of tb_user_auth
--- ----------------------------

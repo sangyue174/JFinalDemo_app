@@ -3,3 +3,4 @@
 **/*.class
 */WebContent/WEB-INF/classes
 ~$*.xlsx
+~$*.docx
