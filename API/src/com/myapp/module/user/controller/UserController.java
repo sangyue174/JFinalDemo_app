@@ -34,8 +34,14 @@ import com.myapp.utils.response.LevelEnum;
  */
 public class UserController extends Controller {
 	private static Log4jLog log = Log4jLog.getLog(UserController.class);
+
 	/**
-	 * 登录动作
+	 * 用户登录
+	 * 
+	 * @title: loginAction
+	 * @author sangyue
+	 * @date May 23, 2017 12:06:50 AM
+	 * @version V1.0
 	 */
 	public void loginAction() {
 		String user = getPara("username");
