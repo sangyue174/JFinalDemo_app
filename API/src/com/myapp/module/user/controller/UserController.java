@@ -44,6 +44,8 @@ public class UserController extends Controller {
 	 * @version V1.0
 	 */
 	public void loginAction() {
+		// 传相应的登录类型过来，然后查询数据库，如果能找到对应userAuth（其中包含密码+salt的验证）,那么取出tokenKey,去ehcache中找它对应的值，如果发现能找到，那么说明这个用户
+		// 已经登录，可以跳过，如果发现没有tokenKey(db)或者ehcache中没有找到相应的值，那么说明用户登录已过期，生成新的tokenKey，保存进数据库，更新到ehcache中
 		String user = getPara("username");
 		String pwd = getPara("password");
 		User userModule = UserService.getUserInfo(user, pwd);
