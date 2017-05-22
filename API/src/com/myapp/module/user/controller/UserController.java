@@ -20,6 +20,7 @@ import com.myapp.module.user.service.UserService;
 import com.myapp.utils.IdentityTypeEnum;
 import com.myapp.utils.PasswordUtil;
 import com.myapp.utils.PhoneFormatCheckUtils;
+import com.myapp.utils.PhoneMessage;
 import com.myapp.utils.response.DataResponse;
 import com.myapp.utils.response.LevelEnum;
 
@@ -101,34 +102,34 @@ public class UserController extends Controller {
 			return;
 		}
 		// 校验是否存在用户
-//		UserAuth checkUser = UserService.checkUserAuth(identityType, identifier);
-//		if(checkUser != null){
-//			this.renderJson(new DataResponse(LevelEnum.ERROR, "已经存在该用户，请修改账号", actionKey));
-//			return;
-//		}
+		UserAuth checkUser = UserService.checkUserAuth(identityType, identifier);
+		if(checkUser != null){
+			this.renderJson(new DataResponse(LevelEnum.ERROR, "已经存在该用户，请修改账号", actionKey));
+			return;
+		}
 		
-//		if (IdentityTypeEnum.PHONE.getValue().equals(identityType)) {
-//			// 获取session中的验证码信息
-//			PhoneMessage pm = (PhoneMessage)getSessionAttr(identifier);
-//			if(pm == null || pm.getAuthCode() == null){
-//				this.renderJson(new DataResponse(LevelEnum.ERROR, "请先获取验证码", actionKey));
-//				return;
-//			}
-//			if(StringUtils.isEmpty(authCode)){
-//				this.renderJson(new DataResponse(LevelEnum.ERROR, "验证码不可为空，请填写", actionKey));
-//				return;
-//			}
-//			String authCodeDB = pm.getAuthCode();
-//			long sendTime = pm.getSendTime().getTime();
-//			if(new Date().getTime() - sendTime > 1000 * 60 * 5){// 验证码时限5分钟
-//				this.renderJson(new DataResponse(LevelEnum.ERROR, "验证码已过期，请重新获取", actionKey));
-//				return;
-//			}
-//			if(!authCodeDB.equals(authCode)){
-//				this.renderJson(new DataResponse(LevelEnum.ERROR, "验证码不正确，请检查", actionKey));
-//				return;
-//			}
-//		}
+		if (IdentityTypeEnum.PHONE.getValue().equals(identityType)) {
+			// 获取session中的验证码信息
+			PhoneMessage pm = (PhoneMessage)getSessionAttr(identifier);
+			if(pm == null || pm.getAuthCode() == null){
+				this.renderJson(new DataResponse(LevelEnum.ERROR, "请先获取验证码", actionKey));
+				return;
+			}
+			if(StringUtils.isEmpty(authCode)){
+				this.renderJson(new DataResponse(LevelEnum.ERROR, "验证码不可为空，请填写", actionKey));
+				return;
+			}
+			String authCodeDB = pm.getAuthCode();
+			long sendTime = pm.getSendTime().getTime();
+			if(new Date().getTime() - sendTime > 1000 * 60 * 5){// 验证码时限5分钟
+				this.renderJson(new DataResponse(LevelEnum.ERROR, "验证码已过期，请重新获取", actionKey));
+				return;
+			}
+			if(!authCodeDB.equals(authCode)){
+				this.renderJson(new DataResponse(LevelEnum.ERROR, "验证码不正确，请检查", actionKey));
+				return;
+			}
+		}
 		// 生成用户验证盐
 		final String salt = PasswordUtil.getSalt().toString();
 		final String md5Pass = PasswordUtil.md5(credential + salt);
