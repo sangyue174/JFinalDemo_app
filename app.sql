@@ -1,7 +1,7 @@
 /*
 Navicat MySQL Data Transfer
 
-Source Server         : localhost
+Source Server         : 本地
 Source Server Version : 50622
 Source Host           : localhost:3306
 Source Database       : app
@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50622
 File Encoding         : 65001
 
-Date: 2017-05-15 00:52:04
+Date: 2017-05-22 14:21:58
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -109,6 +109,7 @@ CREATE TABLE `tb_user_auth` (
   `credential` varchar(100) DEFAULT NULL COMMENT '验证凭证',
   `registerTime` datetime DEFAULT NULL COMMENT '注册时间',
   `salt` varchar(50) DEFAULT NULL COMMENT '验证盐',
+  `tokenKey` varchar(255) DEFAULT NULL COMMENT 'token',
   `verified` varchar(5) DEFAULT '1' COMMENT '是否验证通过(0:无效1:有效)',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;

@@ -72,6 +72,15 @@ public abstract class BaseUserAuth<M extends BaseUserAuth<M>> extends Model<M> i
 		return get("salt");
 	}
 
+	public M setTokenKey(java.lang.String tokenKey) {
+		set("tokenKey", tokenKey);
+		return (M)this;
+	}
+
+	public java.lang.String getTokenKey() {
+		return get("tokenKey");
+	}
+
 	public M setVerified(java.lang.String verified) {
 		set("verified", verified);
 		return (M)this;

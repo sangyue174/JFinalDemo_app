@@ -2,14 +2,14 @@ package com.myapp.module.user.controller;
 
 import java.sql.SQLException;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 import org.apache.commons.lang.StringUtils;
 
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
-import com.jfinal.aop.Before;
 import com.jfinal.core.Controller;
-import com.jfinal.core.JFinal;
 import com.jfinal.log.Log4jLog;
 import com.jfinal.plugin.activerecord.Db;
 import com.jfinal.plugin.activerecord.IAtom;
@@ -101,11 +101,11 @@ public class UserController extends Controller {
 			return;
 		}
 		// 校验是否存在用户
-		UserAuth checkUser = UserService.checkUserAuth(identityType, identifier);
-		if(checkUser != null){
-			this.renderJson(new DataResponse(LevelEnum.ERROR, "已经存在该用户，请修改账号", actionKey));
-			return;
-		}
+//		UserAuth checkUser = UserService.checkUserAuth(identityType, identifier);
+//		if(checkUser != null){
+//			this.renderJson(new DataResponse(LevelEnum.ERROR, "已经存在该用户，请修改账号", actionKey));
+//			return;
+//		}
 		
 //		if (IdentityTypeEnum.PHONE.getValue().equals(identityType)) {
 //			// 获取session中的验证码信息
@@ -133,6 +133,7 @@ public class UserController extends Controller {
 		final String salt = PasswordUtil.getSalt().toString();
 		final String md5Pass = PasswordUtil.md5(credential + salt);
 
+		final StringBuffer sb = new StringBuffer();
 		// 事务保存用户和用户验证信息
 		Db.tx(new IAtom() {
 			@Override
@@ -154,19 +155,24 @@ public class UserController extends Controller {
 				boolean userAuthFlag = UserService.saveUserAuth(userAuth);
 
 				boolean tokenFlag = true;
+				String tokenKey = "";
 				try {
-					// 生成tokenKey，保存在ehcache中
-					String tokenKey = PasswordUtil.generalTokenKey();
-					CacheKit.put("tokenCache", "userAuth:" + userAuth.getId(), tokenKey);
+					// 生成tokenKey，保存在ehcache中（tokenKey:userAuthid）
+					tokenKey = PasswordUtil.generalTokenKey();
+					CacheKit.put("tokenCache", tokenKey, userAuth.getId());
+					sb.append(tokenKey);
 				} catch (Exception e) {
 					tokenFlag = false;
 					log.error("ehcache中保存tokenCache失败，", e);
 				}
-				return userFlag && userAuthFlag && tokenFlag;
+				// 将token保存在userAuth中
+				boolean authToken = userAuth.setTokenKey(tokenKey).update();
+				return userFlag && userAuthFlag && tokenFlag && authToken;
 			}
 		});
-
-		this.renderJson(new DataResponse(LevelEnum.SUCCESS, "注册成功", actionKey, tokenKey));
+		Map<String,Object> rMap = new HashMap<String, Object>();
+		rMap.put("tokenKey", sb.toString());
+		this.renderJson(new DataResponse(LevelEnum.SUCCESS, "注册成功", actionKey, sb.toString()));
 		return;
 	}
 
