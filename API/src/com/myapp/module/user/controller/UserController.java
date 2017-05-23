@@ -9,10 +9,12 @@ import org.apache.commons.lang.StringUtils;
 
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
+import com.jfinal.aop.Before;
 import com.jfinal.core.Controller;
 import com.jfinal.log.Log4jLog;
 import com.jfinal.plugin.activerecord.Db;
 import com.jfinal.plugin.activerecord.IAtom;
+import com.jfinal.plugin.activerecord.tx.Tx;
 import com.jfinal.plugin.ehcache.CacheKit;
 import com.myapp.bean.User;
 import com.myapp.bean.UserAuth;
@@ -46,6 +48,30 @@ public class UserController extends Controller {
 	public void loginAction() {
 		// 传相应的登录类型过来，然后查询数据库，如果能找到对应userAuth（其中包含密码+salt的验证）,那么取出tokenKey,去ehcache中找它对应的值，如果发现能找到，那么说明这个用户
 		// 已经登录，可以跳过，如果发现没有tokenKey(db)或者ehcache中没有找到相应的值，那么说明用户登录已过期，生成新的tokenKey，保存进数据库，更新到ehcache中
+		final String actionKey = getAttr("actionKey").toString();// 获取actionKey
+		final String identityType = getPara("identityType") == null ? "phone"
+				: getPara("identityType").toLowerCase();// 验证类型:phone,qq,weixin
+		final String identifier = getPara("identifier");// 验证账号
+		final String credential = getPara("credential");// 验证凭证
+		
+		if (StringUtils.isEmpty(identifier)) {
+			this.renderJson(new DataResponse(LevelEnum.ERROR, "账号不可为空，请填写", actionKey));
+			return;
+		}
+		if (StringUtils.isEmpty(credential)) {
+			this.renderJson(new DataResponse(LevelEnum.ERROR, "密码不可为空，请填写", actionKey));
+			return;
+		}
+		// 校验是否存在用户
+		UserAuth checkUser = UserService.checkUserAuth(identityType, identifier);
+		if(checkUser == null){
+			this.renderJson(new DataResponse(LevelEnum.ERROR, "不存在该用户，请检查账号", actionKey));
+			return;
+		}
+		String salt = checkUser.getSalt();// 获取用户盐
+		final String md5Pass = PasswordUtil.md5(credential + salt);
+		
+		
 		String user = getPara("username");
 		String pwd = getPara("password");
 		User userModule = UserService.getUserInfo(user, pwd);
@@ -89,6 +115,7 @@ public class UserController extends Controller {
 	 * @date May 21, 2017 4:00:58 PM 
 	 * @version V1.0
 	 */
+	@Before(Tx.class)
 	public void registerAction() {
 //		System.out.println("class name:"+this.getClass().getName()+",method name:"+Thread.currentThread().getStackTrace()[1].getMethodName());
 		final String actionKey = getAttr("actionKey").toString();// 获取actionKey
@@ -117,6 +144,7 @@ public class UserController extends Controller {
 			return;
 		}
 		
+		String salt = "", md5Pass = "";
 		if (IdentityTypeEnum.PHONE.getValue().equals(identityType)) {
 			// 获取session中的验证码信息
 			PhoneMessage pm = (PhoneMessage)getSessionAttr(identifier);
@@ -138,49 +166,44 @@ public class UserController extends Controller {
 				this.renderJson(new DataResponse(LevelEnum.ERROR, "验证码不正确，请检查", actionKey));
 				return;
 			}
+			// 生成用户验证盐
+			salt = PasswordUtil.getSalt().toString();
+			md5Pass = PasswordUtil.md5(credential + salt);
 		}
-		// 生成用户验证盐
-		final String salt = PasswordUtil.getSalt().toString();
-		final String md5Pass = PasswordUtil.md5(credential + salt);
 
 		final StringBuffer sb = new StringBuffer();
-		// 事务保存用户和用户验证信息
-		Db.tx(new IAtom() {
-			@Override
-			public boolean run() throws SQLException {
-				// 先保存用户基本信息
-				User user = new User();
-				user.setIsactive("1");
-				boolean userFlag = UserService.saveUser(user);
+		
+		// 事务保存用户和用户验证信息start
+		// 先保存用户基本信息
+		User user = new User();
+		user.setIsactive("1");
+		UserService.saveUser(user);
 
-				// 再保存用户验证信息
-				UserAuth userAuth = new UserAuth();
-				userAuth.setUserid(user.getId());// 用户id，可以从上一步拿到刚保存的用户信息
-				userAuth.setIdentityType(identityType);
-				userAuth.setIdentifier(identifier);
-				userAuth.setCredential(md5Pass);
-				userAuth.setRegisterTime(new Date());
-				userAuth.setSalt(salt);
-				userAuth.setLoginTime(new Date());
-				userAuth.setVerified("1");
-				boolean userAuthFlag = UserService.saveUserAuth(userAuth);
+		// 再保存用户验证信息
+		UserAuth userAuth = new UserAuth();
+		userAuth.setUserid(user.getId());// 用户id，可以从上一步拿到刚保存的用户信息
+		userAuth.setIdentityType(identityType);
+		userAuth.setIdentifier(identifier);
+		userAuth.setCredential(md5Pass);
+		userAuth.setRegisterTime(new Date());
+		userAuth.setSalt(salt);
+		userAuth.setLoginTime(new Date());
+		userAuth.setVerified("1");
+		UserService.saveUserAuth(userAuth);
 
-				boolean tokenFlag = true;
-				String tokenKey = "";
-				try {
-					// 生成tokenKey，保存在ehcache中（tokenKey:userAuthid）
-					tokenKey = PasswordUtil.generalTokenKey();
-					CacheKit.put("tokenCache", tokenKey, userAuth.getId());
-					sb.append(tokenKey);
-				} catch (Exception e) {
-					tokenFlag = false;
-					log.error("ehcache中保存tokenCache失败，", e);
-				}
-				// 将token保存在userAuth中
-				boolean authToken = userAuth.setTokenKey(tokenKey).update();
-				return userFlag && userAuthFlag && tokenFlag && authToken;
-			}
-		});
+		String tokenKey = "";
+		try {
+			// 生成tokenKey，保存在ehcache中（tokenKey:userAuthid）
+			tokenKey = PasswordUtil.generalTokenKey();
+			CacheKit.put("tokenCache", tokenKey, userAuth.getId());
+			sb.append(tokenKey);
+		} catch (Exception e) {
+			log.error("ehcache中保存tokenCache失败，", e);
+		}
+		// 将token保存在userAuth中
+		userAuth.setTokenKey(tokenKey).update();
+		// 事务保存用户和用户验证信息end
+		
 		Map<String,Object> rMap = new HashMap<String, Object>();
 		rMap.put("tokenKey", sb.toString());
 		this.renderJson(new DataResponse(LevelEnum.SUCCESS, "注册成功", actionKey, sb.toString()));
