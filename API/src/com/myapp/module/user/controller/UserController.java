@@ -48,11 +48,11 @@ public class UserController extends Controller {
 	public void loginAction() {
 		// 传相应的登录类型过来，然后查询数据库，如果能找到对应userAuth（其中包含密码+salt的验证）,那么取出tokenKey,去ehcache中找它对应的值，如果发现能找到，那么说明这个用户
 		// 已经登录，可以跳过，如果发现没有tokenKey(db)或者ehcache中没有找到相应的值，那么说明用户登录已过期，生成新的tokenKey，保存进数据库，更新到ehcache中
-		final String actionKey = getAttr("actionKey").toString();// 获取actionKey
-		final String identityType = getPara("identityType") == null ? "phone"
+		String actionKey = getAttr("actionKey").toString();// 获取actionKey
+		String identityType = getPara("identityType") == null ? "phone"
 				: getPara("identityType").toLowerCase();// 验证类型:phone,qq,weixin
-		final String identifier = getPara("identifier");// 验证账号
-		final String credential = getPara("credential");// 验证凭证
+		String identifier = getPara("identifier");// 验证账号
+		String credential = getPara("credential");// 验证凭证
 		
 		if (StringUtils.isEmpty(identifier)) {
 			this.renderJson(new DataResponse(LevelEnum.ERROR, "账号不可为空，请填写", actionKey));
@@ -68,8 +68,21 @@ public class UserController extends Controller {
 			this.renderJson(new DataResponse(LevelEnum.ERROR, "不存在该用户，请检查账号", actionKey));
 			return;
 		}
-		String salt = checkUser.getSalt();// 获取用户盐
-		final String md5Pass = PasswordUtil.md5(credential + salt);
+		
+		String salt = "";
+		// 手机号登陆验证
+		if (IdentityTypeEnum.PHONE.getValue().equals(identityType)) {
+			salt = checkUser.getSalt();// 获取用户盐
+			credential = PasswordUtil.md5(credential + salt);
+			if(!credential.equals(checkUser.getCredential())){
+				this.renderJson(new DataResponse(LevelEnum.ERROR, "密码不正确，请修改", actionKey));
+				return;
+			}
+		}else{// qq 微信登陆需要判断是否存在用户
+			
+		}
+		
+		
 		
 		
 		String user = getPara("username");
@@ -118,12 +131,12 @@ public class UserController extends Controller {
 	@Before(Tx.class)
 	public void registerAction() {
 //		System.out.println("class name:"+this.getClass().getName()+",method name:"+Thread.currentThread().getStackTrace()[1].getMethodName());
-		final String actionKey = getAttr("actionKey").toString();// 获取actionKey
-		final String identityType = getPara("identityType") == null ? "phone"
+		String actionKey = getAttr("actionKey").toString();// 获取actionKey
+		String identityType = getPara("identityType") == null ? "phone"
 				: getPara("identityType").toLowerCase();// 验证类型:phone,qq,weixin
-		final String identifier = getPara("identifier");// 验证账号
-		final String credential = getPara("credential");// 验证凭证
-		final String authCode = getPara("authCode");// 验证码
+		String identifier = getPara("identifier");// 验证账号
+		String credential = getPara("credential");// 验证凭证
+		String authCode = getPara("authCode");// 验证码
 		if (StringUtils.isEmpty(identifier)) {
 			this.renderJson(new DataResponse(LevelEnum.ERROR, "账号不可为空，请填写", actionKey));
 			return;
@@ -168,11 +181,9 @@ public class UserController extends Controller {
 			}
 			// 生成用户验证盐
 			salt = PasswordUtil.getSalt().toString();
-			md5Pass = PasswordUtil.md5(credential + salt);
+			credential = PasswordUtil.md5(credential + salt);
 		}
 
-		final StringBuffer sb = new StringBuffer();
-		
 		// 事务保存用户和用户验证信息start
 		// 先保存用户基本信息
 		User user = new User();
@@ -196,7 +207,6 @@ public class UserController extends Controller {
 			// 生成tokenKey，保存在ehcache中（tokenKey:userAuthid）
 			tokenKey = PasswordUtil.generalTokenKey();
 			CacheKit.put("tokenCache", tokenKey, userAuth.getId());
-			sb.append(tokenKey);
 		} catch (Exception e) {
 			log.error("ehcache中保存tokenCache失败，", e);
 		}
@@ -205,8 +215,8 @@ public class UserController extends Controller {
 		// 事务保存用户和用户验证信息end
 		
 		Map<String,Object> rMap = new HashMap<String, Object>();
-		rMap.put("tokenKey", sb.toString());
-		this.renderJson(new DataResponse(LevelEnum.SUCCESS, "注册成功", actionKey, sb.toString()));
+		rMap.put("tokenKey", tokenKey);
+		this.renderJson(new DataResponse(LevelEnum.SUCCESS, "注册成功", actionKey, tokenKey));
 		return;
 	}
 
