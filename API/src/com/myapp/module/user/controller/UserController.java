@@ -2,8 +2,6 @@ package com.myapp.module.user.controller;
 
 import java.sql.SQLException;
 import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
 
 import org.apache.commons.lang.StringUtils;
 
@@ -92,7 +90,7 @@ public class UserController extends Controller {
 			}
 			UserAuth checkUser = UserService.checkUserAuth(identityType, identifier);
 			if (checkUser == null) {// 未使用三方登录过系统，则直接新增登录信息
-				Db.tx(new IAtom() {
+				boolean finalFlag = Db.tx(new IAtom() {
 					public boolean run() throws SQLException {
 						// 先保存用户基本信息
 						User user = new User();
@@ -115,7 +113,20 @@ public class UserController extends Controller {
 						return userFlag && userAuthFlag;
 					}
 				});
-
+				if (finalFlag) {
+					this.renderJson(new DataResponse(LevelEnum.SUCCESS, "登录成功", actionKey));
+					return;
+				} else {
+					this.renderJson(new DataResponse(LevelEnum.ERROR, "登录失败", actionKey));
+					return;
+				}
+			}else{// 使用三方登录过系统，则直接更新expiresIn
+				checkUser.setTokenKey(tokenKey);
+				checkUser.setTokenTime(DateUtil.addSecond(new Date(), Integer.valueOf(expiresIn)));// access_token有效时间，三方使用，单位为秒)
+				UserService.updateUserAuth(checkUser);
+				
+				this.renderJson(new DataResponse(LevelEnum.SUCCESS, "登录成功", actionKey));
+				return;
 			}
 		}
 		
@@ -206,8 +217,6 @@ public class UserController extends Controller {
 		userAuth.setVerified("1");
 		UserService.saveUserAuth(userAuth);
 		
-		Map<String,Object> rMap = new HashMap<String, Object>();
-		rMap.put("tokenKey", tokenKey);
 		this.renderJson(new DataResponse(LevelEnum.SUCCESS, "注册成功", actionKey, tokenKey));
 		return;
 	}
