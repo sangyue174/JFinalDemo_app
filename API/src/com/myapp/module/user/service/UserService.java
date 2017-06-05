@@ -52,7 +52,7 @@ public class UserService {
 	}
 
 	/**
-	 * 保存userAuth
+	 * 新增userAuth
 	 * 
 	 * @title: saveUserAuth
 	 * @author sangyue
@@ -63,6 +63,19 @@ public class UserService {
 	 */
 	public static boolean saveUserAuth(UserAuth userAuth) {
 		return userAuth.save();
+	}
+	
+	/**
+	 * 更新userAuth
+	 * @title: updateUserAuth
+	 * @author sangyue
+	 * @date Jun 5, 2017 11:40:01 PM
+	 * @param userAuth
+	 * @return 
+	 * @version V1.0
+	 */
+	public static boolean updateUserAuth(UserAuth userAuth) {
+		return userAuth.update();
 	}
 
 	/**

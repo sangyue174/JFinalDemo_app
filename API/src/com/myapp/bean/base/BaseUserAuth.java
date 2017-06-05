@@ -81,6 +81,15 @@ public abstract class BaseUserAuth<M extends BaseUserAuth<M>> extends Model<M> i
 		return get("tokenKey");
 	}
 
+	public M setTokenTime(java.util.Date tokenTime) {
+		set("tokenTime", tokenTime);
+		return (M)this;
+	}
+
+	public java.util.Date getTokenTime() {
+		return get("tokenTime");
+	}
+
 	public M setLoginTime(java.util.Date loginTime) {
 		set("loginTime", loginTime);
 		return (M)this;

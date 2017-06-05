@@ -7,18 +7,16 @@ import java.util.Map;
 
 import org.apache.commons.lang.StringUtils;
 
-import com.alibaba.fastjson.JSONArray;
-import com.alibaba.fastjson.JSONObject;
 import com.jfinal.aop.Before;
 import com.jfinal.core.Controller;
 import com.jfinal.log.Log4jLog;
 import com.jfinal.plugin.activerecord.Db;
 import com.jfinal.plugin.activerecord.IAtom;
 import com.jfinal.plugin.activerecord.tx.Tx;
-import com.jfinal.plugin.ehcache.CacheKit;
 import com.myapp.bean.User;
 import com.myapp.bean.UserAuth;
 import com.myapp.module.user.service.UserService;
+import com.myapp.utils.DateUtil;
 import com.myapp.utils.IdentityTypeEnum;
 import com.myapp.utils.PasswordUtil;
 import com.myapp.utils.PhoneFormatCheckUtils;
@@ -46,79 +44,81 @@ public class UserController extends Controller {
 	 * @version V1.0
 	 */
 	public void loginAction() {
-		// 传相应的登录类型过来，然后查询数据库，如果能找到对应userAuth（其中包含密码+salt的验证）,那么取出tokenKey,去ehcache中找它对应的值，如果发现能找到，那么说明这个用户
-		// 已经登录，可以跳过，如果发现没有tokenKey(db)或者ehcache中没有找到相应的值，那么说明用户登录已过期，生成新的tokenKey，保存进数据库，更新到ehcache中
+		// 传相应的登录类型过来，然后查询数据库，如果能找到对应userAuth（其中包含密码+salt的验证）,更新tokenKey过期时间
 		String actionKey = getAttr("actionKey").toString();// 获取actionKey
-		String identityType = getPara("identityType") == null ? "phone"
+		final String identityType = getPara("identityType") == null ? "phone"
 				: getPara("identityType").toLowerCase();// 验证类型:phone,qq,weixin
-		String identifier = getPara("identifier");// 验证账号
+		final String identifier = getPara("identifier");// 验证账号，openid
 		String credential = getPara("credential");// 验证凭证
+		final String tokenKey = getPara("tokenKey");// access_token，三方使用
+		final String expiresIn = getPara("expiresIn");// access_token有效时间，三方使用，单位为秒
 		
 		if (StringUtils.isEmpty(identifier)) {
 			this.renderJson(new DataResponse(LevelEnum.ERROR, "账号不可为空，请填写", actionKey));
 			return;
 		}
-		if (StringUtils.isEmpty(credential)) {
-			this.renderJson(new DataResponse(LevelEnum.ERROR, "密码不可为空，请填写", actionKey));
-			return;
-		}
-		// 校验是否存在用户
-		UserAuth checkUser = UserService.checkUserAuth(identityType, identifier);
-		if(checkUser == null){
-			this.renderJson(new DataResponse(LevelEnum.ERROR, "不存在该用户，请检查账号", actionKey));
-			return;
-		}
 		
-		String salt = "";
-		// 手机号登陆验证
+		// 手机登录密码不可为空
 		if (IdentityTypeEnum.PHONE.getValue().equals(identityType)) {
-			salt = checkUser.getSalt();// 获取用户盐
+			if(StringUtils.isEmpty(credential)){
+				this.renderJson(new DataResponse(LevelEnum.ERROR, "密码不可为空，请填写", actionKey));
+				return;
+			}
+			// 校验是否存在用户
+			UserAuth checkUser = UserService.checkUserAuth(identityType, identifier);
+			if(checkUser == null){
+				this.renderJson(new DataResponse(LevelEnum.ERROR, "不存在该用户，请检查账号", actionKey));
+				return;
+			}
+			// 验证手机密码
+			String salt = checkUser.getSalt();// 获取用户盐
 			credential = PasswordUtil.md5(credential + salt);
 			if(!credential.equals(checkUser.getCredential())){
 				this.renderJson(new DataResponse(LevelEnum.ERROR, "密码不正确，请修改", actionKey));
 				return;
 			}
-		}else{// qq 微信登陆需要判断是否存在用户
-			
+			// 更新user token过期时间
+			Date tokenTime = checkUser.getTokenTime();
+			checkUser.setTokenTime(DateUtil.addDay(tokenTime, 30));
+			UserService.updateUserAuth(checkUser);
+		} else {// qq 微信登陆需要判断是否存在用户
+			if(StringUtils.isEmpty(tokenKey)){
+				this.renderJson(new DataResponse(LevelEnum.ERROR, "access_token为空", actionKey));
+				return;
+			}
+			if(StringUtils.isEmpty(expiresIn)){
+				this.renderJson(new DataResponse(LevelEnum.ERROR, "expires_in为空", actionKey));
+				return;
+			}
+			UserAuth checkUser = UserService.checkUserAuth(identityType, identifier);
+			if (checkUser == null) {// 未使用三方登录过系统，则直接新增登录信息
+				Db.tx(new IAtom() {
+					public boolean run() throws SQLException {
+						// 先保存用户基本信息
+						User user = new User();
+						user.setIsactive("1");
+						boolean userFlag = UserService.saveUser(user);
+						// 再保存userAuth信息
+						UserAuth userAuth = new UserAuth();
+						userAuth.setUserid(user.getId());// 用户id，可以从上一步拿到刚保存的用户信息
+						userAuth.setIdentityType(identityType);
+						userAuth.setIdentifier(identifier);
+						userAuth.setCredential("");
+						userAuth.setRegisterTime(new Date());
+						userAuth.setSalt("");
+						userAuth.setTokenKey(tokenKey);
+						userAuth.setTokenTime(DateUtil.addSecond(new Date(), Integer.valueOf(expiresIn)));// access_token有效时间，三方使用，单位为秒
+						userAuth.setLoginTime(new Date());
+						userAuth.setVerified("1");
+						boolean userAuthFlag = UserService.saveUserAuth(userAuth);
+						
+						return userFlag && userAuthFlag;
+					}
+				});
+
+			}
 		}
 		
-		
-		
-		
-		String user = getPara("username");
-		String pwd = getPara("password");
-		User userModule = UserService.getUserInfo(user, pwd);
-		JSONObject object = new JSONObject();// 外层json
-		JSONObject infos = new JSONObject();// 成功以后的用户信息
-		JSONArray data = new JSONArray();// 承载用户信息的array
-		if (userModule == null) {// 用户名或密码错误
-			object.put("errorCode", 0);
-			object.put("msg", "用户名或密码错误");
-			object.put("data", data);
-			this.renderJson(object);
-		} else if (userModule != null
-				&& !userModule.get("password").equals(pwd)) {// 密码错误，请核对
-			object.put("errorCode", 0);
-			object.put("msg", "密码错误，请核对");
-			object.put("data", data);
-			this.renderJson(object);
-		} else {// 登录成功,返回成功登录信息
-			object.put("errorCode", 1);
-			object.put("msg", "登录成功");
-			// 用户信息
-			infos.put("username", userModule.get("username"));
-			infos.put("nickname", userModule.get("nickname"));
-			infos.put("sex", userModule.getInt("sex"));
-			infos.put("usertype", userModule.getInt("usertype"));
-			infos.put("nickname", userModule.get("nickname"));
-			infos.put("mobile", userModule.get("mobile"));
-			infos.put("score", userModule.getInt("score"));
-			infos.put("token", UserService.insertTOKEN(user));
-			// 添加值data数组中
-			data.add(infos);
-			object.put("data", data);
-			this.renderJson(object);
-		}
 	}
 
 	/**
@@ -190,6 +190,8 @@ public class UserController extends Controller {
 		user.setIsactive("1");
 		UserService.saveUser(user);
 
+		// 生成tokenKey
+		String tokenKey = PasswordUtil.generalTokenKey();
 		// 再保存用户验证信息
 		UserAuth userAuth = new UserAuth();
 		userAuth.setUserid(user.getId());// 用户id，可以从上一步拿到刚保存的用户信息
@@ -198,21 +200,11 @@ public class UserController extends Controller {
 		userAuth.setCredential(md5Pass);
 		userAuth.setRegisterTime(new Date());
 		userAuth.setSalt(salt);
+		userAuth.setTokenKey(tokenKey);
+		userAuth.setTokenTime(DateUtil.addDay(new Date(), 30));// token保存时间为30天
 		userAuth.setLoginTime(new Date());
 		userAuth.setVerified("1");
 		UserService.saveUserAuth(userAuth);
-
-		String tokenKey = "";
-		try {
-			// 生成tokenKey，保存在ehcache中（tokenKey:userAuthid）
-			tokenKey = PasswordUtil.generalTokenKey();
-			CacheKit.put("tokenCache", tokenKey, userAuth.getId());
-		} catch (Exception e) {
-			log.error("ehcache中保存tokenCache失败，", e);
-		}
-		// 将token保存在userAuth中
-		userAuth.setTokenKey(tokenKey).update();
-		// 事务保存用户和用户验证信息end
 		
 		Map<String,Object> rMap = new HashMap<String, Object>();
 		rMap.put("tokenKey", tokenKey);
