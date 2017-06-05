@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50622
 File Encoding         : 65001
 
-Date: 2017-05-22 21:45:18
+Date: 2017-06-06 00:11:58
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -85,12 +85,13 @@ CREATE TABLE `tb_user_auth` (
   `id` int(10) NOT NULL AUTO_INCREMENT COMMENT '主键id',
   `userid` int(10) DEFAULT NULL COMMENT 'user主键',
   `identityType` varchar(15) DEFAULT 'phone' COMMENT '验证类型(username,phone,qq,weixin)',
-  `identifier` varchar(50) DEFAULT NULL COMMENT '验证账号',
+  `identifier` varchar(50) DEFAULT NULL COMMENT '验证账号,openid',
   `credential` varchar(100) DEFAULT NULL COMMENT '验证凭证',
   `registerTime` datetime DEFAULT CURRENT_TIMESTAMP COMMENT '注册时间',
   `salt` varchar(50) DEFAULT NULL COMMENT '验证盐',
-  `tokenKey` varchar(255) DEFAULT NULL COMMENT 'token',
+  `tokenKey` varchar(255) DEFAULT NULL COMMENT 'tokenKey,access_token',
+  `tokenTime` datetime DEFAULT CURRENT_TIMESTAMP COMMENT 'token失效时间',
   `loginTime` datetime DEFAULT CURRENT_TIMESTAMP COMMENT '上次登录时间',
   `verified` varchar(5) DEFAULT '1' COMMENT '是否验证通过(0:无效1:有效)',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
