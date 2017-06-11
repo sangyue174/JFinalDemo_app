@@ -334,49 +334,6 @@ public class UserController extends Controller {
 	}
 	
 	/**
-	 * 删除用户
-	 * @title: delUserAction
-	 * @author sangyue
-	 * @date Jun 11, 2017 9:44:20 PM 
-	 * @version V1.0
-	 */
-	public void delUserAction(){
-		String actionKey = getAttr("actionKey").toString();// 获取actionKey
-		String identifier = getPara("identifier");// 验证账号
-		String preCredential = getPara("preCredential");// 原验证凭证
-		String newCredential = getPara("newCredential");// 新验证凭证
-		
-		if (StringUtils.isEmpty(identifier)) {
-			this.renderJson(new DataResponse(LevelEnum.ERROR, "账号不可为空，请填写", actionKey));
-			return;
-		}
-		if (StringUtils.isEmpty(preCredential) || StringUtils.isEmpty(newCredential)) {
-			this.renderJson(new DataResponse(LevelEnum.ERROR, "密码不可为空，请填写", actionKey));
-			return;
-		}
-		
-		UserAuth checkUser = UserService.checkUserAuth(IdentityTypeEnum.PHONE.getValue(), identifier);
-		if(checkUser == null){
-			this.renderJson(new DataResponse(LevelEnum.ERROR, "不存在该用户，请检查账号", actionKey));
-			return;
-		}
-		// 验证手机密码
-		String salt = checkUser.getSalt();// 获取用户盐
-		preCredential = PasswordUtil.md5(preCredential + salt);
-		if(!checkUser.getCredential().equals(preCredential)){
-			this.renderJson(new DataResponse(LevelEnum.ERROR, "原手机号/密码不正确，请检查", actionKey));
-			return;
-		}
-		// 设置新密码
-		newCredential = PasswordUtil.md5(newCredential + salt);
-		checkUser.setCredential(newCredential);
-		UserService.updateUserAuth(checkUser);
-		
-		this.renderJson(new DataResponse(LevelEnum.SUCCESS, "修改密码成功", actionKey));
-		return;
-	}
-	
-	/**
 	 * 校验验证码
 	 * @title: validateAuthCode
 	 * @author sangyue
