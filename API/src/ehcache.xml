@@ -1225,8 +1225,9 @@ Here is an example of CacheManager level resource tuning, which will use up to 4
      </cache>
      -->
      
-	<cache name="tokenCache" maxElementsInMemory="10000" overflowToDisk="true"
-		eternal="false" timeToIdleSeconds="1296000" timeToLiveSeconds="0" 
+    <!-- 验证码缓存 -->
+	<cache name="authCodeCache" maxElementsInMemory="10000" overflowToDisk="true"
+		eternal="false" timeToIdleSeconds="0" timeToLiveSeconds="300" 
 		diskPersistent="true" diskExpiryThreadIntervalSeconds="120" />
 	<!-- 一天86400秒，15天1296000秒，30天2592000秒-->
 	<!-- 

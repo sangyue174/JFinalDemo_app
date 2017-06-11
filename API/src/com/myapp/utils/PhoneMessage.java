@@ -1,8 +1,11 @@
 package com.myapp.utils;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class PhoneMessage {
+public class PhoneMessage implements Serializable {
+	private static final long serialVersionUID = 1L;
+	
 	private String phone;
 	private String authCode;
 	private Date sendTime;

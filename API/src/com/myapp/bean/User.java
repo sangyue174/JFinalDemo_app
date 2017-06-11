@@ -1,5 +1,7 @@
 package com.myapp.bean;
 
+import java.util.List;
+
 import com.myapp.bean.base.BaseUser;
 
 /**
@@ -8,4 +10,8 @@ import com.myapp.bean.base.BaseUser;
 @SuppressWarnings("serial")
 public class User extends BaseUser<User> {
 	public static final User dao = new User().dao();
+
+	public List<UserAuth> getUserAuth() {
+		return UserAuth.dao.find("select * from tb_user_auth where userid = ? ", get("id"));
+	}
 }
