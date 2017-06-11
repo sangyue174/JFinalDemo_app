@@ -7,6 +7,7 @@ import com.myapp.config.MyAppConfig;
 import com.myapp.utils.PasswordUtil;
 
 public class JunitTest extends ControllerTestCase<MyAppConfig> {
+	// User
 	@Test
 	public void registerAction() {
 		String url = "";
@@ -36,6 +37,15 @@ public class JunitTest extends ControllerTestCase<MyAppConfig> {
 		String url = "/user/modifyPassAction?identityType=phone&identifier=18615566651&preCredential=admin1&newCredential=admin";
 		System.out.println(use(url).invoke());
 	}
+	
+	// 发送验证码
+	@Test
+	public void sendCodeAction() {
+		String url = "/auth/sendCodeAction?identifier=18615566651";
+		System.out.println(use(url).invoke());
+	}
+	
+	// 
 	
 	public static void main(String[] args) {
 		byte[] saltByte = PasswordUtil.getSalt();

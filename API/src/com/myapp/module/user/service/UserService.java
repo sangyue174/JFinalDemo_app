@@ -20,7 +20,7 @@ public class UserService {
 	 * @return
 	 */
 	public static User getUserInfo(String username, String pwd) {
-		String sql = "SELECT * FROM tb_user WHERE username=?";// sql语句中？可以防止sql注入，多参数多？
+		String sql = "SELECT * FROM tb_user WHERE username=? and isactive = 1";// sql语句中？可以防止sql注入，多参数多？
 		User user = new User().findFirst(sql, username);// 使用findFirst来实现指定查找，并且查找到的数据会以反射的形式来给User实体类
 		return user;// 返回User实体类
 	}
@@ -90,7 +90,7 @@ public class UserService {
 	 * @version V1.0
 	 */
 	public static UserAuth checkUserAuth(String identityType, String identifier) {
-		String sql = "select * from tb_user_auth where identityType = ? and identifier = ?";
+		String sql = "select * from tb_user_auth where identityType = ? and identifier = ? and verified = 1";
 		UserAuth userAuth = new UserAuth().findFirst(sql, identityType,
 				identifier);
 		return userAuth;
