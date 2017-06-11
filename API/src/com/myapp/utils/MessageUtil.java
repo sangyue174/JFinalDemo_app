@@ -34,7 +34,6 @@ public class MessageUtil {
 		
 		Map<String, String> map = new HashMap<>();
 		map.put("code", code);
-		map.put("name", "【夜莺科技】");
 		String seeJson = JSONObject.toJSON(map).toString();
 		TaobaoClient client = new DefaultTaobaoClient(url, appkey, secret);
 		AlibabaAliqinFcSmsNumSendRequest req = new AlibabaAliqinFcSmsNumSendRequest();
@@ -43,7 +42,7 @@ public class MessageUtil {
 		req.setSmsParamString(seeJson);
 		req.setRecNum(number);
 		req.setSmsFreeSignName(signName);
-		req.setSmsTemplateCode("SMS_70585378");// 验证码模板名称
+		req.setSmsTemplateCode("SMS_70465506");// 验证码模板名称
 		try {
 			AlibabaAliqinFcSmsNumSendResponse rsp = client.execute(req);
 			System.out.println(rsp.getBody());

@@ -1,5 +1,7 @@
 package com.myapp.utils.response;
 
+import com.jfinal.log.Log4jLog;
+
 
 /**
  * @className: DataResponse
@@ -8,6 +10,7 @@ package com.myapp.utils.response;
  * @version V1.0
  */
 public class DataResponse {
+	private static final Log4jLog log = Log4jLog.getLog(DataResponse.class);
 	/** 发生源 */
 	protected String method;
 
@@ -45,6 +48,9 @@ public class DataResponse {
 
 	public DataResponse(String method, LevelEnum level, String code,
 			String msg, Object data) {
+		if (LevelEnum.ERROR.getValue().equals(level.getValue())) {
+			log.error("Exist Error,detail:[" + msg + "], method source:[" + method + "].");
+		}
 		this.method = method;
 		this.level = level.getValue();
 		this.code = code;

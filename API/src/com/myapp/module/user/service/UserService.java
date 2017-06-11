@@ -95,4 +95,19 @@ public class UserService {
 				identifier);
 		return userAuth;
 	}
+	
+	/**
+	 * 根据tokenKey查找用户
+	 * @title: findUserAuthByTokenKey
+	 * @author sangyue
+	 * @date Jun 11, 2017 10:37:48 PM
+	 * @param tokenKey
+	 * @return 
+	 * @version V1.0
+	 */
+	public static UserAuth findUserAuthByTokenKey(String tokenKey) {
+		String sql = "select * from tb_user_auth where identityType = ? and identifier = ? and verified = 1";
+		UserAuth userAuth = new UserAuth().findFirst(sql, tokenKey);
+		return userAuth;
+	}
 }
