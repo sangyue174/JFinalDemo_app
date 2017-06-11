@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50622
 File Encoding         : 65001
 
-Date: 2017-06-06 00:11:58
+Date: 2017-06-11 01:07:38
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -31,6 +31,10 @@ CREATE TABLE `tb_equipment` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
+-- Records of tb_equipment
+-- ----------------------------
+
+-- ----------------------------
 -- Table structure for tb_kid
 -- ----------------------------
 DROP TABLE IF EXISTS `tb_kid`;
@@ -45,6 +49,10 @@ CREATE TABLE `tb_kid` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
+-- Records of tb_kid
+-- ----------------------------
+
+-- ----------------------------
 -- Table structure for tb_temp_record
 -- ----------------------------
 DROP TABLE IF EXISTS `tb_temp_record`;
@@ -55,6 +63,10 @@ CREATE TABLE `tb_temp_record` (
   `temperature` decimal(10,2) unsigned DEFAULT NULL COMMENT '温度',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of tb_temp_record
+-- ----------------------------
 
 -- ----------------------------
 -- Table structure for tb_tip
@@ -68,6 +80,10 @@ CREATE TABLE `tb_tip` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
+-- Records of tb_tip
+-- ----------------------------
+
+-- ----------------------------
 -- Table structure for tb_user
 -- ----------------------------
 DROP TABLE IF EXISTS `tb_user`;
@@ -75,7 +91,18 @@ CREATE TABLE `tb_user` (
   `id` int(10) NOT NULL AUTO_INCREMENT COMMENT '主键id',
   `isactive` varchar(5) DEFAULT '1' COMMENT '是否有效(0:无效 1：有效)',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of tb_user
+-- ----------------------------
+INSERT INTO `tb_user` VALUES ('1', '1');
+INSERT INTO `tb_user` VALUES ('2', '1');
+INSERT INTO `tb_user` VALUES ('3', '1');
+INSERT INTO `tb_user` VALUES ('4', '1');
+INSERT INTO `tb_user` VALUES ('5', '1');
+INSERT INTO `tb_user` VALUES ('6', '1');
+INSERT INTO `tb_user` VALUES ('7', '1');
 
 -- ----------------------------
 -- Table structure for tb_user_auth
@@ -94,4 +121,11 @@ CREATE TABLE `tb_user_auth` (
   `loginTime` datetime DEFAULT CURRENT_TIMESTAMP COMMENT '上次登录时间',
   `verified` varchar(5) DEFAULT '1' COMMENT '是否验证通过(0:无效1:有效)',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of tb_user_auth
+-- ----------------------------
+INSERT INTO `tb_user_auth` VALUES ('1', '1', 'phone', '123', null, '2017-05-22 21:42:23', null, null, null, '2017-05-22 21:42:23', '1');
+INSERT INTO `tb_user_auth` VALUES ('2', '1', 'qq', '1147468768', 'xxx', '2017-06-09 23:40:19', '123', 'xxx', '2017-07-09 23:40:19', '2017-06-09 23:40:19', '1');
+INSERT INTO `tb_user_auth` VALUES ('7', '7', 'phone', '18615566651', '3f0b17baeaaf7d69f9d731d83ae5bf32', '2017-06-11 00:16:16', '[B@1571e0f6', '2de4e96238', '2017-07-11 01:00:28', '2017-06-11 01:00:28', '1');
