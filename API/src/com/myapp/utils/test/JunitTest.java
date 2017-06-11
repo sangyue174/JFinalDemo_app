@@ -29,7 +29,7 @@ public class JunitTest extends ControllerTestCase<MyAppConfig> {
 	}
 	@Test
 	public void forgetPassAction() {
-		String url = "/user/forgetPassAction?identityType=phone&identifier=18615566651&credential=admin1&authCode=1234";
+		String url = "/user/forgetPassAction?identityType=phone&identifier=18615566651&credential=admin1&authCode=069052";
 		System.out.println(use(url).invoke());
 	}
 	@Test
