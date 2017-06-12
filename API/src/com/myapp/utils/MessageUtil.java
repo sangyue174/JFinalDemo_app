@@ -42,7 +42,7 @@ public class MessageUtil {
 		req.setSmsParamString(seeJson);
 		req.setRecNum(number);
 		req.setSmsFreeSignName(signName);
-		req.setSmsTemplateCode("SMS_70465506");// 验证码模板名称
+		req.setSmsTemplateCode("SMS_70590485");// 验证码模板名称
 		try {
 			AlibabaAliqinFcSmsNumSendResponse rsp = client.execute(req);
 			log.debug("验证码信息，手机号：【" + number + ", 验证码：【" + code + "】，返回内容：" + rsp.getBody());
