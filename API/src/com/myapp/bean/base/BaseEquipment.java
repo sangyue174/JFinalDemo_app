@@ -63,13 +63,31 @@ public abstract class BaseEquipment<M extends BaseEquipment<M>> extends Model<M>
 		return get("mintime");
 	}
 
-	public M setIsalarm(java.lang.String isalarm) {
-		set("isalarm", isalarm);
+	public M setIsminalarm(java.lang.String isminalarm) {
+		set("isminalarm", isminalarm);
 		return (M)this;
 	}
 
-	public java.lang.String getIsalarm() {
-		return get("isalarm");
+	public java.lang.String getIsminalarm() {
+		return get("isminalarm");
+	}
+
+	public M setIsmaxalarm(java.lang.String ismaxalarm) {
+		set("ismaxalarm", ismaxalarm);
+		return (M)this;
+	}
+
+	public java.lang.String getIsmaxalarm() {
+		return get("ismaxalarm");
+	}
+
+	public M setIsnotice(java.lang.String isnotice) {
+		set("isnotice", isnotice);
+		return (M)this;
+	}
+
+	public java.lang.String getIsnotice() {
+		return get("isnotice");
 	}
 
 }

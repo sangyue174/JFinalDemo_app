@@ -456,3 +456,24 @@ java.lang.NullPointerException
 
 2017-06-12 00:10:22
 [ERROR]-[Thread: main]-[com.myapp.utils.response.DataResponse.<init>()]: Exist Error,detail:[验证码已过期，请重新获取], method source:[/user/forgetPassAction].
+
+2017-06-12 23:10:27
+[INFO]-[Thread: main]-[com.alibaba.druid.pool.DruidDataSource.init()]: {dataSource-1} inited
+
+2017-06-12 23:10:28
+[DEBUG]-[Thread: main]-[com.alibaba.druid.filter.logging.Log4jFilter.statementLog()]: {conn-10001, stmt-20000} executed. select * from `tb_equipment` where 1 = 2
+
+2017-06-12 23:10:28
+[DEBUG]-[Thread: main]-[com.alibaba.druid.filter.logging.Log4jFilter.statementLog()]: {conn-10001, stmt-20001} executed. select * from `tb_kid` where 1 = 2
+
+2017-06-12 23:10:28
+[DEBUG]-[Thread: main]-[com.alibaba.druid.filter.logging.Log4jFilter.statementLog()]: {conn-10001, stmt-20002} executed. select * from `tb_temp_record` where 1 = 2
+
+2017-06-12 23:10:28
+[DEBUG]-[Thread: main]-[com.alibaba.druid.filter.logging.Log4jFilter.statementLog()]: {conn-10001, stmt-20003} executed. select * from `tb_tip` where 1 = 2
+
+2017-06-12 23:10:28
+[DEBUG]-[Thread: main]-[com.alibaba.druid.filter.logging.Log4jFilter.statementLog()]: {conn-10001, stmt-20004} executed. select * from `tb_user` where 1 = 2
+
+2017-06-12 23:10:28
+[DEBUG]-[Thread: main]-[com.alibaba.druid.filter.logging.Log4jFilter.statementLog()]: {conn-10001, stmt-20005} executed. select * from `tb_user_auth` where 1 = 2
