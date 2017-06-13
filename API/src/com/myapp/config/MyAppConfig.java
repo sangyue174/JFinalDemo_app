@@ -18,6 +18,7 @@ import com.jfinal.render.ViewType;
 import com.jfinal.template.Engine;
 import com.myapp.bean._MappingKit;
 import com.myapp.module.authcode.controller.AuthCodeController;
+import com.myapp.module.equipment.controller.EquipmentController;
 import com.myapp.module.index.controller.IndexController;
 import com.myapp.module.user.controller.UserController;
 import com.myapp.utils.interceptor.ExceptionIntoLogInterceptor;
@@ -44,6 +45,7 @@ public class MyAppConfig extends JFinalConfig {
 	public void configRoute(Routes me) {
 		me.add("/user", UserController.class);
 		me.add("/auth", AuthCodeController.class);
+		me.add("/equipment", EquipmentController.class);
 		me.add("/", IndexController.class);
 	}
 
