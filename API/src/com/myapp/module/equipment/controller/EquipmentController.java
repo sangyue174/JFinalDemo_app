@@ -63,7 +63,7 @@ public class EquipmentController extends Controller {
 		equipment.setNumber(number);
 		equipment.setMaxtime(new BigDecimal(maxtime));
 		equipment.setMintime(new BigDecimal(mintime));
-		equipment.setIsalarm(isalarm);
+		equipment.setIsnotice(isalarm);
 		//添加设备
 		boolean suc = EquipmentService.saveEquipment(equipment);
 		if (suc) {
