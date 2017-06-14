@@ -1,5 +1,6 @@
 package com.myapp.module.temprecord.controller;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -56,6 +57,38 @@ public class TempRecordController extends Controller {
 		resultMap.put("minTemp", maxminRecord.getMinTemp());
 		resultMap.put("tempRecordList", tempRecordList);
 		this.renderJson(new DataResponse(LevelEnum.SUCCESS, "查询成功", actionKey, resultMap));
+		return;
+	}
+	
+	/**
+	 * 查询当前设备涉及的所有日期
+	 * @title: findTempRecordDateAction
+	 * @author sangyue
+	 * @date Jun 15, 2017 12:39:24 AM 
+	 * @version V1.0
+	 */
+	public void findTempRecordDateAction() {
+		String actionKey = getAttr("actionKey").toString();// 获取actionKey
+		String equipid = getPara("equipid");// 设备id
+		if (StringUtils.isEmpty(equipid)) {
+			this.renderJson(new DataResponse(LevelEnum.ERROR, "设备id不可为空，请填写", actionKey));
+			return;
+		}
+		// 校验是否存在该设备
+		Equipment equipment = EquipmentService.findEquipment(Integer.parseInt(equipid));
+		if (equipment == null) {
+			this.renderJson(new DataResponse(LevelEnum.ERROR, "该设备不存在，设备id【" + equipid + "】，请联系管理员", actionKey));
+			return;
+		}
+		
+		// 根据equipid查询设备涉及的所有日期
+		List<TempRecord> tempRecordList = TempRecordService.findTempRecordDateGroupbyRecordTime(Integer.parseInt(equipid));
+		// 循环将tempRecord取出并存在list中返回给app
+		List<String> recordList = new ArrayList<String>();
+		for (TempRecord tempRecord : tempRecordList) {
+			recordList.add(DateUtil.DateToString(tempRecord.getRecordTime(), "yyyyMMdd"));
+		}
+		this.renderJson(new DataResponse(LevelEnum.SUCCESS, "查询成功", actionKey, recordList));
 		return;
 	}
 

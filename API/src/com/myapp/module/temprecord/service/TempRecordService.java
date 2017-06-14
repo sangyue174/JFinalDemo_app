@@ -80,5 +80,20 @@ public class TempRecordService {
 				startDate, endDate);
 		return tempRecord;
 	}
+	
+	/**
+	 * 查询当前设备涉及的所有日期
+	 * @title: findTempRecordDate
+	 * @author sangyue
+	 * @date Jun 15, 2017 12:36:39 AM
+	 * @param equipid
+	 * @return 
+	 * @version V1.0
+	 */
+	public static List<TempRecord> findTempRecordDateGroupbyRecordTime(Integer equipid) {
+		String sql = "select Date(recordTime) recordTime from tb_temp_record where equipid = ? group by Date(recordTime) order by Date(recordTime) ";
+		List<TempRecord> tempRecordList = new TempRecord().find(sql, equipid);
+		return tempRecordList;
+	}
 
 }

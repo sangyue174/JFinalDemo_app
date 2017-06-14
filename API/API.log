@@ -658,3 +658,172 @@ WHERE equipid = 1
 FROM tb_temp_record
 WHERE equipid = 1
 	AND Date(recordTime) BETWEEN '20170614' AND '20170614'
+
+2017-06-15 00:42:44
+[INFO]-[Thread: main]-[com.alibaba.druid.pool.DruidDataSource.init()]: {dataSource-1} inited
+
+2017-06-15 00:42:44
+[DEBUG]-[Thread: main]-[com.alibaba.druid.filter.logging.Log4jFilter.statementLog()]: {conn-10001, stmt-20000} executed. select * from `tb_equipment` where 1 = 2
+
+2017-06-15 00:42:44
+[DEBUG]-[Thread: main]-[com.alibaba.druid.filter.logging.Log4jFilter.statementLog()]: {conn-10001, stmt-20001} executed. select * from `tb_kid` where 1 = 2
+
+2017-06-15 00:42:44
+[DEBUG]-[Thread: main]-[com.alibaba.druid.filter.logging.Log4jFilter.statementLog()]: {conn-10001, stmt-20002} executed. select * from `tb_temp_record` where 1 = 2
+
+2017-06-15 00:42:44
+[DEBUG]-[Thread: main]-[com.alibaba.druid.filter.logging.Log4jFilter.statementLog()]: {conn-10001, stmt-20003} executed. select * from `tb_tip` where 1 = 2
+
+2017-06-15 00:42:44
+[DEBUG]-[Thread: main]-[com.alibaba.druid.filter.logging.Log4jFilter.statementLog()]: {conn-10001, stmt-20004} executed. select * from `tb_user` where 1 = 2
+
+2017-06-15 00:42:44
+[DEBUG]-[Thread: main]-[com.alibaba.druid.filter.logging.Log4jFilter.statementLog()]: {conn-10001, stmt-20005} executed. select * from `tb_user_auth` where 1 = 2
+
+2017-06-15 00:42:45
+[DEBUG]-[Thread: main]-[com.alibaba.druid.filter.logging.Log4jFilter.statementLog()]: {conn-10001, pstmt-20006} executed. SELECT *
+FROM `tb_equipment`
+WHERE `id` = 1
+
+2017-06-15 00:42:45
+[ERROR]-[Thread: main]-[com.myapp.utils.interceptor.ExceptionIntoLogInterceptor.logWrite()]: 
+---Exception Log Begin---
+Controller:com.myapp.module.temprecord.controller.TempRecordController
+Method:findTempRecordDateAction
+Exception Type:com.jfinal.plugin.activerecord.ActiveRecordException
+Exception Details:
+com.jfinal.plugin.activerecord.ActiveRecordException: java.sql.SQLException: Parameter index out of range (1 > number of parameters, which is 0).
+	at com.jfinal.plugin.activerecord.Model.find(Model.java:579)
+	at com.myapp.module.temprecord.service.TempRecordService.findTempRecordDateGroupbyRecordTime(TempRecordService.java:95)
+	at com.myapp.module.temprecord.controller.TempRecordController.findTempRecordDateAction(TempRecordController.java:84)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:57)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:606)
+	at com.jfinal.aop.Invocation.invoke(Invocation.java:73)
+	at com.myapp.utils.interceptor.ExceptionIntoLogInterceptor.intercept(ExceptionIntoLogInterceptor.java:24)
+	at com.jfinal.aop.Invocation.invoke(Invocation.java:67)
+	at com.jfinal.core.ActionHandler.handle(ActionHandler.java:74)
+	at com.jfinal.ext.handler.ContextPathHandler.handle(ContextPathHandler.java:48)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:57)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:606)
+	at com.jfinal.ext.kit.Reflect.on(Reflect.java:644)
+	at com.jfinal.ext.kit.Reflect.call(Reflect.java:383)
+	at com.jfinal.ext.test.ControllerTestCase.invoke(ControllerTestCase.java:124)
+	at com.myapp.utils.test.JunitTest.findTempRecordDateAction(JunitTest.java:58)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:57)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:606)
+	at org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:45)
+	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:15)
+	at org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:42)
+	at org.junit.internal.runners.statements.InvokeMethod.evaluate(InvokeMethod.java:20)
+	at org.junit.internal.runners.statements.RunBefores.evaluate(RunBefores.java:28)
+	at org.junit.runners.ParentRunner.runLeaf(ParentRunner.java:263)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:68)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:47)
+	at org.junit.runners.ParentRunner$3.run(ParentRunner.java:231)
+	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:60)
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:229)
+	at org.junit.runners.ParentRunner.access$000(ParentRunner.java:50)
+	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:222)
+	at org.junit.internal.runners.statements.RunAfters.evaluate(RunAfters.java:30)
+	at org.junit.runners.ParentRunner.run(ParentRunner.java:300)
+	at org.eclipse.jdt.internal.junit4.runner.JUnit4TestReference.run(JUnit4TestReference.java:50)
+	at org.eclipse.jdt.internal.junit.runner.TestExecution.run(TestExecution.java:38)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.runTests(RemoteTestRunner.java:459)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.runTests(RemoteTestRunner.java:675)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.run(RemoteTestRunner.java:382)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.main(RemoteTestRunner.java:192)
+Caused by: java.sql.SQLException: Parameter index out of range (1 > number of parameters, which is 0).
+	at com.mysql.jdbc.SQLError.createSQLException(SQLError.java:1073)
+	at com.mysql.jdbc.SQLError.createSQLException(SQLError.java:987)
+	at com.mysql.jdbc.SQLError.createSQLException(SQLError.java:982)
+	at com.mysql.jdbc.SQLError.createSQLException(SQLError.java:927)
+	at com.mysql.jdbc.PreparedStatement.checkBounds(PreparedStatement.java:3754)
+	at com.mysql.jdbc.PreparedStatement.setInternal(PreparedStatement.java:3738)
+	at com.mysql.jdbc.PreparedStatement.setInternal(PreparedStatement.java:3780)
+	at com.mysql.jdbc.PreparedStatement.setInt(PreparedStatement.java:3724)
+	at com.mysql.jdbc.PreparedStatement.setObject(PreparedStatement.java:3988)
+	at com.alibaba.druid.filter.FilterChainImpl.preparedStatement_setObject(FilterChainImpl.java:2923)
+	at com.alibaba.druid.filter.FilterAdapter.preparedStatement_setObject(FilterAdapter.java:1299)
+	at com.alibaba.druid.filter.FilterChainImpl.preparedStatement_setObject(FilterChainImpl.java:2920)
+	at com.alibaba.druid.filter.FilterAdapter.preparedStatement_setObject(FilterAdapter.java:1299)
+	at com.alibaba.druid.filter.FilterChainImpl.preparedStatement_setObject(FilterChainImpl.java:2920)
+	at com.alibaba.druid.filter.FilterAdapter.preparedStatement_setObject(FilterAdapter.java:1299)
+	at com.alibaba.druid.filter.FilterChainImpl.preparedStatement_setObject(FilterChainImpl.java:2920)
+	at com.alibaba.druid.proxy.jdbc.PreparedStatementProxyImpl.setObject(PreparedStatementProxyImpl.java:398)
+	at com.alibaba.druid.pool.DruidPooledPreparedStatement.setObject(DruidPooledPreparedStatement.java:476)
+	at com.jfinal.plugin.activerecord.dialect.Dialect.fillStatement(Dialect.java:81)
+	at com.jfinal.plugin.activerecord.Model.find(Model.java:559)
+	at com.jfinal.plugin.activerecord.Model.find(Model.java:577)
+	... 44 more
+
+2017-06-15 00:43:29
+[INFO]-[Thread: main]-[com.alibaba.druid.pool.DruidDataSource.init()]: {dataSource-1} inited
+
+2017-06-15 00:43:29
+[DEBUG]-[Thread: main]-[com.alibaba.druid.filter.logging.Log4jFilter.statementLog()]: {conn-10001, stmt-20000} executed. select * from `tb_equipment` where 1 = 2
+
+2017-06-15 00:43:29
+[DEBUG]-[Thread: main]-[com.alibaba.druid.filter.logging.Log4jFilter.statementLog()]: {conn-10001, stmt-20001} executed. select * from `tb_kid` where 1 = 2
+
+2017-06-15 00:43:29
+[DEBUG]-[Thread: main]-[com.alibaba.druid.filter.logging.Log4jFilter.statementLog()]: {conn-10001, stmt-20002} executed. select * from `tb_temp_record` where 1 = 2
+
+2017-06-15 00:43:29
+[DEBUG]-[Thread: main]-[com.alibaba.druid.filter.logging.Log4jFilter.statementLog()]: {conn-10001, stmt-20003} executed. select * from `tb_tip` where 1 = 2
+
+2017-06-15 00:43:29
+[DEBUG]-[Thread: main]-[com.alibaba.druid.filter.logging.Log4jFilter.statementLog()]: {conn-10001, stmt-20004} executed. select * from `tb_user` where 1 = 2
+
+2017-06-15 00:43:29
+[DEBUG]-[Thread: main]-[com.alibaba.druid.filter.logging.Log4jFilter.statementLog()]: {conn-10001, stmt-20005} executed. select * from `tb_user_auth` where 1 = 2
+
+2017-06-15 00:43:30
+[DEBUG]-[Thread: main]-[com.alibaba.druid.filter.logging.Log4jFilter.statementLog()]: {conn-10001, pstmt-20006} executed. SELECT *
+FROM `tb_equipment`
+WHERE `id` = 1
+
+2017-06-15 00:43:30
+[DEBUG]-[Thread: main]-[com.alibaba.druid.filter.logging.Log4jFilter.statementLog()]: {conn-10001, pstmt-20007} executed. SELECT Date(recordTime) AS recordTime
+FROM tb_temp_record
+WHERE equipid = 1
+GROUP BY Date(recordTime)
+ORDER BY Date(recordTime)
+
+2017-06-15 00:46:53
+[INFO]-[Thread: main]-[com.alibaba.druid.pool.DruidDataSource.init()]: {dataSource-1} inited
+
+2017-06-15 00:46:53
+[DEBUG]-[Thread: main]-[com.alibaba.druid.filter.logging.Log4jFilter.statementLog()]: {conn-10001, stmt-20000} executed. select * from `tb_equipment` where 1 = 2
+
+2017-06-15 00:46:53
+[DEBUG]-[Thread: main]-[com.alibaba.druid.filter.logging.Log4jFilter.statementLog()]: {conn-10001, stmt-20001} executed. select * from `tb_kid` where 1 = 2
+
+2017-06-15 00:46:53
+[DEBUG]-[Thread: main]-[com.alibaba.druid.filter.logging.Log4jFilter.statementLog()]: {conn-10001, stmt-20002} executed. select * from `tb_temp_record` where 1 = 2
+
+2017-06-15 00:46:53
+[DEBUG]-[Thread: main]-[com.alibaba.druid.filter.logging.Log4jFilter.statementLog()]: {conn-10001, stmt-20003} executed. select * from `tb_tip` where 1 = 2
+
+2017-06-15 00:46:53
+[DEBUG]-[Thread: main]-[com.alibaba.druid.filter.logging.Log4jFilter.statementLog()]: {conn-10001, stmt-20004} executed. select * from `tb_user` where 1 = 2
+
+2017-06-15 00:46:53
+[DEBUG]-[Thread: main]-[com.alibaba.druid.filter.logging.Log4jFilter.statementLog()]: {conn-10001, stmt-20005} executed. select * from `tb_user_auth` where 1 = 2
+
+2017-06-15 00:46:55
+[DEBUG]-[Thread: main]-[com.alibaba.druid.filter.logging.Log4jFilter.statementLog()]: {conn-10001, pstmt-20006} executed. SELECT *
+FROM `tb_equipment`
+WHERE `id` = 1
+
+2017-06-15 00:46:55
+[DEBUG]-[Thread: main]-[com.alibaba.druid.filter.logging.Log4jFilter.statementLog()]: {conn-10001, pstmt-20007} executed. SELECT Date(recordTime) AS recordTime
+FROM tb_temp_record
+WHERE equipid = 1
+GROUP BY Date(recordTime)
+ORDER BY Date(recordTime)

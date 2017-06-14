@@ -45,12 +45,19 @@ public class JunitTest extends ControllerTestCase<MyAppConfig> {
 		System.out.println(use(url).invoke());
 	}
 	
-	
+	// tempRecord
 	@Test
 	public void findTempRecordChartAction() {
 		String url = "/tempRecord/findTempRecordChartAction?equipid=1&date=20170614";
 		System.out.println(use(url).invoke());
 	}
+	
+	@Test
+	public void findTempRecordDateAction() {
+		String url = "/tempRecord/findTempRecordDateAction?equipid=1";
+		System.out.println(use(url).invoke());
+	}
+	
 	
 	
 	public static void main(String[] args) {
