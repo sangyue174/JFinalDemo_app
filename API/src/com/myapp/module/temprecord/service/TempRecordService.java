@@ -55,7 +55,7 @@ public class TempRecordService {
 	 */
 	public static List<TempRecord> findTempRecordByDate(Integer equipid,
 			String startDate, String endDate) {
-		String sql = "select * from tb_temp_record where equipid = ? and Date(recordTime) between ? and ? ";
+		String sql = "select recordTime, temperature from tb_temp_record where equipid = ? and Date(recordTime) between ? and ? ";
 		List<TempRecord> tempRecordList = new TempRecord().find(sql, equipid,
 				startDate, endDate);
 		return tempRecordList;
@@ -75,7 +75,7 @@ public class TempRecordService {
 	 */
 	public static TempRecord findMaxMinTempRecordByDate(Integer equipid,
 			String startDate, String endDate) {
-		String sql = "select max(temperature), min(temperature) from tb_temp_record where equipid = ? and Date(recordTime) between ? and ? ";
+		String sql = "select max(temperature) maxTemp, min(temperature) minTemp from tb_temp_record where equipid = ? and Date(recordTime) between ? and ? ";
 		TempRecord tempRecord = new TempRecord().findFirst(sql, equipid,
 				startDate, endDate);
 		return tempRecord;

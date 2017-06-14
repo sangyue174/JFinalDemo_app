@@ -45,11 +45,16 @@ public class JunitTest extends ControllerTestCase<MyAppConfig> {
 		System.out.println(use(url).invoke());
 	}
 	
-	// 
+	
+	@Test
+	public void findTempRecordChartAction() {
+		String url = "/tempRecord/findTempRecordChartAction?equipid=1&date=20170614";
+		System.out.println(use(url).invoke());
+	}
+	
 	
 	public static void main(String[] args) {
 		byte[] saltByte = PasswordUtil.getSalt();
 		System.out.println(saltByte.toString());
 	}
-
 }

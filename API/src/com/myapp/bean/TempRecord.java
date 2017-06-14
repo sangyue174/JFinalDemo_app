@@ -1,5 +1,7 @@
 package com.myapp.bean;
 
+import java.math.BigDecimal;
+
 import com.myapp.bean.base.BaseTempRecord;
 
 /**
@@ -8,4 +10,44 @@ import com.myapp.bean.base.BaseTempRecord;
 @SuppressWarnings("serial")
 public class TempRecord extends BaseTempRecord<TempRecord> {
 	public static final TempRecord dao = new TempRecord().dao();
+	
+//	private BigDecimal maxTemp = BigDecimal.valueOf(0);
+//	private BigDecimal minTemp = BigDecimal.valueOf(0);
+	
+//	@Override
+//	protected Map<String, Object> getAttrs() {
+//		// TODO Auto-generated method stub
+//		Map<String,Object> attrs = super.getAttrs();
+//		attrs.put("maxTemp", this.maxTemp);
+//		attrs.put("minTemp", this.minTemp);
+//		return attrs;
+//	}
+
+	/**
+	 * @return the maxTemp
+	 */
+	public BigDecimal getMaxTemp() {
+		return get("maxTemp");
+	}
+
+	/**
+	 * @param maxTemp the maxTemp to set
+	 */
+	public void setMaxTemp(BigDecimal maxTemp) {
+		put("maxTemp", maxTemp);
+	}
+
+	/**
+	 * @return the minTemp
+	 */
+	public BigDecimal getMinTemp() {
+		return get("minTemp");
+	}
+
+	/**
+	 * @param minTemp the minTemp to set
+	 */
+	public void setMinTemp(BigDecimal minTemp) {
+		put("minTemp", minTemp);
+	}
 }

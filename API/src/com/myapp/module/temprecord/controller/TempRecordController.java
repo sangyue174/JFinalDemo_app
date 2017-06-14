@@ -1,7 +1,9 @@
 package com.myapp.module.temprecord.controller;
 
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.commons.lang.StringUtils;
 
@@ -48,9 +50,12 @@ public class TempRecordController extends Controller {
 		List<TempRecord> tempRecordList = TempRecordService.findTempRecordByDate(Integer.parseInt(equipid), date, date);
 		// 根据date查询最大最小温度记录
 		TempRecord maxminRecord = TempRecordService.findMaxMinTempRecordByDate(Integer.parseInt(equipid), date, date);
-		
-		// TODO 解析tempRecordList and maxminRecord，拼凑并返回app战士
-		this.renderJson(new DataResponse(LevelEnum.SUCCESS, "查询成功", actionKey));
+		// 定义返回map
+		Map<String, Object> resultMap = new HashMap<String, Object>();
+		resultMap.put("maxTemp", maxminRecord.getMaxTemp());
+		resultMap.put("minTemp", maxminRecord.getMinTemp());
+		resultMap.put("tempRecordList", tempRecordList);
+		this.renderJson(new DataResponse(LevelEnum.SUCCESS, "查询成功", actionKey, resultMap));
 		return;
 	}
 
