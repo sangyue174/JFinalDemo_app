@@ -54,7 +54,7 @@ public class JunitTest extends ControllerTestCase<MyAppConfig> {
 	
 	@Test
 	public void findTempRecordDateAction() {
-		String url = "/tempRecord/findTempRecordDateAction?equipid=1";
+		String url = "/tempRecord/findTempRecordDateAction?equipid=1&tokenKey=2de4e96238";
 		System.out.println(use(url).invoke());
 	}
 	

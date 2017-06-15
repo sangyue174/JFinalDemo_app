@@ -23,6 +23,7 @@ import com.myapp.module.index.controller.IndexController;
 import com.myapp.module.temprecord.controller.TempRecordController;
 import com.myapp.module.user.controller.UserController;
 import com.myapp.utils.interceptor.ExceptionIntoLogInterceptor;
+import com.myapp.utils.interceptor.ValidateLoginStatusInterceptor;
 
 /**
  * 配置类
@@ -113,6 +114,7 @@ public class MyAppConfig extends JFinalConfig {
 		// 全局拦截器，对所有请求拦截
 		// 添加控制层全局拦截器
 		me.addGlobalActionInterceptor(new ExceptionIntoLogInterceptor());
+		me.addGlobalActionInterceptor(new ValidateLoginStatusInterceptor());
 		// 添加业务层全局拦截器
 //		me.addGlobalServiceInterceptor(exceptionInt);
 	}

@@ -4,12 +4,14 @@ import java.util.Date;
 
 import org.apache.commons.lang.StringUtils;
 
+import com.jfinal.aop.Clear;
 import com.jfinal.core.Controller;
 import com.jfinal.plugin.ehcache.CacheKit;
 import com.myapp.utils.CodeUtil;
 import com.myapp.utils.MessageUtil;
 import com.myapp.utils.PhoneFormatCheckUtils;
 import com.myapp.utils.PhoneMessage;
+import com.myapp.utils.interceptor.ValidateLoginStatusInterceptor;
 import com.myapp.utils.response.DataResponse;
 import com.myapp.utils.response.LevelEnum;
 
@@ -21,6 +23,7 @@ import com.myapp.utils.response.LevelEnum;
  * @date Jun 11, 2017 3:01:21 PM
  * @version V1.0
  */
+@Clear(ValidateLoginStatusInterceptor.class)
 public class AuthCodeController extends Controller {
 	/**
 	 * 发送验证码

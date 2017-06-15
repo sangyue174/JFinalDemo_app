@@ -7,6 +7,7 @@ import java.util.List;
 import org.apache.commons.lang.StringUtils;
 
 import com.jfinal.aop.Before;
+import com.jfinal.aop.Clear;
 import com.jfinal.core.Controller;
 import com.jfinal.plugin.activerecord.Db;
 import com.jfinal.plugin.activerecord.IAtom;
@@ -20,6 +21,7 @@ import com.myapp.utils.IdentityTypeEnum;
 import com.myapp.utils.PasswordUtil;
 import com.myapp.utils.PhoneFormatCheckUtils;
 import com.myapp.utils.PhoneMessage;
+import com.myapp.utils.interceptor.ValidateLoginStatusInterceptor;
 import com.myapp.utils.response.DataResponse;
 import com.myapp.utils.response.LevelEnum;
 
@@ -31,6 +33,7 @@ import com.myapp.utils.response.LevelEnum;
  * @date May 22, 2017 11:32:02 PM
  * @version V1.0
  */
+@Clear(ValidateLoginStatusInterceptor.class)
 public class UserController extends Controller {
 	/**
 	 * 用户注册
