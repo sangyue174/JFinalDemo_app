@@ -67,7 +67,7 @@ public class UserController extends Controller {
 		// 校验是否存在用户
 		UserAuth checkUser = UserService.checkUserAuth(identityType, identifier);
 		if(checkUser != null){
-			this.renderJson(new DataResponse(LevelEnum.ERROR, "已经存在该用户，请修改账号", actionKey));
+			this.renderJson(new DataResponse(LevelEnum.ERROR, "已经存在该用户，请修改账号,identityType 为[" + identityType + "], identifier为[" + identifier + "]", actionKey));
 			return;
 		}
 		

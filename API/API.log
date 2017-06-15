@@ -1078,3 +1078,40 @@ WHERE identityType = 'phone'
 
 2017-06-15 23:38:04
 [DEBUG]-[Thread: main]-[com.alibaba.druid.filter.logging.Log4jFilter.connectionLog()]: {conn-10001} setAutoCommit true
+
+2017-06-15 23:41:13
+[INFO]-[Thread: main]-[com.alibaba.druid.pool.DruidDataSource.init()]: {dataSource-1} inited
+
+2017-06-15 23:41:13
+[DEBUG]-[Thread: main]-[com.alibaba.druid.filter.logging.Log4jFilter.statementLog()]: {conn-10001, stmt-20000} executed. select * from `tb_equipment` where 1 = 2
+
+2017-06-15 23:41:13
+[DEBUG]-[Thread: main]-[com.alibaba.druid.filter.logging.Log4jFilter.statementLog()]: {conn-10001, stmt-20001} executed. select * from `tb_kid` where 1 = 2
+
+2017-06-15 23:41:13
+[DEBUG]-[Thread: main]-[com.alibaba.druid.filter.logging.Log4jFilter.statementLog()]: {conn-10001, stmt-20002} executed. select * from `tb_temp_record` where 1 = 2
+
+2017-06-15 23:41:13
+[DEBUG]-[Thread: main]-[com.alibaba.druid.filter.logging.Log4jFilter.statementLog()]: {conn-10001, stmt-20003} executed. select * from `tb_tip` where 1 = 2
+
+2017-06-15 23:41:13
+[DEBUG]-[Thread: main]-[com.alibaba.druid.filter.logging.Log4jFilter.statementLog()]: {conn-10001, stmt-20004} executed. select * from `tb_user` where 1 = 2
+
+2017-06-15 23:41:13
+[DEBUG]-[Thread: main]-[com.alibaba.druid.filter.logging.Log4jFilter.statementLog()]: {conn-10001, stmt-20005} executed. select * from `tb_user_auth` where 1 = 2
+
+2017-06-15 23:41:15
+[DEBUG]-[Thread: main]-[com.alibaba.druid.filter.logging.Log4jFilter.connectionLog()]: {conn-10001} setAutoCommit false
+
+2017-06-15 23:41:15
+[DEBUG]-[Thread: main]-[com.alibaba.druid.filter.logging.Log4jFilter.statementLog()]: {conn-10001, pstmt-20006} executed. SELECT *
+FROM tb_user_auth
+WHERE identityType = 'phone'
+	AND identifier = '18615566651'
+	AND verified = 1
+
+2017-06-15 23:41:15
+[ERROR]-[Thread: main]-[com.myapp.utils.response.DataResponse.<init>()]: Exist Error,detail:[已经存在该用户，请修改账号,identityType 为[phone], identifier为[18615566651]], method source:[/user/registerAction].
+
+2017-06-15 23:41:15
+[DEBUG]-[Thread: main]-[com.alibaba.druid.filter.logging.Log4jFilter.connectionLog()]: {conn-10001} setAutoCommit true
