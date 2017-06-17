@@ -7,7 +7,7 @@
 	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/commons-logging.jar"/>
 	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/ezmorph-1.0.6.jar"/>
 	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/json-lib-2.1.jar"/>
-	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/servlet-api.jar"/>
+	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/servlet-api.jar" sourcepath="C:/Users/asang/AppData/Local/Temp/decompiler/source/tomcat-servlet-api-7.0.62-sources.jar"/>
 	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/mchange-commons-java-0.2.3.4.jar"/>
 	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/druid-1.0.5.jar"/>
 	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/fastjson-1.1.25.jar"/>
