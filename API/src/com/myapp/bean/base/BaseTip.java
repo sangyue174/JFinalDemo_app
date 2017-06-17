@@ -19,12 +19,39 @@ public abstract class BaseTip<M extends BaseTip<M>> extends Model<M> implements 
 	}
 
 	public M setTipType(java.lang.String tipType) {
-		set("tip_type", tipType);
+		set("tipType", tipType);
 		return (M)this;
 	}
 
 	public java.lang.String getTipType() {
-		return get("tip_type");
+		return get("tipType");
+	}
+
+	public M setNumber(java.lang.Integer number) {
+		set("number", number);
+		return (M)this;
+	}
+
+	public java.lang.Integer getNumber() {
+		return get("number");
+	}
+
+	public M setTitle(java.lang.String title) {
+		set("title", title);
+		return (M)this;
+	}
+
+	public java.lang.String getTitle() {
+		return get("title");
+	}
+
+	public M setImageUrl(java.lang.String imageUrl) {
+		set("imageUrl", imageUrl);
+		return (M)this;
+	}
+
+	public java.lang.String getImageUrl() {
+		return get("imageUrl");
 	}
 
 	public M setContent(java.lang.String content) {

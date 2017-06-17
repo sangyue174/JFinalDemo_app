@@ -106,7 +106,8 @@ public class UserService {
 	 * @version V1.0
 	 */
 	public static UserAuth findUserAuthByTokenKey(String tokenKey) {
-		String sql = "select * from tb_user_auth where tokenKey = ? and verified = 1";
+		String sql = "select a.* from tb_user_auth a where a.tokenKey = ? and a.verified = 1 "
+				+ "and exists (select 1 from tb_user b where a.userid = b.id and b.isactive = 1) ";
 		UserAuth userAuth = new UserAuth().findFirst(sql, tokenKey);
 		return userAuth;
 	}

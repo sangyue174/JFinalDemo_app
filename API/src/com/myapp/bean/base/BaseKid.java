@@ -36,6 +36,15 @@ public abstract class BaseKid<M extends BaseKid<M>> extends Model<M> implements 
 		return get("nickname");
 	}
 
+	public M setSex(java.lang.String sex) {
+		set("sex", sex);
+		return (M)this;
+	}
+
+	public java.lang.String getSex() {
+		return get("sex");
+	}
+
 	public M setBirthday(java.util.Date birthday) {
 		set("birthday", birthday);
 		return (M)this;

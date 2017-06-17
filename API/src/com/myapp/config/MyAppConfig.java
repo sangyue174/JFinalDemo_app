@@ -20,7 +20,9 @@ import com.myapp.bean._MappingKit;
 import com.myapp.module.authcode.controller.AuthCodeController;
 import com.myapp.module.equipment.controller.EquipmentController;
 import com.myapp.module.index.controller.IndexController;
+import com.myapp.module.kid.controller.KidController;
 import com.myapp.module.temprecord.controller.TempRecordController;
+import com.myapp.module.tip.controller.TipController;
 import com.myapp.module.user.controller.UserController;
 import com.myapp.utils.interceptor.ExceptionIntoLogInterceptor;
 import com.myapp.utils.interceptor.ValidateLoginStatusInterceptor;
@@ -35,12 +37,15 @@ public class MyAppConfig extends JFinalConfig {
 
 	@Override
 	public void configConstant(Constants me) {
+		PropKit.use("Config.properties");
 		// 设置为开发模式
 		me.setDevMode(true);
 		// 设置编码为UTF-8
 		me.setEncoding("utf-8");
 		// 设置View类型为JSP
 		me.setViewType(ViewType.JSP);
+		// 设置文件默认上传路径
+		me.setBaseUploadPath(PropKit.get("baseUploadPath"));
 	}
 
 	@Override
@@ -49,6 +54,8 @@ public class MyAppConfig extends JFinalConfig {
 		me.add("/auth", AuthCodeController.class);
 		me.add("/equipment", EquipmentController.class);
 		me.add("/tempRecord", TempRecordController.class);
+		me.add("/tip", TipController.class);
+		me.add("/kid", KidController.class);
 		me.add("/", IndexController.class);
 	}
 
