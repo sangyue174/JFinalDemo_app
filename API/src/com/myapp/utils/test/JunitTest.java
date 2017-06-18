@@ -1,20 +1,18 @@
 package com.myapp.utils.test;
 
-import java.beans.IntrospectionException;
-import java.beans.PropertyDescriptor;
-import java.io.File;
 import java.lang.reflect.Field;
-import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
 
 import org.junit.Test;
 
+import com.jfinal.ext.kit.Reflect;
 import com.jfinal.ext.test.ControllerTestCase;
+import com.myapp.bean.User;
 import com.myapp.config.MyAppConfig;
 
 public class JunitTest extends ControllerTestCase<MyAppConfig> {
 	private int i = 11;
 	public String str = "test";
+	public static User user;
 	// User
 	@Test
 	public void registerAction() {
@@ -78,13 +76,56 @@ public class JunitTest extends ControllerTestCase<MyAppConfig> {
 		System.out.println(use(url).invoke());
 	}
 	
-	// 新增孩子信息
+	// 孩子相关
 	@Test
 	public void addKidAction() {
-		String url = "/kid/addKidAction?nickname=测试孩子昵称1&sex=1&birthday=2017-6-17&healthIssue=0&tokenKey=2de4e96238";
-		File imageFile = new File("E:/file/QQ图片20170311022435.jpg");
-		System.out.println(use(url).post(imageFile).invoke());
+		String url = "/kid/addKidAction?nickname=测试孩子昵称1&sex=1&birthday=2017-6-17&headurl=http://123.com&healthIssue=0&tokenKey=2de4e96238";
+//		File imageFile = new File("D:/file/图片test.gif");
+		System.out.println(use(url).invoke());
 	}
+	@Test
+	public void findKidAction() {
+		String url = "/kid/findKidAction?kidid=1&tokenKey=2de4e96238";
+		System.out.println(use(url).invoke());
+	}
+	
+	@Test
+	public void updateKidAction() {
+		String url = "/kid/updateKidAction?kidid=1&nickname=测试孩子昵称2&sex=1&birthday=2016-6-17&headurl=http://1234.com&healthIssue=1&tokenKey=2de4e96238";
+		System.out.println(use(url).invoke());
+	}
+	
+	// 设备相关
+	@Test
+	public void addEquipmentAction() {
+		String url = "/equipment/addEquipmentAction?kidid=1&number=testnum&maxtime=40&mintime=38.5&ismaxalarm=0&isminalarm=0&isnotice=0&tokenKey=2de4e96238";
+		System.out.println(use(url).invoke());
+	}
+	
+	@Test
+	public void deleteEquipmentAction() {
+		String url = "/equipment/deleteEquipmentAction?number=testnum&tokenKey=2de4e96238";
+		System.out.println(use(url).invoke());
+	}
+	
+	@Test
+	public void activeEquipmentAction() {
+		String url = "/equipment/activeEquipmentAction?number=testnum&tokenKey=2de4e96238";
+		System.out.println(use(url).invoke());
+	}
+	
+	@Test
+	public void updateEquipmentAction() {
+		String url = "/equipment/updateEquipmentAction?number=testnum&maxtime=41&mintime=38.6&ismaxalarm=1&isminalarm=1&isnotice=1&tokenKey=2de4e96238";
+		System.out.println(use(url).invoke());
+	}
+	
+	@Test
+	public void findEquipmentAction() {
+		String url = "/equipment/findEquipmentAction?number=testnum&tokenKey=2de4e96238";
+		System.out.println(use(url).invoke());
+	}
+	
 	
 	public void test(String ss){
 		System.out.println(ss);
@@ -101,20 +142,27 @@ public class JunitTest extends ControllerTestCase<MyAppConfig> {
 		try {
 			JunitTest jnuit = new JunitTest();
 			Class clazz = jnuit.getClass();
-//			Field field1 = clazz.getDeclaredField("i");
+			Field field1 = clazz.getDeclaredField("str");
 //			System.out.println(field1);
 //			System.out.println(field1.get(jnuit));
 //			field1.set(jnuit, 123);
-//			
-//			System.out.println(field1.get(jnuit));
-//			
+//			Reflect.on(field1.get(jnuit));
+			
+			user = new User();
+			user.setId(123);
+			user.setIsactive("1");
+			Field field3 = clazz.getDeclaredField("user");
+			System.out.println(field3.get(jnuit));
+			Reflect.on(field3.get(jnuit));
+			
 //			Method method1 = clazz.getDeclaredMethod("test", String.class);
 //			System.out.println(method1.invoke(jnuit, "sang"));
-			Method method2 = clazz.getDeclaredMethod("test2");
-			method2.invoke(null);
-			
-			Method method3 = clazz.getDeclaredMethod("test3");
-			System.out.println(method3.invoke(null));
+//			Method method2 = clazz.getDeclaredMethod("test2");
+//			method2.invoke(null);
+//			
+//			Method method3 = clazz.getDeclaredMethod("test3");
+//			System.out.println(method3.invoke(null));
+//			System.out.println(method3.getClass());
 			
 			
 //			Field[] fields = clazz.getDeclaredFields();// 获得属性

@@ -18,6 +18,15 @@ public abstract class BaseTempRecord<M extends BaseTempRecord<M>> extends Model<
 		return get("id");
 	}
 
+	public M setKidid(java.lang.Integer kidid) {
+		set("kidid", kidid);
+		return (M)this;
+	}
+
+	public java.lang.Integer getKidid() {
+		return get("kidid");
+	}
+
 	public M setEquipid(java.lang.Integer equipid) {
 		set("equipid", equipid);
 		return (M)this;

@@ -40,7 +40,7 @@ import com.jfinal.log.Log4jLog;
 
 public abstract class ControllerTestCase<T extends JFinalConfig> {
     protected static final Log4jLog LOG = Log4jLog.getLog(ControllerTestCase.class);
-    protected static ServletContext servletContext = new MockServletContext();;
+    protected static ServletContext servletContext = new MockServletContext();
     protected static MockHttpRequest request;
     protected static MockHttpResponse response;
     protected static Handler handler;
@@ -121,6 +121,9 @@ public abstract class ControllerTestCase<T extends JFinalConfig> {
         StringWriter resp = new StringWriter();
         request = new MockHttpRequest(bodyData);
         response = new MockHttpResponse(resp);
+//        if(bodyData != null){
+//        	response.addHeader("Content-type", "multipart/form-data");
+//        }
         Reflect.on(handler).call("handle", getTarget(actionUrl, request), request, response, new boolean[] { true });
         String response = resp.toString();
         if (responseFile != null) {

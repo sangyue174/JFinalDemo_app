@@ -90,4 +90,13 @@ public abstract class BaseEquipment<M extends BaseEquipment<M>> extends Model<M>
 		return get("isnotice");
 	}
 
+	public M setIsactive(java.lang.String isactive) {
+		set("isactive", isactive);
+		return (M)this;
+	}
+
+	public java.lang.String getIsactive() {
+		return get("isactive");
+	}
+
 }

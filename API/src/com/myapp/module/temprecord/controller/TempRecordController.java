@@ -34,23 +34,24 @@ public class TempRecordController extends Controller {
 	 */
 	public void findTempRecordChartAction() {
 		String actionKey = getAttr("actionKey").toString();// 获取actionKey
-		String equipid = getPara("equipid");// 设备id
+		String number = getPara("number");// 设备标号
 		String date = StringUtils.isEmpty(getPara("date")) ? DateUtil.DateToString(new Date(), "yyyyMMdd"):getPara("date");// 日期(yyyyMMdd格式)，默认当前日期
-		if (StringUtils.isEmpty(equipid)) {
-			this.renderJson(new DataResponse(LevelEnum.ERROR, "设备id不可为空，请填写", actionKey));
+		if (StringUtils.isEmpty(number)) {
+			this.renderJson(new DataResponse(LevelEnum.ERROR, "设备标号不可为空，请填写", actionKey));
 			return;
 		}
 		// 校验是否存在该设备
-		Equipment equipment = EquipmentService.findEquipment(Integer.parseInt(equipid));
+		Equipment equipment = EquipmentService.findEquipmentByNumber(number);
 		if (equipment == null) {
-			this.renderJson(new DataResponse(LevelEnum.ERROR, "该设备不存在，设备id【" + equipid + "】，请联系管理员", actionKey));
+			this.renderJson(new DataResponse(LevelEnum.ERROR, "该设备不存在，设备编号[" + number + "]，请联系管理员", actionKey));
 			return;
 		}
+		int equipid = equipment.getId();// 获取设备id
 		
 		// 根据date查询TempRecord
-		List<TempRecord> tempRecordList = TempRecordService.findTempRecordByDate(Integer.parseInt(equipid), date, date);
+		List<TempRecord> tempRecordList = TempRecordService.findTempRecordByDate(equipid, date, date);
 		// 根据date查询最大最小温度记录
-		TempRecord maxminRecord = TempRecordService.findMaxMinTempRecordByDate(Integer.parseInt(equipid), date, date);
+		TempRecord maxminRecord = TempRecordService.findMaxMinTempRecordByDate(equipid, date, date);
 		// 定义返回map
 		Map<String, Object> resultMap = new HashMap<String, Object>();
 		resultMap.put("maxTemp", maxminRecord.getMaxTemp());
@@ -69,20 +70,21 @@ public class TempRecordController extends Controller {
 	 */
 	public void findTempRecordDateAction() {
 		String actionKey = getAttr("actionKey").toString();// 获取actionKey
-		String equipid = getPara("equipid");// 设备id
-		if (StringUtils.isEmpty(equipid)) {
-			this.renderJson(new DataResponse(LevelEnum.ERROR, "设备id不可为空，请填写", actionKey));
+		String number = getPara("number");// 设备编号
+		if (StringUtils.isEmpty(number)) {
+			this.renderJson(new DataResponse(LevelEnum.ERROR, "设备编号不可为空，请填写", actionKey));
 			return;
 		}
 		// 校验是否存在该设备
-		Equipment equipment = EquipmentService.findEquipment(Integer.parseInt(equipid));
+		Equipment equipment = EquipmentService.findEquipmentByNumber(number);
 		if (equipment == null) {
-			this.renderJson(new DataResponse(LevelEnum.ERROR, "该设备不存在，设备id【" + equipid + "】，请联系管理员", actionKey));
+			this.renderJson(new DataResponse(LevelEnum.ERROR, "该设备不存在，设备编号[" + number + "]，请联系管理员", actionKey));
 			return;
 		}
+		int equipid = equipment.getId();// 获取设备id
 		
 		// 根据equipid查询设备涉及的所有日期
-		List<TempRecord> tempRecordList = TempRecordService.findTempRecordDateGroupbyRecordTime(Integer.parseInt(equipid));
+		List<TempRecord> tempRecordList = TempRecordService.findTempRecordDateGroupbyRecordTime(equipid);
 		// 循环将tempRecord取出并存在list中返回给app
 		List<String> recordList = new ArrayList<String>();
 		for (TempRecord tempRecord : tempRecordList) {
