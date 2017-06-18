@@ -2,7 +2,6 @@ package com.myapp.module.user.controller;
 
 import java.sql.SQLException;
 import java.util.Date;
-import java.util.List;
 
 import org.apache.commons.lang.StringUtils;
 
@@ -46,8 +45,8 @@ public class UserController extends Controller {
 	public void registerAction() {
 //		System.out.println("class name:"+this.getClass().getName()+",method name:"+Thread.currentThread().getStackTrace()[1].getMethodName());
 		String actionKey = getAttr("actionKey").toString();// 获取actionKey
-		String identityType = getPara("identityType") == null ? "phone"
-				: getPara("identityType").toLowerCase();// 验证类型:phone,qq,weixin
+//		String identityType = getPara("identityType") == null ? "phone"
+//				: getPara("identityType").toLowerCase();// 验证类型:phone
 		String identifier = getPara("identifier");// 验证账号
 		String credential = getPara("credential");// 验证凭证
 		String authCode = getPara("authCode");// 验证码
@@ -60,33 +59,32 @@ public class UserController extends Controller {
 			return;
 		}
 		// 校验手机号是否合法
-		if(IdentityTypeEnum.PHONE.getValue().equals(identityType) && !PhoneFormatCheckUtils.isChinaPhoneLegal(identifier)){
+		if(!PhoneFormatCheckUtils.isChinaPhoneLegal(identifier)){
 			this.renderJson(new DataResponse(LevelEnum.ERROR, "手机号不合法，请修改", actionKey));
 			return;
 		}
 		// 校验是否存在用户
-		UserAuth checkUser = UserService.checkUserAuth(identityType, identifier);
+		UserAuth checkUser = UserService.checkUserAuth(IdentityTypeEnum.PHONE.getValue(), identifier);
 		if(checkUser != null){
-			this.renderJson(new DataResponse(LevelEnum.ERROR, "已经存在该用户，请修改账号,identityType 为[" + identityType + "], identifier为[" + identifier + "]", actionKey));
+			this.renderJson(new DataResponse(LevelEnum.ERROR, "已经存在该用户，请修改账号,identityType 为[" + IdentityTypeEnum.PHONE.getValue() + "], identifier为[" + identifier + "]", actionKey));
 			return;
 		}
 		
 		String salt = "";
-		if (IdentityTypeEnum.PHONE.getValue().equals(identityType)) {
-			// TODO
-			// 临时设置验证码
-			// testAuthCode(identifier);
-			
-			// 校验验证码
-			if(!validateAuthCode(identifier, authCode, actionKey)){
-				return;
-			}
-			// 生成用户验证盐
-			salt = PasswordUtil.getSalt().toString();
-			credential = PasswordUtil.md5(credential + salt);
+//		if (IdentityTypeEnum.PHONE.getValue().equals(identityType)) {
+		// TODO
+		// 临时设置验证码
+		// testAuthCode(identifier);
+		
+		// 校验验证码
+		if(!validateAuthCode(identifier, authCode, actionKey)){
+			return;
 		}
+		// 生成用户验证盐
+		salt = PasswordUtil.getSalt().toString();
+		credential = PasswordUtil.md5(credential + salt);
+//		}
 
-		// 事务保存用户和用户验证信息start
 		// 先保存用户基本信息
 		User user = new User();
 		user.setIsactive("1");
@@ -97,7 +95,7 @@ public class UserController extends Controller {
 		// 再保存用户验证信息
 		UserAuth userAuth = new UserAuth();
 		userAuth.setUserid(user.getId());// 用户id，可以从上一步拿到刚保存的用户信息
-		userAuth.setIdentityType(identityType);
+		userAuth.setIdentityType(IdentityTypeEnum.PHONE.getValue());
 		userAuth.setIdentifier(identifier);
 		userAuth.setCredential(credential);
 		userAuth.setRegisterTime(new Date());
@@ -269,6 +267,10 @@ public class UserController extends Controller {
 			this.renderJson(new DataResponse(LevelEnum.ERROR, "账号不可为空，请填写", actionKey));
 			return;
 		}
+		if (StringUtils.isEmpty(credential)) {
+			this.renderJson(new DataResponse(LevelEnum.ERROR, "密码不可为空，请填写", actionKey));
+			return;
+		}
 		// TODO
 		// 临时设置验证码
 		// testAuthCode(identifier);
@@ -386,11 +388,4 @@ public class UserController extends Controller {
 		pm1.setPhone(identifier);
 		CacheKit.put("authCodeCache", identifier, pm1);
 	}
-	
-	public void test(){
-		User user = User.dao.findById(1);
-		List<UserAuth> ua = user.getUserAuth();
-		this.renderJson(ua);
-	}
-
 }

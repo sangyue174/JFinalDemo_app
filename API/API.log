@@ -4955,3 +4955,472 @@ WHERE number = 'testnum'
 
 2017-06-18 18:46:18
 [ERROR]-[Thread: main]-[com.myapp.utils.response.DataResponse.<init>()]: Exist Error,detail:[查询设备信息成功，设备编号[testnum]], method source:[/equipment/findEquipmentAction].
+
+2017-06-18 23:07:31
+[INFO]-[Thread: main]-[com.alibaba.druid.pool.DruidDataSource.init()]: {dataSource-1} inited
+
+2017-06-18 23:07:31
+[DEBUG]-[Thread: main]-[com.alibaba.druid.filter.logging.Log4jFilter.statementLog()]: {conn-10001, stmt-20000} executed. select * from `tb_equipment` where 1 = 2
+
+2017-06-18 23:07:31
+[DEBUG]-[Thread: main]-[com.alibaba.druid.filter.logging.Log4jFilter.statementLog()]: {conn-10001, stmt-20001} executed. select * from `tb_kid` where 1 = 2
+
+2017-06-18 23:07:31
+[DEBUG]-[Thread: main]-[com.alibaba.druid.filter.logging.Log4jFilter.statementLog()]: {conn-10001, stmt-20002} executed. select * from `tb_temp_record` where 1 = 2
+
+2017-06-18 23:07:31
+[DEBUG]-[Thread: main]-[com.alibaba.druid.filter.logging.Log4jFilter.statementLog()]: {conn-10001, stmt-20003} executed. select * from `tb_tip` where 1 = 2
+
+2017-06-18 23:07:31
+[DEBUG]-[Thread: main]-[com.alibaba.druid.filter.logging.Log4jFilter.statementLog()]: {conn-10001, stmt-20004} executed. select * from `tb_user` where 1 = 2
+
+2017-06-18 23:07:31
+[DEBUG]-[Thread: main]-[com.alibaba.druid.filter.logging.Log4jFilter.statementLog()]: {conn-10001, stmt-20005} executed. select * from `tb_user_auth` where 1 = 2
+
+2017-06-18 23:07:33
+[DEBUG]-[Thread: main]-[com.myapp.utils.MessageUtil.sendSupadataCode()]: 验证码信息，手机号：【18605409884, 验证码：【051043】，返回内容：{"alibaba_aliqin_fc_sms_num_send_response":{"result":{"err_code":"0","model":"108211439265^1111144069897","success":true},"request_id":"ziondrt78s7v"}}
+
+2017-06-18 23:08:07
+[INFO]-[Thread: main]-[com.alibaba.druid.pool.DruidDataSource.init()]: {dataSource-1} inited
+
+2017-06-18 23:08:07
+[DEBUG]-[Thread: main]-[com.alibaba.druid.filter.logging.Log4jFilter.statementLog()]: {conn-10001, stmt-20000} executed. select * from `tb_equipment` where 1 = 2
+
+2017-06-18 23:08:07
+[DEBUG]-[Thread: main]-[com.alibaba.druid.filter.logging.Log4jFilter.statementLog()]: {conn-10001, stmt-20001} executed. select * from `tb_kid` where 1 = 2
+
+2017-06-18 23:08:07
+[DEBUG]-[Thread: main]-[com.alibaba.druid.filter.logging.Log4jFilter.statementLog()]: {conn-10001, stmt-20002} executed. select * from `tb_temp_record` where 1 = 2
+
+2017-06-18 23:08:07
+[DEBUG]-[Thread: main]-[com.alibaba.druid.filter.logging.Log4jFilter.statementLog()]: {conn-10001, stmt-20003} executed. select * from `tb_tip` where 1 = 2
+
+2017-06-18 23:08:07
+[DEBUG]-[Thread: main]-[com.alibaba.druid.filter.logging.Log4jFilter.statementLog()]: {conn-10001, stmt-20004} executed. select * from `tb_user` where 1 = 2
+
+2017-06-18 23:08:07
+[DEBUG]-[Thread: main]-[com.alibaba.druid.filter.logging.Log4jFilter.statementLog()]: {conn-10001, stmt-20005} executed. select * from `tb_user_auth` where 1 = 2
+
+2017-06-18 23:08:08
+[DEBUG]-[Thread: main]-[com.alibaba.druid.filter.logging.Log4jFilter.connectionLog()]: {conn-10001} setAutoCommit false
+
+2017-06-18 23:08:08
+[ERROR]-[Thread: main]-[com.myapp.utils.response.DataResponse.<init>()]: Exist Error,detail:[手机号不合法，请修改], method source:[/user/registerAction].
+
+2017-06-18 23:08:08
+[DEBUG]-[Thread: main]-[com.alibaba.druid.filter.logging.Log4jFilter.connectionLog()]: {conn-10001} setAutoCommit true
+
+2017-06-18 23:09:38
+[INFO]-[Thread: main]-[com.alibaba.druid.pool.DruidDataSource.init()]: {dataSource-1} inited
+
+2017-06-18 23:09:38
+[DEBUG]-[Thread: main]-[com.alibaba.druid.filter.logging.Log4jFilter.statementLog()]: {conn-10001, stmt-20000} executed. select * from `tb_equipment` where 1 = 2
+
+2017-06-18 23:09:38
+[DEBUG]-[Thread: main]-[com.alibaba.druid.filter.logging.Log4jFilter.statementLog()]: {conn-10001, stmt-20001} executed. select * from `tb_kid` where 1 = 2
+
+2017-06-18 23:09:38
+[DEBUG]-[Thread: main]-[com.alibaba.druid.filter.logging.Log4jFilter.statementLog()]: {conn-10001, stmt-20002} executed. select * from `tb_temp_record` where 1 = 2
+
+2017-06-18 23:09:38
+[DEBUG]-[Thread: main]-[com.alibaba.druid.filter.logging.Log4jFilter.statementLog()]: {conn-10001, stmt-20003} executed. select * from `tb_tip` where 1 = 2
+
+2017-06-18 23:09:38
+[DEBUG]-[Thread: main]-[com.alibaba.druid.filter.logging.Log4jFilter.statementLog()]: {conn-10001, stmt-20004} executed. select * from `tb_user` where 1 = 2
+
+2017-06-18 23:09:38
+[DEBUG]-[Thread: main]-[com.alibaba.druid.filter.logging.Log4jFilter.statementLog()]: {conn-10001, stmt-20005} executed. select * from `tb_user_auth` where 1 = 2
+
+2017-06-18 23:09:39
+[DEBUG]-[Thread: main]-[com.alibaba.druid.filter.logging.Log4jFilter.connectionLog()]: {conn-10001} setAutoCommit false
+
+2017-06-18 23:09:39
+[DEBUG]-[Thread: main]-[com.alibaba.druid.filter.logging.Log4jFilter.statementLog()]: {conn-10001, pstmt-20006} executed. SELECT *
+FROM tb_user_auth
+WHERE identityType = 'phone'
+	AND identifier = '18605409884'
+	AND verified = 1
+
+2017-06-18 23:09:39
+[ERROR]-[Thread: main]-[com.myapp.utils.response.DataResponse.<init>()]: Exist Error,detail:[验证码已过期，请重新获取], method source:[/user/registerAction].
+
+2017-06-18 23:09:39
+[DEBUG]-[Thread: main]-[com.alibaba.druid.filter.logging.Log4jFilter.connectionLog()]: {conn-10001} setAutoCommit true
+
+2017-06-18 23:11:05
+[INFO]-[Thread: main]-[com.alibaba.druid.pool.DruidDataSource.init()]: {dataSource-1} inited
+
+2017-06-18 23:11:05
+[DEBUG]-[Thread: main]-[com.alibaba.druid.filter.logging.Log4jFilter.statementLog()]: {conn-10001, stmt-20000} executed. select * from `tb_equipment` where 1 = 2
+
+2017-06-18 23:11:05
+[DEBUG]-[Thread: main]-[com.alibaba.druid.filter.logging.Log4jFilter.statementLog()]: {conn-10001, stmt-20001} executed. select * from `tb_kid` where 1 = 2
+
+2017-06-18 23:11:05
+[DEBUG]-[Thread: main]-[com.alibaba.druid.filter.logging.Log4jFilter.statementLog()]: {conn-10001, stmt-20002} executed. select * from `tb_temp_record` where 1 = 2
+
+2017-06-18 23:11:05
+[DEBUG]-[Thread: main]-[com.alibaba.druid.filter.logging.Log4jFilter.statementLog()]: {conn-10001, stmt-20003} executed. select * from `tb_tip` where 1 = 2
+
+2017-06-18 23:11:05
+[DEBUG]-[Thread: main]-[com.alibaba.druid.filter.logging.Log4jFilter.statementLog()]: {conn-10001, stmt-20004} executed. select * from `tb_user` where 1 = 2
+
+2017-06-18 23:11:05
+[DEBUG]-[Thread: main]-[com.alibaba.druid.filter.logging.Log4jFilter.statementLog()]: {conn-10001, stmt-20005} executed. select * from `tb_user_auth` where 1 = 2
+
+2017-06-18 23:11:07
+[DEBUG]-[Thread: main]-[com.alibaba.druid.filter.logging.Log4jFilter.connectionLog()]: {conn-10001} setAutoCommit false
+
+2017-06-18 23:11:07
+[DEBUG]-[Thread: main]-[com.alibaba.druid.filter.logging.Log4jFilter.statementLog()]: {conn-10001, pstmt-20006} executed. SELECT *
+FROM tb_user_auth
+WHERE identityType = 'phone'
+	AND identifier = '18605409884'
+	AND verified = 1
+
+2017-06-18 23:11:07
+[DEBUG]-[Thread: main]-[com.alibaba.druid.filter.logging.Log4jFilter.statementLog()]: {conn-10001, pstmt-20007} executed. INSERT INTO `tb_user` (`isactive`)
+VALUES ('1')
+
+2017-06-18 23:11:07
+[DEBUG]-[Thread: main]-[com.alibaba.druid.filter.logging.Log4jFilter.statementLog()]: {conn-10001, pstmt-20008} executed. INSERT INTO `tb_user_auth` (`tokenKey`, `loginTime`, `identityType`, `verified`, `userid`
+	, `tokenTime`, `identifier`, `registerTime`, `credential`, `salt`)
+VALUES ('2e0db82357', '2017-06-18', 'phone', '1', 8
+	, '2017-07-18', '18605409884', '2017-06-18', '621bbcb167c138c1e2674727cf6c54f5', '[B@7e32156a')
+
+2017-06-18 23:11:07
+[DEBUG]-[Thread: main]-[com.alibaba.druid.filter.logging.Log4jFilter.connectionLog()]: {conn-10001} setAutoCommit true
+
+2017-06-18 23:21:47
+[INFO]-[Thread: main]-[com.alibaba.druid.pool.DruidDataSource.init()]: {dataSource-1} inited
+
+2017-06-18 23:21:47
+[DEBUG]-[Thread: main]-[com.alibaba.druid.filter.logging.Log4jFilter.statementLog()]: {conn-10001, stmt-20000} executed. select * from `tb_equipment` where 1 = 2
+
+2017-06-18 23:21:47
+[DEBUG]-[Thread: main]-[com.alibaba.druid.filter.logging.Log4jFilter.statementLog()]: {conn-10001, stmt-20001} executed. select * from `tb_kid` where 1 = 2
+
+2017-06-18 23:21:47
+[DEBUG]-[Thread: main]-[com.alibaba.druid.filter.logging.Log4jFilter.statementLog()]: {conn-10001, stmt-20002} executed. select * from `tb_temp_record` where 1 = 2
+
+2017-06-18 23:21:47
+[DEBUG]-[Thread: main]-[com.alibaba.druid.filter.logging.Log4jFilter.statementLog()]: {conn-10001, stmt-20003} executed. select * from `tb_tip` where 1 = 2
+
+2017-06-18 23:21:47
+[DEBUG]-[Thread: main]-[com.alibaba.druid.filter.logging.Log4jFilter.statementLog()]: {conn-10001, stmt-20004} executed. select * from `tb_user` where 1 = 2
+
+2017-06-18 23:21:47
+[DEBUG]-[Thread: main]-[com.alibaba.druid.filter.logging.Log4jFilter.statementLog()]: {conn-10001, stmt-20005} executed. select * from `tb_user_auth` where 1 = 2
+
+2017-06-18 23:21:48
+[DEBUG]-[Thread: main]-[com.alibaba.druid.filter.logging.Log4jFilter.statementLog()]: {conn-10001, pstmt-20006} executed. SELECT *
+FROM tb_user_auth
+WHERE identityType = 'phone'
+	AND identifier = '18615566651'
+	AND verified = 1
+
+2017-06-18 23:21:48
+[DEBUG]-[Thread: main]-[com.alibaba.druid.filter.logging.Log4jFilter.statementLog()]: {conn-10001, pstmt-20007} executed. UPDATE `tb_user_auth`
+SET `tokenKey` = '2e0dc1ed76', `loginTime` = '2017-06-18', `tokenTime` = '2017-07-18'
+WHERE `id` = 7
+
+2017-06-18 23:27:45
+[INFO]-[Thread: main]-[com.alibaba.druid.pool.DruidDataSource.init()]: {dataSource-1} inited
+
+2017-06-18 23:27:45
+[DEBUG]-[Thread: main]-[com.alibaba.druid.filter.logging.Log4jFilter.statementLog()]: {conn-10001, stmt-20000} executed. select * from `tb_equipment` where 1 = 2
+
+2017-06-18 23:27:45
+[DEBUG]-[Thread: main]-[com.alibaba.druid.filter.logging.Log4jFilter.statementLog()]: {conn-10001, stmt-20001} executed. select * from `tb_kid` where 1 = 2
+
+2017-06-18 23:27:45
+[DEBUG]-[Thread: main]-[com.alibaba.druid.filter.logging.Log4jFilter.statementLog()]: {conn-10001, stmt-20002} executed. select * from `tb_temp_record` where 1 = 2
+
+2017-06-18 23:27:45
+[DEBUG]-[Thread: main]-[com.alibaba.druid.filter.logging.Log4jFilter.statementLog()]: {conn-10001, stmt-20003} executed. select * from `tb_tip` where 1 = 2
+
+2017-06-18 23:27:45
+[DEBUG]-[Thread: main]-[com.alibaba.druid.filter.logging.Log4jFilter.statementLog()]: {conn-10001, stmt-20004} executed. select * from `tb_user` where 1 = 2
+
+2017-06-18 23:27:45
+[DEBUG]-[Thread: main]-[com.alibaba.druid.filter.logging.Log4jFilter.statementLog()]: {conn-10001, stmt-20005} executed. select * from `tb_user_auth` where 1 = 2
+
+2017-06-18 23:27:47
+[DEBUG]-[Thread: main]-[com.alibaba.druid.filter.logging.Log4jFilter.statementLog()]: {conn-10001, pstmt-20006} executed. SELECT *
+FROM tb_user_auth
+WHERE identityType = 'phone'
+	AND identifier = '18615566651'
+	AND verified = 1
+
+2017-06-18 23:27:47
+[DEBUG]-[Thread: main]-[com.alibaba.druid.filter.logging.Log4jFilter.statementLog()]: {conn-10001, pstmt-20007} executed. UPDATE `tb_user_auth`
+SET `tokenKey` = '', `tokenTime` = NULL
+WHERE `id` = 7
+
+2017-06-18 23:33:09
+[INFO]-[Thread: main]-[com.alibaba.druid.pool.DruidDataSource.init()]: {dataSource-1} inited
+
+2017-06-18 23:33:09
+[DEBUG]-[Thread: main]-[com.alibaba.druid.filter.logging.Log4jFilter.statementLog()]: {conn-10001, stmt-20000} executed. select * from `tb_equipment` where 1 = 2
+
+2017-06-18 23:33:09
+[DEBUG]-[Thread: main]-[com.alibaba.druid.filter.logging.Log4jFilter.statementLog()]: {conn-10001, stmt-20001} executed. select * from `tb_kid` where 1 = 2
+
+2017-06-18 23:33:09
+[DEBUG]-[Thread: main]-[com.alibaba.druid.filter.logging.Log4jFilter.statementLog()]: {conn-10001, stmt-20002} executed. select * from `tb_temp_record` where 1 = 2
+
+2017-06-18 23:33:09
+[DEBUG]-[Thread: main]-[com.alibaba.druid.filter.logging.Log4jFilter.statementLog()]: {conn-10001, stmt-20003} executed. select * from `tb_tip` where 1 = 2
+
+2017-06-18 23:33:09
+[DEBUG]-[Thread: main]-[com.alibaba.druid.filter.logging.Log4jFilter.statementLog()]: {conn-10001, stmt-20004} executed. select * from `tb_user` where 1 = 2
+
+2017-06-18 23:33:09
+[DEBUG]-[Thread: main]-[com.alibaba.druid.filter.logging.Log4jFilter.statementLog()]: {conn-10001, stmt-20005} executed. select * from `tb_user_auth` where 1 = 2
+
+2017-06-18 23:33:10
+[DEBUG]-[Thread: main]-[com.alibaba.druid.filter.logging.Log4jFilter.statementLog()]: {conn-10001, pstmt-20006} executed. SELECT *
+FROM tb_user_auth
+WHERE identityType = 'phone'
+	AND identifier = '18615566651'
+	AND verified = 1
+
+2017-06-18 23:33:10
+[DEBUG]-[Thread: main]-[com.alibaba.druid.filter.logging.Log4jFilter.statementLog()]: {conn-10001, pstmt-20007} executed. UPDATE `tb_user_auth`
+SET `credential` = '3f0b17baeaaf7d69f9d731d83ae5bf32'
+WHERE `id` = 7
+
+2017-06-18 23:36:21
+[INFO]-[Thread: main]-[com.alibaba.druid.pool.DruidDataSource.init()]: {dataSource-1} inited
+
+2017-06-18 23:36:21
+[DEBUG]-[Thread: main]-[com.alibaba.druid.filter.logging.Log4jFilter.statementLog()]: {conn-10001, stmt-20000} executed. select * from `tb_equipment` where 1 = 2
+
+2017-06-18 23:36:21
+[DEBUG]-[Thread: main]-[com.alibaba.druid.filter.logging.Log4jFilter.statementLog()]: {conn-10001, stmt-20001} executed. select * from `tb_kid` where 1 = 2
+
+2017-06-18 23:36:21
+[DEBUG]-[Thread: main]-[com.alibaba.druid.filter.logging.Log4jFilter.statementLog()]: {conn-10001, stmt-20002} executed. select * from `tb_temp_record` where 1 = 2
+
+2017-06-18 23:36:21
+[DEBUG]-[Thread: main]-[com.alibaba.druid.filter.logging.Log4jFilter.statementLog()]: {conn-10001, stmt-20003} executed. select * from `tb_tip` where 1 = 2
+
+2017-06-18 23:36:21
+[DEBUG]-[Thread: main]-[com.alibaba.druid.filter.logging.Log4jFilter.statementLog()]: {conn-10001, stmt-20004} executed. select * from `tb_user` where 1 = 2
+
+2017-06-18 23:36:21
+[DEBUG]-[Thread: main]-[com.alibaba.druid.filter.logging.Log4jFilter.statementLog()]: {conn-10001, stmt-20005} executed. select * from `tb_user_auth` where 1 = 2
+
+2017-06-18 23:36:22
+[DEBUG]-[Thread: main]-[com.alibaba.druid.filter.logging.Log4jFilter.statementLog()]: {conn-10001, pstmt-20006} executed. SELECT *
+FROM tb_user_auth
+WHERE identityType = 'phone'
+	AND identifier = '18615566651'
+	AND verified = 1
+
+2017-06-18 23:36:22
+[DEBUG]-[Thread: main]-[com.alibaba.druid.filter.logging.Log4jFilter.statementLog()]: {conn-10001, pstmt-20007} executed. UPDATE `tb_user_auth`
+SET `credential` = '3f0b17baeaaf7d69f9d731d83ae5bf32'
+WHERE `id` = 7
+
+2017-06-18 23:38:57
+[INFO]-[Thread: main]-[com.alibaba.druid.pool.DruidDataSource.init()]: {dataSource-1} inited
+
+2017-06-18 23:38:57
+[DEBUG]-[Thread: main]-[com.alibaba.druid.filter.logging.Log4jFilter.statementLog()]: {conn-10001, stmt-20000} executed. select * from `tb_equipment` where 1 = 2
+
+2017-06-18 23:38:57
+[DEBUG]-[Thread: main]-[com.alibaba.druid.filter.logging.Log4jFilter.statementLog()]: {conn-10001, stmt-20001} executed. select * from `tb_kid` where 1 = 2
+
+2017-06-18 23:38:57
+[DEBUG]-[Thread: main]-[com.alibaba.druid.filter.logging.Log4jFilter.statementLog()]: {conn-10001, stmt-20002} executed. select * from `tb_temp_record` where 1 = 2
+
+2017-06-18 23:38:57
+[DEBUG]-[Thread: main]-[com.alibaba.druid.filter.logging.Log4jFilter.statementLog()]: {conn-10001, stmt-20003} executed. select * from `tb_tip` where 1 = 2
+
+2017-06-18 23:38:57
+[DEBUG]-[Thread: main]-[com.alibaba.druid.filter.logging.Log4jFilter.statementLog()]: {conn-10001, stmt-20004} executed. select * from `tb_user` where 1 = 2
+
+2017-06-18 23:38:57
+[DEBUG]-[Thread: main]-[com.alibaba.druid.filter.logging.Log4jFilter.statementLog()]: {conn-10001, stmt-20005} executed. select * from `tb_user_auth` where 1 = 2
+
+2017-06-18 23:38:59
+[DEBUG]-[Thread: main]-[com.myapp.utils.MessageUtil.sendSupadataCode()]: 验证码信息，手机号：【18615566651, 验证码：【025088】，返回内容：{"alibaba_aliqin_fc_sms_num_send_response":{"result":{"err_code":"0","model":"108211549724^1111144445795","success":true},"request_id":"12ckhncs6l59o"}}
+
+2017-06-18 23:50:02
+[INFO]-[Thread: main]-[com.alibaba.druid.pool.DruidDataSource.init()]: {dataSource-1} inited
+
+2017-06-18 23:50:03
+[DEBUG]-[Thread: main]-[com.alibaba.druid.filter.logging.Log4jFilter.statementLog()]: {conn-10001, stmt-20000} executed. select * from `tb_equipment` where 1 = 2
+
+2017-06-18 23:50:03
+[DEBUG]-[Thread: main]-[com.alibaba.druid.filter.logging.Log4jFilter.statementLog()]: {conn-10001, stmt-20001} executed. select * from `tb_kid` where 1 = 2
+
+2017-06-18 23:50:03
+[DEBUG]-[Thread: main]-[com.alibaba.druid.filter.logging.Log4jFilter.statementLog()]: {conn-10001, stmt-20002} executed. select * from `tb_temp_record` where 1 = 2
+
+2017-06-18 23:50:03
+[DEBUG]-[Thread: main]-[com.alibaba.druid.filter.logging.Log4jFilter.statementLog()]: {conn-10001, stmt-20003} executed. select * from `tb_tip` where 1 = 2
+
+2017-06-18 23:50:03
+[DEBUG]-[Thread: main]-[com.alibaba.druid.filter.logging.Log4jFilter.statementLog()]: {conn-10001, stmt-20004} executed. select * from `tb_user` where 1 = 2
+
+2017-06-18 23:50:03
+[DEBUG]-[Thread: main]-[com.alibaba.druid.filter.logging.Log4jFilter.statementLog()]: {conn-10001, stmt-20005} executed. select * from `tb_user_auth` where 1 = 2
+
+2017-06-18 23:50:04
+[DEBUG]-[Thread: main]-[com.alibaba.druid.filter.logging.Log4jFilter.statementLog()]: {conn-10001, pstmt-20006} executed. SELECT a.*
+FROM tb_user_auth a
+WHERE a.tokenKey = '2de4e96238'
+	AND a.verified = 1
+	AND EXISTS (SELECT 1
+		FROM tb_user b
+		WHERE a.userid = b.id
+			AND b.isactive = 1)
+
+2017-06-18 23:50:04
+[ERROR]-[Thread: main]-[com.myapp.utils.response.DataResponse.<init>()]: Exist Error,detail:[ValidateInterceptor验证不通过，tokenKey已失效或不正确，请重新登录], method source:[/kid/addKidAction].
+
+2017-06-18 23:50:47
+[INFO]-[Thread: main]-[com.alibaba.druid.pool.DruidDataSource.init()]: {dataSource-1} inited
+
+2017-06-18 23:50:47
+[DEBUG]-[Thread: main]-[com.alibaba.druid.filter.logging.Log4jFilter.statementLog()]: {conn-10001, stmt-20000} executed. select * from `tb_equipment` where 1 = 2
+
+2017-06-18 23:50:47
+[DEBUG]-[Thread: main]-[com.alibaba.druid.filter.logging.Log4jFilter.statementLog()]: {conn-10001, stmt-20001} executed. select * from `tb_kid` where 1 = 2
+
+2017-06-18 23:50:47
+[DEBUG]-[Thread: main]-[com.alibaba.druid.filter.logging.Log4jFilter.statementLog()]: {conn-10001, stmt-20002} executed. select * from `tb_temp_record` where 1 = 2
+
+2017-06-18 23:50:47
+[DEBUG]-[Thread: main]-[com.alibaba.druid.filter.logging.Log4jFilter.statementLog()]: {conn-10001, stmt-20003} executed. select * from `tb_tip` where 1 = 2
+
+2017-06-18 23:50:47
+[DEBUG]-[Thread: main]-[com.alibaba.druid.filter.logging.Log4jFilter.statementLog()]: {conn-10001, stmt-20004} executed. select * from `tb_user` where 1 = 2
+
+2017-06-18 23:50:47
+[DEBUG]-[Thread: main]-[com.alibaba.druid.filter.logging.Log4jFilter.statementLog()]: {conn-10001, stmt-20005} executed. select * from `tb_user_auth` where 1 = 2
+
+2017-06-18 23:50:48
+[DEBUG]-[Thread: main]-[com.alibaba.druid.filter.logging.Log4jFilter.statementLog()]: {conn-10001, pstmt-20006} executed. SELECT a.*
+FROM tb_user_auth a
+WHERE a.tokenKey = '2e0dc1ed76'
+	AND a.verified = 1
+	AND EXISTS (SELECT 1
+		FROM tb_user b
+		WHERE a.userid = b.id
+			AND b.isactive = 1)
+
+2017-06-18 23:50:48
+[INFO]-[Thread: main]-[com.myapp.utils.interceptor.ValidateLoginStatusInterceptor.intercept()]: ValidateInterceptor验证通过，tokenKey为[2e0dc1ed76],tokenTime 为[2017-07-18 23:21:48.0].
+
+2017-06-18 23:50:48
+[DEBUG]-[Thread: main]-[com.alibaba.druid.filter.logging.Log4jFilter.statementLog()]: {conn-10001, pstmt-20007} executed. SELECT a.*
+FROM tb_user_auth a
+WHERE a.tokenKey = '2e0dc1ed76'
+	AND a.verified = 1
+	AND EXISTS (SELECT 1
+		FROM tb_user b
+		WHERE a.userid = b.id
+			AND b.isactive = 1)
+
+2017-06-18 23:50:48
+[DEBUG]-[Thread: main]-[com.alibaba.druid.filter.logging.Log4jFilter.statementLog()]: {conn-10001, pstmt-20008} executed. INSERT INTO `tb_kid` (`birthday`, `sex`, `nickname`, `userid`, `healthIssue`
+	, `headurl`)
+VALUES ('2017-06-17', '1', '测试孩子昵称1', 7, '0'
+	, 'http://123.com')
+
+2017-06-19 00:07:17
+[INFO]-[Thread: main]-[com.alibaba.druid.pool.DruidDataSource.init()]: {dataSource-1} inited
+
+2017-06-19 00:07:18
+[DEBUG]-[Thread: main]-[com.alibaba.druid.filter.logging.Log4jFilter.statementLog()]: {conn-10001, stmt-20000} executed. select * from `tb_equipment` where 1 = 2
+
+2017-06-19 00:07:18
+[DEBUG]-[Thread: main]-[com.alibaba.druid.filter.logging.Log4jFilter.statementLog()]: {conn-10001, stmt-20001} executed. select * from `tb_kid` where 1 = 2
+
+2017-06-19 00:07:18
+[DEBUG]-[Thread: main]-[com.alibaba.druid.filter.logging.Log4jFilter.statementLog()]: {conn-10001, stmt-20002} executed. select * from `tb_temp_record` where 1 = 2
+
+2017-06-19 00:07:18
+[DEBUG]-[Thread: main]-[com.alibaba.druid.filter.logging.Log4jFilter.statementLog()]: {conn-10001, stmt-20003} executed. select * from `tb_tip` where 1 = 2
+
+2017-06-19 00:07:18
+[DEBUG]-[Thread: main]-[com.alibaba.druid.filter.logging.Log4jFilter.statementLog()]: {conn-10001, stmt-20004} executed. select * from `tb_user` where 1 = 2
+
+2017-06-19 00:07:18
+[DEBUG]-[Thread: main]-[com.alibaba.druid.filter.logging.Log4jFilter.statementLog()]: {conn-10001, stmt-20005} executed. select * from `tb_user_auth` where 1 = 2
+
+2017-06-19 00:07:19
+[DEBUG]-[Thread: main]-[com.alibaba.druid.filter.logging.Log4jFilter.statementLog()]: {conn-10001, pstmt-20006} executed. SELECT a.*
+FROM tb_user_auth a
+WHERE a.tokenKey = '2e0dc1ed76'
+	AND a.verified = 1
+	AND EXISTS (SELECT 1
+		FROM tb_user b
+		WHERE a.userid = b.id
+			AND b.isactive = 1)
+
+2017-06-19 00:07:19
+[INFO]-[Thread: main]-[com.myapp.utils.interceptor.ValidateLoginStatusInterceptor.intercept()]: ValidateInterceptor验证通过，tokenKey为[2e0dc1ed76],tokenTime 为[2017-07-18 23:21:48.0].
+
+2017-06-19 00:07:19
+[DEBUG]-[Thread: main]-[com.alibaba.druid.filter.logging.Log4jFilter.statementLog()]: {conn-10001, pstmt-20007} executed. SELECT nickname, sex, birthday, headurl, healthIssue
+FROM tb_kid
+WHERE id = 1
+
+2017-06-19 00:15:50
+[INFO]-[Thread: main]-[com.alibaba.druid.pool.DruidDataSource.init()]: {dataSource-1} inited
+
+2017-06-19 00:15:51
+[DEBUG]-[Thread: main]-[com.alibaba.druid.filter.logging.Log4jFilter.statementLog()]: {conn-10001, stmt-20000} executed. select * from `tb_equipment` where 1 = 2
+
+2017-06-19 00:15:51
+[DEBUG]-[Thread: main]-[com.alibaba.druid.filter.logging.Log4jFilter.statementLog()]: {conn-10001, stmt-20001} executed. select * from `tb_kid` where 1 = 2
+
+2017-06-19 00:15:51
+[DEBUG]-[Thread: main]-[com.alibaba.druid.filter.logging.Log4jFilter.statementLog()]: {conn-10001, stmt-20002} executed. select * from `tb_temp_record` where 1 = 2
+
+2017-06-19 00:15:51
+[DEBUG]-[Thread: main]-[com.alibaba.druid.filter.logging.Log4jFilter.statementLog()]: {conn-10001, stmt-20003} executed. select * from `tb_tip` where 1 = 2
+
+2017-06-19 00:15:51
+[DEBUG]-[Thread: main]-[com.alibaba.druid.filter.logging.Log4jFilter.statementLog()]: {conn-10001, stmt-20004} executed. select * from `tb_user` where 1 = 2
+
+2017-06-19 00:15:51
+[DEBUG]-[Thread: main]-[com.alibaba.druid.filter.logging.Log4jFilter.statementLog()]: {conn-10001, stmt-20005} executed. select * from `tb_user_auth` where 1 = 2
+
+2017-06-19 00:15:52
+[DEBUG]-[Thread: main]-[com.alibaba.druid.filter.logging.Log4jFilter.statementLog()]: {conn-10001, pstmt-20006} executed. SELECT a.*
+FROM tb_user_auth a
+WHERE a.tokenKey = '2e0dc1ed76'
+	AND a.verified = 1
+	AND EXISTS (SELECT 1
+		FROM tb_user b
+		WHERE a.userid = b.id
+			AND b.isactive = 1)
+
+2017-06-19 00:15:52
+[INFO]-[Thread: main]-[com.myapp.utils.interceptor.ValidateLoginStatusInterceptor.intercept()]: ValidateInterceptor验证通过，tokenKey为[2e0dc1ed76],tokenTime 为[2017-07-18 23:21:48.0].
+
+2017-06-19 00:15:52
+[DEBUG]-[Thread: main]-[com.alibaba.druid.filter.logging.Log4jFilter.statementLog()]: {conn-10001, pstmt-20007} executed. SELECT a.*
+FROM tb_user_auth a
+WHERE a.tokenKey = '2e0dc1ed76'
+	AND a.verified = 1
+	AND EXISTS (SELECT 1
+		FROM tb_user b
+		WHERE a.userid = b.id
+			AND b.isactive = 1)
+
+2017-06-19 00:15:52
+[DEBUG]-[Thread: main]-[com.alibaba.druid.filter.logging.Log4jFilter.statementLog()]: {conn-10001, pstmt-20008} executed. SELECT nickname, sex, birthday, headurl, healthIssue
+FROM tb_kid
+WHERE id = 1
+	AND userid = 7
+
+2017-06-19 00:15:52
+[DEBUG]-[Thread: main]-[com.alibaba.druid.filter.logging.Log4jFilter.statementLog()]: {conn-10001, pstmt-20009} executed. UPDATE `tb_kid`
+SET `birthday` = '2016-06-17', `sex` = '1', `nickname` = '测试孩子昵称2', `healthIssue` = '1', `headurl` = 'http://1234.com'
+WHERE `id` = 1

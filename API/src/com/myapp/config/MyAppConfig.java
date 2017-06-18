@@ -45,7 +45,7 @@ public class MyAppConfig extends JFinalConfig {
 		// 设置View类型为JSP
 		me.setViewType(ViewType.JSP);
 		// 设置文件默认上传路径
-		me.setBaseUploadPath(PropKit.get("baseUploadPath"));
+//		me.setBaseUploadPath(PropKit.get("baseUploadPath"));
 	}
 
 	@Override

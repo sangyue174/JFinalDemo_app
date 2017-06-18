@@ -34,11 +34,15 @@ public class KidController extends Controller {
 		String actionKey = getAttr("actionKey").toString();// 获取actionKey
 		String tokenKey = getPara("tokenKey");// 获取tokenKey查询用户信息
 		String nickname = getPara("nickname");// 昵称
-		String sex = getPara("sex") == null ? "1" : "0";// 性别(0:女1:男)
+		String sex = StringUtils.isEmpty(getPara("sex")) ? "1" : getPara("sex");// 性别(0:女1:男)
 		Date birthday = getParaToDate("birthday", new Date());// 生日
-		String headurl = getPara("headurl");
-		String healthIssue = getPara("healthIssue") == null ? "0" : "1";// 健康问题(0:没有1:有)
-
+		String headurl = getPara("headurl");// 头像url
+		String healthIssue = StringUtils.isEmpty(getPara("healthIssue")) ? "0" : getPara("healthIssue");// 健康问题(0:没有1:有)
+		
+		if(StringUtils.isEmpty(nickname)){
+			this.renderJson(new DataResponse(LevelEnum.ERROR, "昵称不可为空，请填写", actionKey));
+			return;
+		}
 		// 根据tokenKey查询相关用户信息
 		UserAuth userAuth = UserService.findUserAuthByTokenKey(tokenKey);
 		if (userAuth == null) {
@@ -76,7 +80,7 @@ public class KidController extends Controller {
 		}
 		String actionKey = getAttr("actionKey").toString();// 获取actionKey
 		if(StringUtils.isEmpty(headurl)){
-			this.renderJson(new DataResponse(LevelEnum.ERROR, "上传孩子头像失败，请重试", actionKey, headurl));
+			this.renderJson(new DataResponse(LevelEnum.ERROR, "上传孩子头像失败，请重试", actionKey));
 			return;
 		}
 		this.renderJson(new DataResponse(LevelEnum.SUCCESS, "上传孩子头像成功", actionKey, headurl));
@@ -86,7 +90,7 @@ public class KidController extends Controller {
 	/**
 	 * 查询孩子信息
 	 * 
-	 * @title: findTipContentAction
+	 * @title: findKidAction
 	 * @author sangyue
 	 * @date Jun 17, 2017 11:33:41 AM
 	 * @version V1.0
@@ -96,8 +100,7 @@ public class KidController extends Controller {
 		int kidid = getParaToInt("kidid"); // 孩子id
 
 		if (kidid == 0) {
-			this.renderJson(new DataResponse(LevelEnum.ERROR, "孩子id不可为空，请填写",
-					actionKey));
+			this.renderJson(new DataResponse(LevelEnum.ERROR, "孩子id不可为空，请填写", actionKey));
 			return;
 		}
 		// 根据kidid查找孩子信息
@@ -119,11 +122,15 @@ public class KidController extends Controller {
 		String tokenKey = getPara("tokenKey");// 获取tokenKey查询用户信息
 		int kidid = getParaToInt("kidid"); // 孩子id
 		String nickname = getPara("nickname");// 昵称
-		String sex = getPara("sex") == null ? "1" : getPara("sex");// 性别(0:女1:男)
+		String sex = StringUtils.isEmpty(getPara("sex")) ? "1" : getPara("sex");// 性别(0:女1:男)
 		Date birthday = getParaToDate("birthday", new Date());// 生日
-		String headurl = getPara("headurl");
-		String healthIssue = getPara("healthIssue") == null ? "0" : getPara("healthIssue");// 健康问题(0:没有1:有)
+		String headurl = getPara("headurl");// 头像url
+		String healthIssue = StringUtils.isEmpty(getPara("healthIssue")) ? "0" : getPara("healthIssue");// 健康问题(0:没有1:有)
 
+		if (kidid == 0) {
+			this.renderJson(new DataResponse(LevelEnum.ERROR, "孩子id不可为空，请填写", actionKey));
+			return;
+		}
 		// 根据tokenKey查询相关用户信息
 		UserAuth userAuth = UserService.findUserAuthByTokenKey(tokenKey);
 		if (userAuth == null) {
