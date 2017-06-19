@@ -34,7 +34,7 @@ public class TempRecordController extends Controller {
 	 */
 	public void findTempRecordChartAction() {
 		String actionKey = getAttr("actionKey").toString();// 获取actionKey
-		String number = getPara("number");// 设备标号
+		String number = getPara("number");// 设备编号
 		String date = StringUtils.isEmpty(getPara("date")) ? DateUtil.DateToString(new Date(), "yyyyMMdd"):getPara("date");// 日期(yyyyMMdd格式)，默认当前日期
 		if (StringUtils.isEmpty(number)) {
 			this.renderJson(new DataResponse(LevelEnum.ERROR, "设备标号不可为空，请填写", actionKey));

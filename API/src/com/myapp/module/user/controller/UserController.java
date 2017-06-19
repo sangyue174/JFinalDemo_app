@@ -302,24 +302,21 @@ public class UserController extends Controller {
 	 * @date Jun 11, 2017 3:20:10 AM 
 	 * @version V1.0
 	 */
+	@Before(ValidateLoginStatusInterceptor.class)
 	public void modifyPassAction(){
 		String actionKey = getAttr("actionKey").toString();// 获取actionKey
-		String identifier = getPara("identifier");// 验证账号
+		String tokenKey = getPara("tokenKey");// tokenKey验证
 		String preCredential = getPara("preCredential");// 原验证凭证
 		String newCredential = getPara("newCredential");// 新验证凭证
 		
-		if (StringUtils.isEmpty(identifier)) {
-			this.renderJson(new DataResponse(LevelEnum.ERROR, "账号不可为空，请填写", actionKey));
-			return;
-		}
 		if (StringUtils.isEmpty(preCredential) || StringUtils.isEmpty(newCredential)) {
 			this.renderJson(new DataResponse(LevelEnum.ERROR, "密码不可为空，请填写", actionKey));
 			return;
 		}
 
-		UserAuth checkUser = UserService.checkUserAuth(IdentityTypeEnum.PHONE.getValue(), identifier);
+		UserAuth checkUser = UserService.findUserAuthByTokenKey(tokenKey);
 		if(checkUser == null){
-			this.renderJson(new DataResponse(LevelEnum.ERROR, "不存在该用户，请检查账号", actionKey));
+			this.renderJson(new DataResponse(LevelEnum.ERROR, "未查询到当前tokenKey[" + tokenKey + "]用户，请重试", actionKey));
 			return;
 		}
 		// 验证手机密码

@@ -40,7 +40,7 @@ public class JunitTest extends ControllerTestCase<MyAppConfig> {
 	}
 	@Test
 	public void modifyPassAction() {
-		String url = "/user/modifyPassAction?identifier=18615566651&preCredential=admin&newCredential=admin";
+		String url = "/user/modifyPassAction?tokenKey=2e0dc1ed76&preCredential=admin&newCredential=admin";
 		System.out.println(use(url).invoke());
 	}
 	
@@ -55,13 +55,13 @@ public class JunitTest extends ControllerTestCase<MyAppConfig> {
 	// tempRecord
 	@Test
 	public void findTempRecordChartAction() {
-		String url = "/tempRecord/findTempRecordChartAction?equipid=1&date=20170614";
+		String url = "/tempRecord/findTempRecordChartAction?number=001&date=20170614&tokenKey=2e0dc1ed76";
 		System.out.println(use(url).invoke());
 	}
 	
 	@Test
 	public void findTempRecordDateAction() {
-		String url = "/tempRecord/findTempRecordDateAction?equipid=1&tokenKey=2e0dc1ed76";
+		String url = "/tempRecord/findTempRecordDateAction?number=001&tokenKey=2e0dc1ed76";
 		System.out.println(use(url).invoke());
 	}
 	
@@ -99,7 +99,7 @@ public class JunitTest extends ControllerTestCase<MyAppConfig> {
 	// 设备相关
 	@Test
 	public void addEquipmentAction() {
-		String url = "/equipment/addEquipmentAction?kidid=1&number=testnum&maxtime=40&mintime=38.5&ismaxalarm=0&isminalarm=0&isnotice=0&tokenKey=2e0dc1ed76";
+		String url = "/equipment/addEquipmentAction?kidid=1&number=testnum1&maxtime=40&mintime=38.5&ismaxalarm=0&isminalarm=0&isnotice=0&tokenKey=2e0dc1ed76";
 		System.out.println(use(url).invoke());
 	}
 	

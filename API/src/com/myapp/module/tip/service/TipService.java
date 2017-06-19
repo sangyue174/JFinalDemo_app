@@ -24,7 +24,7 @@ public class TipService {
 	 * @version V1.0
 	 */
 	public static List<Tip> findTipByTipType(String tipType) {
-		String sql = "select id, number, imageUrl title from tb_tip where tipType = ? order by number ";
+		String sql = "select id, number, imageUrl, title from tb_tip where tipType = ? order by number ";
 		List<Tip> tipList = new Tip().find(sql, tipType);
 		return tipList;
 	}

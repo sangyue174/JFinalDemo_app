@@ -24,7 +24,7 @@ import com.myapp.utils.response.LevelEnum;
  */
 public class EquipmentController extends Controller {
 	/**
-	 * 添加设备
+	 * 添加设备信息
 	 */
 	public void addEquipmentAction() {
 		String actionKey = getAttr("actionKey").toString();// 获取actionKey
@@ -99,7 +99,7 @@ public class EquipmentController extends Controller {
 			this.renderJson(new DataResponse(LevelEnum.ERROR, "设备添加失败，设备编号[" + number + "]", actionKey));
 			return;
 		}
-		this.renderJson(new DataResponse(LevelEnum.SUCCESS, "设备添加成功，设备编号[" + number + "]", actionKey, number));
+		this.renderJson(new DataResponse(LevelEnum.SUCCESS, "设备添加成功，设备编号[" + number + "]", actionKey));
 		return;
 	}
 	
@@ -207,7 +207,7 @@ public class EquipmentController extends Controller {
 			this.renderJson(new DataResponse(LevelEnum.ERROR, "未查询到该设备，设备编号[" + number + "]", actionKey));
 			return;
 		}
-		this.renderJson(new DataResponse(LevelEnum.ERROR, "查询设备信息成功，设备编号[" + number + "]", actionKey, equipment));
+		this.renderJson(new DataResponse(LevelEnum.SUCCESS, "查询设备信息成功，设备编号[" + number + "]", actionKey, equipment));
 		return;
 		
 	}

@@ -4,12 +4,14 @@ import java.util.Date;
 
 import org.apache.commons.lang.StringUtils;
 
+import com.jfinal.aop.Clear;
 import com.jfinal.core.Controller;
 import com.jfinal.upload.UploadFile;
 import com.myapp.bean.Kid;
 import com.myapp.bean.UserAuth;
 import com.myapp.module.kid.service.KidService;
 import com.myapp.module.user.service.UserService;
+import com.myapp.utils.interceptor.ValidateLoginStatusInterceptor;
 import com.myapp.utils.response.DataResponse;
 import com.myapp.utils.response.LevelEnum;
 
@@ -72,13 +74,20 @@ public class KidController extends Controller {
 	 * @date Jun 18, 2017 4:21:44 PM 
 	 * @version V1.0
 	 */
+	@Clear(ValidateLoginStatusInterceptor.class)
 	public void uploadKidImageAction() {
 		UploadFile imageFile = getFile();
-		String headurl = "";
-		if(imageFile != null){
-			headurl = imageFile.getUploadPath() + imageFile.getOriginalFileName();// 头像url
-		}
 		String actionKey = getAttr("actionKey").toString();// 获取actionKey
+		String headurl = "";
+		if(imageFile == null){
+			this.renderJson(new DataResponse(LevelEnum.ERROR, "上传孩子头像失败，请重试", actionKey));
+			return;
+		}
+		if (imageFile.getUploadPath().endsWith("/")) {
+			headurl = imageFile.getUploadPath() + imageFile.getOriginalFileName();// 头像url
+		} else {
+			headurl = imageFile.getUploadPath() + "/" + imageFile.getOriginalFileName();// 头像url
+		}
 		if(StringUtils.isEmpty(headurl)){
 			this.renderJson(new DataResponse(LevelEnum.ERROR, "上传孩子头像失败，请重试", actionKey));
 			return;
