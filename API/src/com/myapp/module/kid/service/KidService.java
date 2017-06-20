@@ -1,5 +1,7 @@
 package com.myapp.module.kid.service;
 
+import java.util.List;
+
 import com.myapp.bean.Kid;
 
 /**
@@ -50,7 +52,7 @@ public class KidService {
 	 * @version V1.0
 	 */
 	public static Kid findKidById(int kidid) {
-		String sql = "select nickname, sex, birthday, headurl, healthIssue from tb_kid where id = ? ";
+		String sql = "select nickname, sex, birthday, headurl, healthIssue, number from tb_kid where id = ? ";
 		Kid kid = new Kid().findFirst(sql, kidid);
 		return kid;
 	}
@@ -66,8 +68,24 @@ public class KidService {
 	 * @version V1.0
 	 */
 	public static Kid findKidByUserAndId(int kidid, int userid) {
-		String sql = "select nickname, sex, birthday, headurl, healthIssue from tb_kid where id = ? and userid = ? ";
+		String sql = "select nickname, sex, birthday, headurl, healthIssue, number from tb_kid where id = ? and userid = ? ";
 		Kid kid = new Kid().findFirst(sql, kidid, userid);
 		return kid;
+	}
+	
+	/**
+	 * 根据userid查找孩子列表
+	 * 
+	 * @title: findKidListByUserid
+	 * @author sangyue
+	 * @date Jun 20, 2017 10:17:39 PM
+	 * @param userid
+	 * @return
+	 * @version V1.0
+	 */
+	public static List<Kid> findKidListByUserid(int userid) {
+		String sql = "select id, nickname, sex, birthday, headurl, healthIssue, number from tb_kid where userid = ? order by number";
+		List<Kid> kidList = new Kid().find(sql, userid);
+		return kidList;
 	}
 }

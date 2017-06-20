@@ -8,4 +8,16 @@ import com.myapp.bean.base.BaseKid;
 @SuppressWarnings("serial")
 public class Kid extends BaseKid<Kid> {
 	public static final Kid dao = new Kid().dao();
+
+	public void setEquipmentNumber(String equipNumber) {
+		put("equipNumber", equipNumber);
+	}
+
+	public String getEquipmentNumber() {
+		Equipment equip = Equipment.dao.findFirst("select * from tb_equipment where kidid = ? ", get("id"));
+		if (equip == null) {
+			return null;
+		}
+		return equip.getNumber();
+	}
 }

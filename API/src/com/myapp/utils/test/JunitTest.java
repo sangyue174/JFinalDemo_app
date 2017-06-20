@@ -80,7 +80,7 @@ public class JunitTest extends ControllerTestCase<MyAppConfig> {
 	// 孩子相关
 	@Test
 	public void addKidAction() {
-		String url = "/kid/addKidAction?nickname=测试孩子昵称1&sex=1&birthday=2017-6-17&headurl=http://123.com&healthIssue=0&tokenKey=2e0dc1ed76";
+		String url = "/kid/addKidAction?nickname=测试孩子昵称3&sex=1&birthday=2017-6-17&headurl=http://123.com&healthIssue=0&tokenKey=2e0dc1ed76";
 //		File imageFile = new File("D:/file/图片test.gif");
 		System.out.println(use(url).invoke());
 	}
@@ -93,6 +93,12 @@ public class JunitTest extends ControllerTestCase<MyAppConfig> {
 	@Test
 	public void updateKidAction() {
 		String url = "/kid/updateKidAction?kidid=1&nickname=测试孩子昵称2&sex=1&birthday=2016-6-17&headurl=http://1234.com&healthIssue=1&tokenKey=2e0dc1ed76";
+		System.out.println(use(url).invoke());
+	}
+	
+	@Test
+	public void findKidListAction() {
+		String url = "/kid/findKidListAction?tokenKey=2e0dc1ed76";
 		System.out.println(use(url).invoke());
 	}
 	

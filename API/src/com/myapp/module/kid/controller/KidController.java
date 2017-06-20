@@ -1,6 +1,7 @@
 package com.myapp.module.kid.controller;
 
 import java.util.Date;
+import java.util.List;
 
 import org.apache.commons.lang.StringUtils;
 
@@ -52,7 +53,14 @@ public class KidController extends Controller {
 			return;
 		}
 		int userid = userAuth.getUserid();
-
+		
+		// 查找当前用户下的孩子数量
+		List<Kid> kidList = KidService.findKidListByUserid(userid);
+		int number = 1;
+		if(kidList != null){
+			number = kidList.size() + 1;
+		}
+		
 		// 保存孩子信息
 		Kid kid = new Kid();
 		kid.setUserid(userid);
@@ -61,6 +69,7 @@ public class KidController extends Controller {
 		kid.setBirthday(birthday);
 		kid.setHeadurl(headurl);
 		kid.setHealthIssue(healthIssue);
+		kid.setNumber(number);
 		KidService.saveKid(kid);
 
 		this.renderJson(new DataResponse(LevelEnum.SUCCESS, "保存孩子信息成功", actionKey, kid.getId()));
@@ -164,6 +173,35 @@ public class KidController extends Controller {
 		KidService.updateKid(kid);
 
 		this.renderJson(new DataResponse(LevelEnum.SUCCESS, "修改孩子信息成功", actionKey));
+		return;
+	}
+	
+	/**
+	 * 查询孩子列表
+	 * @title: findKidListAction
+	 * @author sangyue
+	 * @date Jun 20, 2017 9:45:03 PM 
+	 * @version V1.0
+	 */
+	public void findKidListAction() {
+		String actionKey = getAttr("actionKey").toString();// 获取actionKey
+		String tokenKey = getPara("tokenKey");// 获取tokenKey查询用户信息
+		
+		// 根据tokenKey查询相关用户信息
+		UserAuth userAuth = UserService.findUserAuthByTokenKey(tokenKey);
+		if (userAuth == null) {
+			this.renderJson(new DataResponse(LevelEnum.ERROR, "未查询到当前tokenKey[" + tokenKey + "]用户，请重试", actionKey));
+			return;
+		}
+		int userid = userAuth.getUserid();
+		// 根据userid查找孩子信息
+		List<Kid> kidList = KidService.findKidListByUserid(userid);
+		for(Kid kid : kidList){
+			String equipNumber = kid.getEquipmentNumber();
+			kid.setEquipmentNumber(equipNumber);
+		}
+
+		this.renderJson(new DataResponse(LevelEnum.SUCCESS, "查询孩子列表", actionKey, kidList));
 		return;
 	}
 

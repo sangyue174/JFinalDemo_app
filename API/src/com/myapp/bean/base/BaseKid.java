@@ -72,4 +72,13 @@ public abstract class BaseKid<M extends BaseKid<M>> extends Model<M> implements 
 		return get("healthIssue");
 	}
 
+	public M setNumber(java.lang.Integer number) {
+		set("number", number);
+		return (M)this;
+	}
+
+	public java.lang.Integer getNumber() {
+		return get("number");
+	}
+
 }

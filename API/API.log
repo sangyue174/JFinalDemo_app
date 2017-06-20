@@ -6125,3 +6125,974 @@ WHERE a.tokenKey = '2e0dc1ed76'
 [DEBUG]-[Thread: main]-[com.alibaba.druid.filter.logging.Log4jFilter.statementLog()]: {conn-10001, pstmt-20007} executed. SELECT number, imageUrl, title, content
 FROM tb_tip
 WHERE id = '1'
+
+2017-06-20 22:33:22
+[INFO]-[Thread: main]-[com.alibaba.druid.pool.DruidDataSource.init()]: {dataSource-1} inited
+
+2017-06-20 22:33:22
+[DEBUG]-[Thread: main]-[com.alibaba.druid.filter.logging.Log4jFilter.statementLog()]: {conn-10001, stmt-20000} executed. select * from `tb_equipment` where 1 = 2
+
+2017-06-20 22:33:22
+[DEBUG]-[Thread: main]-[com.alibaba.druid.filter.logging.Log4jFilter.statementLog()]: {conn-10001, stmt-20001} executed. select * from `tb_kid` where 1 = 2
+
+2017-06-20 22:33:22
+[DEBUG]-[Thread: main]-[com.alibaba.druid.filter.logging.Log4jFilter.statementLog()]: {conn-10001, stmt-20002} executed. select * from `tb_temp_record` where 1 = 2
+
+2017-06-20 22:33:22
+[DEBUG]-[Thread: main]-[com.alibaba.druid.filter.logging.Log4jFilter.statementLog()]: {conn-10001, stmt-20003} executed. select * from `tb_tip` where 1 = 2
+
+2017-06-20 22:33:22
+[DEBUG]-[Thread: main]-[com.alibaba.druid.filter.logging.Log4jFilter.statementLog()]: {conn-10001, stmt-20004} executed. select * from `tb_user` where 1 = 2
+
+2017-06-20 22:33:22
+[DEBUG]-[Thread: main]-[com.alibaba.druid.filter.logging.Log4jFilter.statementLog()]: {conn-10001, stmt-20005} executed. select * from `tb_user_auth` where 1 = 2
+
+2017-06-20 22:33:23
+[DEBUG]-[Thread: main]-[com.alibaba.druid.filter.logging.Log4jFilter.statementLog()]: {conn-10001, pstmt-20006} executed. SELECT a.*
+FROM tb_user_auth a
+WHERE a.tokenKey = '2e0dc1ed76'
+	AND a.verified = 1
+	AND EXISTS (SELECT 1
+		FROM tb_user b
+		WHERE a.userid = b.id
+			AND b.isactive = 1)
+
+2017-06-20 22:33:23
+[INFO]-[Thread: main]-[com.myapp.utils.interceptor.ValidateLoginStatusInterceptor.intercept()]: ValidateInterceptor验证通过，tokenKey为[2e0dc1ed76],tokenTime 为[2017-07-18 23:21:48.0].
+
+2017-06-20 22:33:23
+[DEBUG]-[Thread: main]-[com.alibaba.druid.filter.logging.Log4jFilter.statementLog()]: {conn-10001, pstmt-20007} executed. SELECT a.*
+FROM tb_user_auth a
+WHERE a.tokenKey = '2e0dc1ed76'
+	AND a.verified = 1
+	AND EXISTS (SELECT 1
+		FROM tb_user b
+		WHERE a.userid = b.id
+			AND b.isactive = 1)
+
+2017-06-20 22:33:23
+[DEBUG]-[Thread: main]-[com.alibaba.druid.filter.logging.Log4jFilter.statementLog()]: {conn-10001, pstmt-20008} executed. SELECT nickname, sex, birthday, headurl, healthIssue
+FROM tb_kid
+WHERE userid = 7
+
+2017-06-20 22:58:46
+[INFO]-[Thread: main]-[com.alibaba.druid.pool.DruidDataSource.init()]: {dataSource-1} inited
+
+2017-06-20 22:58:46
+[DEBUG]-[Thread: main]-[com.alibaba.druid.filter.logging.Log4jFilter.statementLog()]: {conn-10001, stmt-20000} executed. select * from `tb_equipment` where 1 = 2
+
+2017-06-20 22:58:46
+[DEBUG]-[Thread: main]-[com.alibaba.druid.filter.logging.Log4jFilter.statementLog()]: {conn-10001, stmt-20001} executed. select * from `tb_kid` where 1 = 2
+
+2017-06-20 22:58:46
+[DEBUG]-[Thread: main]-[com.alibaba.druid.filter.logging.Log4jFilter.statementLog()]: {conn-10001, stmt-20002} executed. select * from `tb_temp_record` where 1 = 2
+
+2017-06-20 22:58:46
+[DEBUG]-[Thread: main]-[com.alibaba.druid.filter.logging.Log4jFilter.statementLog()]: {conn-10001, stmt-20003} executed. select * from `tb_tip` where 1 = 2
+
+2017-06-20 22:58:46
+[DEBUG]-[Thread: main]-[com.alibaba.druid.filter.logging.Log4jFilter.statementLog()]: {conn-10001, stmt-20004} executed. select * from `tb_user` where 1 = 2
+
+2017-06-20 22:58:46
+[DEBUG]-[Thread: main]-[com.alibaba.druid.filter.logging.Log4jFilter.statementLog()]: {conn-10001, stmt-20005} executed. select * from `tb_user_auth` where 1 = 2
+
+2017-06-21 00:07:49
+[INFO]-[Thread: main]-[com.alibaba.druid.pool.DruidDataSource.init()]: {dataSource-1} inited
+
+2017-06-21 00:07:49
+[DEBUG]-[Thread: main]-[com.alibaba.druid.filter.logging.Log4jFilter.statementLog()]: {conn-10001, stmt-20000} executed. select * from `tb_equipment` where 1 = 2
+
+2017-06-21 00:07:49
+[DEBUG]-[Thread: main]-[com.alibaba.druid.filter.logging.Log4jFilter.statementLog()]: {conn-10001, stmt-20001} executed. select * from `tb_kid` where 1 = 2
+
+2017-06-21 00:07:49
+[DEBUG]-[Thread: main]-[com.alibaba.druid.filter.logging.Log4jFilter.statementLog()]: {conn-10001, stmt-20002} executed. select * from `tb_temp_record` where 1 = 2
+
+2017-06-21 00:07:49
+[DEBUG]-[Thread: main]-[com.alibaba.druid.filter.logging.Log4jFilter.statementLog()]: {conn-10001, stmt-20003} executed. select * from `tb_tip` where 1 = 2
+
+2017-06-21 00:07:49
+[DEBUG]-[Thread: main]-[com.alibaba.druid.filter.logging.Log4jFilter.statementLog()]: {conn-10001, stmt-20004} executed. select * from `tb_user` where 1 = 2
+
+2017-06-21 00:07:49
+[DEBUG]-[Thread: main]-[com.alibaba.druid.filter.logging.Log4jFilter.statementLog()]: {conn-10001, stmt-20005} executed. select * from `tb_user_auth` where 1 = 2
+
+2017-06-21 00:13:48
+[INFO]-[Thread: main]-[com.alibaba.druid.pool.DruidDataSource.init()]: {dataSource-1} inited
+
+2017-06-21 00:13:48
+[DEBUG]-[Thread: main]-[com.alibaba.druid.filter.logging.Log4jFilter.statementLog()]: {conn-10001, stmt-20000} executed. select * from `tb_equipment` where 1 = 2
+
+2017-06-21 00:13:48
+[DEBUG]-[Thread: main]-[com.alibaba.druid.filter.logging.Log4jFilter.statementLog()]: {conn-10001, stmt-20001} executed. select * from `tb_kid` where 1 = 2
+
+2017-06-21 00:13:48
+[DEBUG]-[Thread: main]-[com.alibaba.druid.filter.logging.Log4jFilter.statementLog()]: {conn-10001, stmt-20002} executed. select * from `tb_temp_record` where 1 = 2
+
+2017-06-21 00:13:48
+[DEBUG]-[Thread: main]-[com.alibaba.druid.filter.logging.Log4jFilter.statementLog()]: {conn-10001, stmt-20003} executed. select * from `tb_tip` where 1 = 2
+
+2017-06-21 00:13:48
+[DEBUG]-[Thread: main]-[com.alibaba.druid.filter.logging.Log4jFilter.statementLog()]: {conn-10001, stmt-20004} executed. select * from `tb_user` where 1 = 2
+
+2017-06-21 00:13:48
+[DEBUG]-[Thread: main]-[com.alibaba.druid.filter.logging.Log4jFilter.statementLog()]: {conn-10001, stmt-20005} executed. select * from `tb_user_auth` where 1 = 2
+
+2017-06-21 00:13:49
+[DEBUG]-[Thread: main]-[com.alibaba.druid.filter.logging.Log4jFilter.statementLog()]: {conn-10001, pstmt-20006} executed. SELECT a.*
+FROM tb_user_auth a
+WHERE a.tokenKey = '2e0dc1ed76'
+	AND a.verified = 1
+	AND EXISTS (SELECT 1
+		FROM tb_user b
+		WHERE a.userid = b.id
+			AND b.isactive = 1)
+
+2017-06-21 00:13:49
+[INFO]-[Thread: main]-[com.myapp.utils.interceptor.ValidateLoginStatusInterceptor.intercept()]: ValidateInterceptor验证通过，tokenKey为[2e0dc1ed76],tokenTime 为[2017-07-18 23:21:48.0].
+
+2017-06-21 00:13:49
+[DEBUG]-[Thread: main]-[com.alibaba.druid.filter.logging.Log4jFilter.statementLog()]: {conn-10001, pstmt-20007} executed. SELECT a.*
+FROM tb_user_auth a
+WHERE a.tokenKey = '2e0dc1ed76'
+	AND a.verified = 1
+	AND EXISTS (SELECT 1
+		FROM tb_user b
+		WHERE a.userid = b.id
+			AND b.isactive = 1)
+
+2017-06-21 00:13:56
+[ERROR]-[Thread: main]-[com.myapp.utils.interceptor.ExceptionIntoLogInterceptor.logWrite()]: 
+---Exception Log Begin---
+Controller:com.myapp.module.kid.controller.KidController
+Method:addKidAction
+Exception Type:com.jfinal.plugin.activerecord.ActiveRecordException
+Exception Details:
+com.jfinal.plugin.activerecord.ActiveRecordException: java.sql.SQLException: sql injection violation, syntax error: syntax error, IDENTIFIER maxnumber, pos 31 : select count(1) count maxnumber from tb_kid where userid = ? 
+	at com.jfinal.plugin.activerecord.Model.find(Model.java:579)
+	at com.jfinal.plugin.activerecord.Model.findFirst(Model.java:608)
+	at com.myapp.module.kid.service.KidService.findKidCountByUserid(KidService.java:103)
+	at com.myapp.module.kid.controller.KidController.addKidAction(KidController.java:58)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:57)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:606)
+	at com.jfinal.aop.Invocation.invoke(Invocation.java:73)
+	at com.myapp.utils.interceptor.ValidateLoginStatusInterceptor.intercept(ValidateLoginStatusInterceptor.java:52)
+	at com.jfinal.aop.Invocation.invoke(Invocation.java:67)
+	at com.myapp.utils.interceptor.ExceptionIntoLogInterceptor.intercept(ExceptionIntoLogInterceptor.java:24)
+	at com.jfinal.aop.Invocation.invoke(Invocation.java:67)
+	at com.jfinal.core.ActionHandler.handle(ActionHandler.java:74)
+	at com.jfinal.ext.handler.ContextPathHandler.handle(ContextPathHandler.java:48)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:57)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:606)
+	at com.jfinal.ext.kit.Reflect.on(Reflect.java:644)
+	at com.jfinal.ext.kit.Reflect.call(Reflect.java:383)
+	at com.jfinal.ext.test.ControllerTestCase.invoke(ControllerTestCase.java:127)
+	at com.myapp.utils.test.JunitTest.addKidAction(JunitTest.java:85)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:57)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:606)
+	at org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:45)
+	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:15)
+	at org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:42)
+	at org.junit.internal.runners.statements.InvokeMethod.evaluate(InvokeMethod.java:20)
+	at org.junit.internal.runners.statements.RunBefores.evaluate(RunBefores.java:28)
+	at org.junit.runners.ParentRunner.runLeaf(ParentRunner.java:263)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:68)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:47)
+	at org.junit.runners.ParentRunner$3.run(ParentRunner.java:231)
+	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:60)
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:229)
+	at org.junit.runners.ParentRunner.access$000(ParentRunner.java:50)
+	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:222)
+	at org.junit.internal.runners.statements.RunAfters.evaluate(RunAfters.java:30)
+	at org.junit.runners.ParentRunner.run(ParentRunner.java:300)
+	at org.eclipse.jdt.internal.junit4.runner.JUnit4TestReference.run(JUnit4TestReference.java:50)
+	at org.eclipse.jdt.internal.junit.runner.TestExecution.run(TestExecution.java:38)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.runTests(RemoteTestRunner.java:459)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.runTests(RemoteTestRunner.java:675)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.run(RemoteTestRunner.java:382)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.main(RemoteTestRunner.java:192)
+Caused by: java.sql.SQLException: sql injection violation, syntax error: syntax error, IDENTIFIER maxnumber, pos 31 : select count(1) count maxnumber from tb_kid where userid = ? 
+	at com.alibaba.druid.wall.WallFilter.check(WallFilter.java:706)
+	at com.alibaba.druid.wall.WallFilter.connection_prepareStatement(WallFilter.java:234)
+	at com.alibaba.druid.filter.FilterChainImpl.connection_prepareStatement(FilterChainImpl.java:448)
+	at com.alibaba.druid.proxy.jdbc.ConnectionProxyImpl.prepareStatement(ConnectionProxyImpl.java:342)
+	at com.alibaba.druid.pool.DruidPooledConnection.prepareStatement(DruidPooledConnection.java:311)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:57)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:606)
+	at com.jfinal.plugin.activerecord.SqlReporter.invoke(SqlReporter.java:58)
+	at com.sun.proxy.$Proxy7.prepareStatement(Unknown Source)
+	at com.jfinal.plugin.activerecord.Model.find(Model.java:558)
+	at com.jfinal.plugin.activerecord.Model.find(Model.java:577)
+	... 47 more
+Caused by: com.alibaba.druid.sql.parser.ParserException: syntax error, IDENTIFIER maxnumber, pos 31
+	at com.alibaba.druid.sql.parser.SQLStatementParser.parseStatementList(SQLStatementParser.java:300)
+	at com.alibaba.druid.sql.parser.SQLStatementParser.parseStatementList(SQLStatementParser.java:108)
+	at com.alibaba.druid.wall.WallProvider.checkInternal(WallProvider.java:627)
+	at com.alibaba.druid.wall.WallProvider.check(WallProvider.java:586)
+	at com.alibaba.druid.wall.WallFilter.check(WallFilter.java:694)
+	... 59 more
+
+2017-06-21 00:14:29
+[INFO]-[Thread: main]-[com.alibaba.druid.pool.DruidDataSource.init()]: {dataSource-1} inited
+
+2017-06-21 00:14:29
+[DEBUG]-[Thread: main]-[com.alibaba.druid.filter.logging.Log4jFilter.statementLog()]: {conn-10001, stmt-20000} executed. select * from `tb_equipment` where 1 = 2
+
+2017-06-21 00:14:29
+[DEBUG]-[Thread: main]-[com.alibaba.druid.filter.logging.Log4jFilter.statementLog()]: {conn-10001, stmt-20001} executed. select * from `tb_kid` where 1 = 2
+
+2017-06-21 00:14:29
+[DEBUG]-[Thread: main]-[com.alibaba.druid.filter.logging.Log4jFilter.statementLog()]: {conn-10001, stmt-20002} executed. select * from `tb_temp_record` where 1 = 2
+
+2017-06-21 00:14:29
+[DEBUG]-[Thread: main]-[com.alibaba.druid.filter.logging.Log4jFilter.statementLog()]: {conn-10001, stmt-20003} executed. select * from `tb_tip` where 1 = 2
+
+2017-06-21 00:14:29
+[DEBUG]-[Thread: main]-[com.alibaba.druid.filter.logging.Log4jFilter.statementLog()]: {conn-10001, stmt-20004} executed. select * from `tb_user` where 1 = 2
+
+2017-06-21 00:14:29
+[DEBUG]-[Thread: main]-[com.alibaba.druid.filter.logging.Log4jFilter.statementLog()]: {conn-10001, stmt-20005} executed. select * from `tb_user_auth` where 1 = 2
+
+2017-06-21 00:14:30
+[DEBUG]-[Thread: main]-[com.alibaba.druid.filter.logging.Log4jFilter.statementLog()]: {conn-10001, pstmt-20006} executed. SELECT a.*
+FROM tb_user_auth a
+WHERE a.tokenKey = '2e0dc1ed76'
+	AND a.verified = 1
+	AND EXISTS (SELECT 1
+		FROM tb_user b
+		WHERE a.userid = b.id
+			AND b.isactive = 1)
+
+2017-06-21 00:14:30
+[INFO]-[Thread: main]-[com.myapp.utils.interceptor.ValidateLoginStatusInterceptor.intercept()]: ValidateInterceptor验证通过，tokenKey为[2e0dc1ed76],tokenTime 为[2017-07-18 23:21:48.0].
+
+2017-06-21 00:14:30
+[DEBUG]-[Thread: main]-[com.alibaba.druid.filter.logging.Log4jFilter.statementLog()]: {conn-10001, pstmt-20007} executed. SELECT a.*
+FROM tb_user_auth a
+WHERE a.tokenKey = '2e0dc1ed76'
+	AND a.verified = 1
+	AND EXISTS (SELECT 1
+		FROM tb_user b
+		WHERE a.userid = b.id
+			AND b.isactive = 1)
+
+2017-06-21 00:14:34
+[DEBUG]-[Thread: main]-[com.alibaba.druid.filter.logging.Log4jFilter.statementLog()]: {conn-10001, pstmt-20008} executed. SELECT COUNT(1) AS count
+FROM tb_kid
+WHERE userid = 7
+
+2017-06-21 00:15:59
+[DEBUG]-[Thread: main]-[com.alibaba.druid.filter.logging.Log4jFilter.statementLog()]: {conn-10001, pstmt-20009} executed. INSERT INTO `tb_kid` (`birthday`, `sex`, `nickname`, `userid`, `number`
+	, `healthIssue`, `headurl`)
+VALUES ('2017-06-17', '1', '测试孩子昵称3sex=1', 7, 2
+	, '0', 'http://123.com')
+
+2017-06-21 00:16:26
+[INFO]-[Thread: main]-[com.alibaba.druid.pool.DruidDataSource.init()]: {dataSource-1} inited
+
+2017-06-21 00:16:26
+[DEBUG]-[Thread: main]-[com.alibaba.druid.filter.logging.Log4jFilter.statementLog()]: {conn-10001, stmt-20000} executed. select * from `tb_equipment` where 1 = 2
+
+2017-06-21 00:16:26
+[DEBUG]-[Thread: main]-[com.alibaba.druid.filter.logging.Log4jFilter.statementLog()]: {conn-10001, stmt-20001} executed. select * from `tb_kid` where 1 = 2
+
+2017-06-21 00:16:26
+[DEBUG]-[Thread: main]-[com.alibaba.druid.filter.logging.Log4jFilter.statementLog()]: {conn-10001, stmt-20002} executed. select * from `tb_temp_record` where 1 = 2
+
+2017-06-21 00:16:26
+[DEBUG]-[Thread: main]-[com.alibaba.druid.filter.logging.Log4jFilter.statementLog()]: {conn-10001, stmt-20003} executed. select * from `tb_tip` where 1 = 2
+
+2017-06-21 00:16:26
+[DEBUG]-[Thread: main]-[com.alibaba.druid.filter.logging.Log4jFilter.statementLog()]: {conn-10001, stmt-20004} executed. select * from `tb_user` where 1 = 2
+
+2017-06-21 00:16:26
+[DEBUG]-[Thread: main]-[com.alibaba.druid.filter.logging.Log4jFilter.statementLog()]: {conn-10001, stmt-20005} executed. select * from `tb_user_auth` where 1 = 2
+
+2017-06-21 00:16:28
+[DEBUG]-[Thread: main]-[com.alibaba.druid.filter.logging.Log4jFilter.statementLog()]: {conn-10001, pstmt-20006} executed. SELECT a.*
+FROM tb_user_auth a
+WHERE a.tokenKey = '2e0dc1ed76'
+	AND a.verified = 1
+	AND EXISTS (SELECT 1
+		FROM tb_user b
+		WHERE a.userid = b.id
+			AND b.isactive = 1)
+
+2017-06-21 00:16:28
+[INFO]-[Thread: main]-[com.myapp.utils.interceptor.ValidateLoginStatusInterceptor.intercept()]: ValidateInterceptor验证通过，tokenKey为[2e0dc1ed76],tokenTime 为[2017-07-18 23:21:48.0].
+
+2017-06-21 00:16:28
+[DEBUG]-[Thread: main]-[com.alibaba.druid.filter.logging.Log4jFilter.statementLog()]: {conn-10001, pstmt-20007} executed. SELECT a.*
+FROM tb_user_auth a
+WHERE a.tokenKey = '2e0dc1ed76'
+	AND a.verified = 1
+	AND EXISTS (SELECT 1
+		FROM tb_user b
+		WHERE a.userid = b.id
+			AND b.isactive = 1)
+
+2017-06-21 00:16:35
+[DEBUG]-[Thread: main]-[com.alibaba.druid.filter.logging.Log4jFilter.statementLog()]: {conn-10001, pstmt-20008} executed. SELECT COUNT(1) AS count
+FROM tb_kid
+WHERE userid = 7
+
+2017-06-21 00:16:35
+[ERROR]-[Thread: main]-[com.myapp.utils.interceptor.ExceptionIntoLogInterceptor.logWrite()]: 
+---Exception Log Begin---
+Controller:com.myapp.module.kid.controller.KidController
+Method:addKidAction
+Exception Type:java.lang.ClassCastException
+Exception Details:
+java.lang.ClassCastException: java.lang.Long cannot be cast to java.lang.Integer
+	at com.myapp.bean.Kid.getCount(Kid.java:13)
+	at com.myapp.module.kid.controller.KidController.addKidAction(KidController.java:61)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:57)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:606)
+	at com.jfinal.aop.Invocation.invoke(Invocation.java:73)
+	at com.myapp.utils.interceptor.ValidateLoginStatusInterceptor.intercept(ValidateLoginStatusInterceptor.java:52)
+	at com.jfinal.aop.Invocation.invoke(Invocation.java:67)
+	at com.myapp.utils.interceptor.ExceptionIntoLogInterceptor.intercept(ExceptionIntoLogInterceptor.java:24)
+	at com.jfinal.aop.Invocation.invoke(Invocation.java:67)
+	at com.jfinal.core.ActionHandler.handle(ActionHandler.java:74)
+	at com.jfinal.ext.handler.ContextPathHandler.handle(ContextPathHandler.java:48)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:57)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:606)
+	at com.jfinal.ext.kit.Reflect.on(Reflect.java:644)
+	at com.jfinal.ext.kit.Reflect.call(Reflect.java:383)
+	at com.jfinal.ext.test.ControllerTestCase.invoke(ControllerTestCase.java:127)
+	at com.myapp.utils.test.JunitTest.addKidAction(JunitTest.java:85)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:57)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:606)
+	at org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:45)
+	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:15)
+	at org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:42)
+	at org.junit.internal.runners.statements.InvokeMethod.evaluate(InvokeMethod.java:20)
+	at org.junit.internal.runners.statements.RunBefores.evaluate(RunBefores.java:28)
+	at org.junit.runners.ParentRunner.runLeaf(ParentRunner.java:263)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:68)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:47)
+	at org.junit.runners.ParentRunner$3.run(ParentRunner.java:231)
+	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:60)
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:229)
+	at org.junit.runners.ParentRunner.access$000(ParentRunner.java:50)
+	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:222)
+	at org.junit.internal.runners.statements.RunAfters.evaluate(RunAfters.java:30)
+	at org.junit.runners.ParentRunner.run(ParentRunner.java:300)
+	at org.eclipse.jdt.internal.junit4.runner.JUnit4TestReference.run(JUnit4TestReference.java:50)
+	at org.eclipse.jdt.internal.junit.runner.TestExecution.run(TestExecution.java:38)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.runTests(RemoteTestRunner.java:459)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.runTests(RemoteTestRunner.java:675)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.run(RemoteTestRunner.java:382)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.main(RemoteTestRunner.java:192)
+
+2017-06-21 00:18:00
+[INFO]-[Thread: main]-[com.alibaba.druid.pool.DruidDataSource.init()]: {dataSource-1} inited
+
+2017-06-21 00:18:00
+[DEBUG]-[Thread: main]-[com.alibaba.druid.filter.logging.Log4jFilter.statementLog()]: {conn-10001, stmt-20000} executed. select * from `tb_equipment` where 1 = 2
+
+2017-06-21 00:18:00
+[DEBUG]-[Thread: main]-[com.alibaba.druid.filter.logging.Log4jFilter.statementLog()]: {conn-10001, stmt-20001} executed. select * from `tb_kid` where 1 = 2
+
+2017-06-21 00:18:00
+[DEBUG]-[Thread: main]-[com.alibaba.druid.filter.logging.Log4jFilter.statementLog()]: {conn-10001, stmt-20002} executed. select * from `tb_temp_record` where 1 = 2
+
+2017-06-21 00:18:00
+[DEBUG]-[Thread: main]-[com.alibaba.druid.filter.logging.Log4jFilter.statementLog()]: {conn-10001, stmt-20003} executed. select * from `tb_tip` where 1 = 2
+
+2017-06-21 00:18:00
+[DEBUG]-[Thread: main]-[com.alibaba.druid.filter.logging.Log4jFilter.statementLog()]: {conn-10001, stmt-20004} executed. select * from `tb_user` where 1 = 2
+
+2017-06-21 00:18:00
+[DEBUG]-[Thread: main]-[com.alibaba.druid.filter.logging.Log4jFilter.statementLog()]: {conn-10001, stmt-20005} executed. select * from `tb_user_auth` where 1 = 2
+
+2017-06-21 00:18:01
+[DEBUG]-[Thread: main]-[com.alibaba.druid.filter.logging.Log4jFilter.statementLog()]: {conn-10001, pstmt-20006} executed. SELECT a.*
+FROM tb_user_auth a
+WHERE a.tokenKey = '2e0dc1ed76'
+	AND a.verified = 1
+	AND EXISTS (SELECT 1
+		FROM tb_user b
+		WHERE a.userid = b.id
+			AND b.isactive = 1)
+
+2017-06-21 00:18:01
+[INFO]-[Thread: main]-[com.myapp.utils.interceptor.ValidateLoginStatusInterceptor.intercept()]: ValidateInterceptor验证通过，tokenKey为[2e0dc1ed76],tokenTime 为[2017-07-18 23:21:48.0].
+
+2017-06-21 00:18:01
+[DEBUG]-[Thread: main]-[com.alibaba.druid.filter.logging.Log4jFilter.statementLog()]: {conn-10001, pstmt-20007} executed. SELECT a.*
+FROM tb_user_auth a
+WHERE a.tokenKey = '2e0dc1ed76'
+	AND a.verified = 1
+	AND EXISTS (SELECT 1
+		FROM tb_user b
+		WHERE a.userid = b.id
+			AND b.isactive = 1)
+
+2017-06-21 00:18:01
+[DEBUG]-[Thread: main]-[com.alibaba.druid.filter.logging.Log4jFilter.statementLog()]: {conn-10001, pstmt-20008} executed. SELECT COUNT(1) AS count
+FROM tb_kid
+WHERE userid = 7
+
+2017-06-21 00:18:01
+[ERROR]-[Thread: main]-[com.myapp.utils.interceptor.ExceptionIntoLogInterceptor.logWrite()]: 
+---Exception Log Begin---
+Controller:com.myapp.module.kid.controller.KidController
+Method:addKidAction
+Exception Type:java.lang.ClassCastException
+Exception Details:
+java.lang.ClassCastException: java.lang.Long cannot be cast to java.lang.Integer
+	at com.myapp.bean.Kid.getCount(Kid.java:13)
+	at com.myapp.module.kid.controller.KidController.addKidAction(KidController.java:61)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:57)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:606)
+	at com.jfinal.aop.Invocation.invoke(Invocation.java:73)
+	at com.myapp.utils.interceptor.ValidateLoginStatusInterceptor.intercept(ValidateLoginStatusInterceptor.java:52)
+	at com.jfinal.aop.Invocation.invoke(Invocation.java:67)
+	at com.myapp.utils.interceptor.ExceptionIntoLogInterceptor.intercept(ExceptionIntoLogInterceptor.java:24)
+	at com.jfinal.aop.Invocation.invoke(Invocation.java:67)
+	at com.jfinal.core.ActionHandler.handle(ActionHandler.java:74)
+	at com.jfinal.ext.handler.ContextPathHandler.handle(ContextPathHandler.java:48)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:57)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:606)
+	at com.jfinal.ext.kit.Reflect.on(Reflect.java:644)
+	at com.jfinal.ext.kit.Reflect.call(Reflect.java:383)
+	at com.jfinal.ext.test.ControllerTestCase.invoke(ControllerTestCase.java:127)
+	at com.myapp.utils.test.JunitTest.addKidAction(JunitTest.java:85)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:57)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:606)
+	at org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:45)
+	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:15)
+	at org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:42)
+	at org.junit.internal.runners.statements.InvokeMethod.evaluate(InvokeMethod.java:20)
+	at org.junit.internal.runners.statements.RunBefores.evaluate(RunBefores.java:28)
+	at org.junit.runners.ParentRunner.runLeaf(ParentRunner.java:263)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:68)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:47)
+	at org.junit.runners.ParentRunner$3.run(ParentRunner.java:231)
+	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:60)
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:229)
+	at org.junit.runners.ParentRunner.access$000(ParentRunner.java:50)
+	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:222)
+	at org.junit.internal.runners.statements.RunAfters.evaluate(RunAfters.java:30)
+	at org.junit.runners.ParentRunner.run(ParentRunner.java:300)
+	at org.eclipse.jdt.internal.junit4.runner.JUnit4TestReference.run(JUnit4TestReference.java:50)
+	at org.eclipse.jdt.internal.junit.runner.TestExecution.run(TestExecution.java:38)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.runTests(RemoteTestRunner.java:459)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.runTests(RemoteTestRunner.java:675)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.run(RemoteTestRunner.java:382)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.main(RemoteTestRunner.java:192)
+
+2017-06-21 00:23:33
+[INFO]-[Thread: main]-[com.alibaba.druid.pool.DruidDataSource.init()]: {dataSource-1} inited
+
+2017-06-21 00:23:33
+[DEBUG]-[Thread: main]-[com.alibaba.druid.filter.logging.Log4jFilter.statementLog()]: {conn-10001, stmt-20000} executed. select * from `tb_equipment` where 1 = 2
+
+2017-06-21 00:23:33
+[DEBUG]-[Thread: main]-[com.alibaba.druid.filter.logging.Log4jFilter.statementLog()]: {conn-10001, stmt-20001} executed. select * from `tb_kid` where 1 = 2
+
+2017-06-21 00:23:33
+[DEBUG]-[Thread: main]-[com.alibaba.druid.filter.logging.Log4jFilter.statementLog()]: {conn-10001, stmt-20002} executed. select * from `tb_temp_record` where 1 = 2
+
+2017-06-21 00:23:33
+[DEBUG]-[Thread: main]-[com.alibaba.druid.filter.logging.Log4jFilter.statementLog()]: {conn-10001, stmt-20003} executed. select * from `tb_tip` where 1 = 2
+
+2017-06-21 00:23:33
+[DEBUG]-[Thread: main]-[com.alibaba.druid.filter.logging.Log4jFilter.statementLog()]: {conn-10001, stmt-20004} executed. select * from `tb_user` where 1 = 2
+
+2017-06-21 00:23:33
+[DEBUG]-[Thread: main]-[com.alibaba.druid.filter.logging.Log4jFilter.statementLog()]: {conn-10001, stmt-20005} executed. select * from `tb_user_auth` where 1 = 2
+
+2017-06-21 00:23:35
+[DEBUG]-[Thread: main]-[com.alibaba.druid.filter.logging.Log4jFilter.statementLog()]: {conn-10001, pstmt-20006} executed. SELECT a.*
+FROM tb_user_auth a
+WHERE a.tokenKey = '2e0dc1ed76'
+	AND a.verified = 1
+	AND EXISTS (SELECT 1
+		FROM tb_user b
+		WHERE a.userid = b.id
+			AND b.isactive = 1)
+
+2017-06-21 00:23:35
+[INFO]-[Thread: main]-[com.myapp.utils.interceptor.ValidateLoginStatusInterceptor.intercept()]: ValidateInterceptor验证通过，tokenKey为[2e0dc1ed76],tokenTime 为[2017-07-18 23:21:48.0].
+
+2017-06-21 00:23:35
+[DEBUG]-[Thread: main]-[com.alibaba.druid.filter.logging.Log4jFilter.statementLog()]: {conn-10001, pstmt-20007} executed. SELECT a.*
+FROM tb_user_auth a
+WHERE a.tokenKey = '2e0dc1ed76'
+	AND a.verified = 1
+	AND EXISTS (SELECT 1
+		FROM tb_user b
+		WHERE a.userid = b.id
+			AND b.isactive = 1)
+
+2017-06-21 00:23:37
+[DEBUG]-[Thread: main]-[com.alibaba.druid.filter.logging.Log4jFilter.statementLog()]: {conn-10001, pstmt-20008} executed. SELECT COUNT(1) AS count
+FROM tb_kid
+WHERE userid = 7
+
+2017-06-21 00:23:46
+[ERROR]-[Thread: main]-[com.myapp.utils.interceptor.ExceptionIntoLogInterceptor.logWrite()]: 
+---Exception Log Begin---
+Controller:com.myapp.module.kid.controller.KidController
+Method:addKidAction
+Exception Type:java.lang.ClassCastException
+Exception Details:
+java.lang.ClassCastException: java.lang.Long cannot be cast to java.lang.Integer
+	at com.myapp.bean.Kid.getCount(Kid.java:13)
+	at com.myapp.module.kid.controller.KidController.addKidAction(KidController.java:61)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:57)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:606)
+	at com.jfinal.aop.Invocation.invoke(Invocation.java:73)
+	at com.myapp.utils.interceptor.ValidateLoginStatusInterceptor.intercept(ValidateLoginStatusInterceptor.java:52)
+	at com.jfinal.aop.Invocation.invoke(Invocation.java:67)
+	at com.myapp.utils.interceptor.ExceptionIntoLogInterceptor.intercept(ExceptionIntoLogInterceptor.java:24)
+	at com.jfinal.aop.Invocation.invoke(Invocation.java:67)
+	at com.jfinal.core.ActionHandler.handle(ActionHandler.java:74)
+	at com.jfinal.ext.handler.ContextPathHandler.handle(ContextPathHandler.java:48)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:57)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:606)
+	at com.jfinal.ext.kit.Reflect.on(Reflect.java:644)
+	at com.jfinal.ext.kit.Reflect.call(Reflect.java:383)
+	at com.jfinal.ext.test.ControllerTestCase.invoke(ControllerTestCase.java:127)
+	at com.myapp.utils.test.JunitTest.addKidAction(JunitTest.java:85)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:57)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:606)
+	at org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:45)
+	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:15)
+	at org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:42)
+	at org.junit.internal.runners.statements.InvokeMethod.evaluate(InvokeMethod.java:20)
+	at org.junit.internal.runners.statements.RunBefores.evaluate(RunBefores.java:28)
+	at org.junit.runners.ParentRunner.runLeaf(ParentRunner.java:263)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:68)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:47)
+	at org.junit.runners.ParentRunner$3.run(ParentRunner.java:231)
+	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:60)
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:229)
+	at org.junit.runners.ParentRunner.access$000(ParentRunner.java:50)
+	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:222)
+	at org.junit.internal.runners.statements.RunAfters.evaluate(RunAfters.java:30)
+	at org.junit.runners.ParentRunner.run(ParentRunner.java:300)
+	at org.eclipse.jdt.internal.junit4.runner.JUnit4TestReference.run(JUnit4TestReference.java:50)
+	at org.eclipse.jdt.internal.junit.runner.TestExecution.run(TestExecution.java:38)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.runTests(RemoteTestRunner.java:459)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.runTests(RemoteTestRunner.java:675)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.run(RemoteTestRunner.java:382)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.main(RemoteTestRunner.java:192)
+
+2017-06-21 00:31:08
+[INFO]-[Thread: main]-[com.alibaba.druid.pool.DruidDataSource.init()]: {dataSource-1} inited
+
+2017-06-21 00:31:08
+[DEBUG]-[Thread: main]-[com.alibaba.druid.filter.logging.Log4jFilter.statementLog()]: {conn-10001, stmt-20000} executed. select * from `tb_equipment` where 1 = 2
+
+2017-06-21 00:31:08
+[DEBUG]-[Thread: main]-[com.alibaba.druid.filter.logging.Log4jFilter.statementLog()]: {conn-10001, stmt-20001} executed. select * from `tb_kid` where 1 = 2
+
+2017-06-21 00:31:08
+[DEBUG]-[Thread: main]-[com.alibaba.druid.filter.logging.Log4jFilter.statementLog()]: {conn-10001, stmt-20002} executed. select * from `tb_temp_record` where 1 = 2
+
+2017-06-21 00:31:08
+[DEBUG]-[Thread: main]-[com.alibaba.druid.filter.logging.Log4jFilter.statementLog()]: {conn-10001, stmt-20003} executed. select * from `tb_tip` where 1 = 2
+
+2017-06-21 00:31:08
+[DEBUG]-[Thread: main]-[com.alibaba.druid.filter.logging.Log4jFilter.statementLog()]: {conn-10001, stmt-20004} executed. select * from `tb_user` where 1 = 2
+
+2017-06-21 00:31:08
+[DEBUG]-[Thread: main]-[com.alibaba.druid.filter.logging.Log4jFilter.statementLog()]: {conn-10001, stmt-20005} executed. select * from `tb_user_auth` where 1 = 2
+
+2017-06-21 00:31:09
+[DEBUG]-[Thread: main]-[com.alibaba.druid.filter.logging.Log4jFilter.statementLog()]: {conn-10001, pstmt-20006} executed. SELECT a.*
+FROM tb_user_auth a
+WHERE a.tokenKey = '2e0dc1ed76'
+	AND a.verified = 1
+	AND EXISTS (SELECT 1
+		FROM tb_user b
+		WHERE a.userid = b.id
+			AND b.isactive = 1)
+
+2017-06-21 00:31:09
+[INFO]-[Thread: main]-[com.myapp.utils.interceptor.ValidateLoginStatusInterceptor.intercept()]: ValidateInterceptor验证通过，tokenKey为[2e0dc1ed76],tokenTime 为[2017-07-18 23:21:48.0].
+
+2017-06-21 00:31:09
+[DEBUG]-[Thread: main]-[com.alibaba.druid.filter.logging.Log4jFilter.statementLog()]: {conn-10001, pstmt-20007} executed. SELECT a.*
+FROM tb_user_auth a
+WHERE a.tokenKey = '2e0dc1ed76'
+	AND a.verified = 1
+	AND EXISTS (SELECT 1
+		FROM tb_user b
+		WHERE a.userid = b.id
+			AND b.isactive = 1)
+
+2017-06-21 00:31:12
+[DEBUG]-[Thread: main]-[com.alibaba.druid.filter.logging.Log4jFilter.statementLog()]: {conn-10001, pstmt-20008} executed. SELECT nickname, sex, birthday, headurl, healthIssue
+FROM tb_kid
+WHERE userid = 7
+
+2017-06-21 00:31:27
+[DEBUG]-[Thread: main]-[com.alibaba.druid.filter.logging.Log4jFilter.statementLog()]: {conn-10001, pstmt-20009} executed. INSERT INTO `tb_kid` (`birthday`, `sex`, `nickname`, `userid`, `number`
+	, `healthIssue`, `headurl`)
+VALUES ('2017-06-17', '1', '测试孩子昵称3', 7, 3
+	, '0', 'http://123.com')
+
+2017-06-21 00:31:50
+[INFO]-[Thread: main]-[com.alibaba.druid.pool.DruidDataSource.init()]: {dataSource-1} inited
+
+2017-06-21 00:31:51
+[DEBUG]-[Thread: main]-[com.alibaba.druid.filter.logging.Log4jFilter.statementLog()]: {conn-10001, stmt-20000} executed. select * from `tb_equipment` where 1 = 2
+
+2017-06-21 00:31:51
+[DEBUG]-[Thread: main]-[com.alibaba.druid.filter.logging.Log4jFilter.statementLog()]: {conn-10001, stmt-20001} executed. select * from `tb_kid` where 1 = 2
+
+2017-06-21 00:31:51
+[DEBUG]-[Thread: main]-[com.alibaba.druid.filter.logging.Log4jFilter.statementLog()]: {conn-10001, stmt-20002} executed. select * from `tb_temp_record` where 1 = 2
+
+2017-06-21 00:31:51
+[DEBUG]-[Thread: main]-[com.alibaba.druid.filter.logging.Log4jFilter.statementLog()]: {conn-10001, stmt-20003} executed. select * from `tb_tip` where 1 = 2
+
+2017-06-21 00:31:51
+[DEBUG]-[Thread: main]-[com.alibaba.druid.filter.logging.Log4jFilter.statementLog()]: {conn-10001, stmt-20004} executed. select * from `tb_user` where 1 = 2
+
+2017-06-21 00:31:51
+[DEBUG]-[Thread: main]-[com.alibaba.druid.filter.logging.Log4jFilter.statementLog()]: {conn-10001, stmt-20005} executed. select * from `tb_user_auth` where 1 = 2
+
+2017-06-21 00:31:52
+[DEBUG]-[Thread: main]-[com.alibaba.druid.filter.logging.Log4jFilter.statementLog()]: {conn-10001, pstmt-20006} executed. SELECT a.*
+FROM tb_user_auth a
+WHERE a.tokenKey = '2e0dc1ed76'
+	AND a.verified = 1
+	AND EXISTS (SELECT 1
+		FROM tb_user b
+		WHERE a.userid = b.id
+			AND b.isactive = 1)
+
+2017-06-21 00:31:52
+[INFO]-[Thread: main]-[com.myapp.utils.interceptor.ValidateLoginStatusInterceptor.intercept()]: ValidateInterceptor验证通过，tokenKey为[2e0dc1ed76],tokenTime 为[2017-07-18 23:21:48.0].
+
+2017-06-21 00:31:52
+[DEBUG]-[Thread: main]-[com.alibaba.druid.filter.logging.Log4jFilter.statementLog()]: {conn-10001, pstmt-20007} executed. SELECT a.*
+FROM tb_user_auth a
+WHERE a.tokenKey = '2e0dc1ed76'
+	AND a.verified = 1
+	AND EXISTS (SELECT 1
+		FROM tb_user b
+		WHERE a.userid = b.id
+			AND b.isactive = 1)
+
+2017-06-21 00:31:52
+[DEBUG]-[Thread: main]-[com.alibaba.druid.filter.logging.Log4jFilter.statementLog()]: {conn-10001, pstmt-20008} executed. SELECT nickname, sex, birthday, headurl, healthIssue
+FROM tb_kid
+WHERE userid = 7
+
+2017-06-21 00:31:52
+[DEBUG]-[Thread: main]-[com.alibaba.druid.filter.logging.Log4jFilter.statementLog()]: {conn-10001, pstmt-20009} executed. INSERT INTO `tb_kid` (`birthday`, `sex`, `nickname`, `userid`, `number`
+	, `healthIssue`, `headurl`)
+VALUES ('2017-06-17', '1', '测试孩子昵称3', 7, 1
+	, '0', 'http://123.com')
+
+2017-06-21 00:47:43
+[INFO]-[Thread: main]-[com.alibaba.druid.pool.DruidDataSource.init()]: {dataSource-1} inited
+
+2017-06-21 00:47:43
+[DEBUG]-[Thread: main]-[com.alibaba.druid.filter.logging.Log4jFilter.statementLog()]: {conn-10001, stmt-20000} executed. select * from `tb_equipment` where 1 = 2
+
+2017-06-21 00:47:43
+[DEBUG]-[Thread: main]-[com.alibaba.druid.filter.logging.Log4jFilter.statementLog()]: {conn-10001, stmt-20001} executed. select * from `tb_kid` where 1 = 2
+
+2017-06-21 00:47:43
+[DEBUG]-[Thread: main]-[com.alibaba.druid.filter.logging.Log4jFilter.statementLog()]: {conn-10001, stmt-20002} executed. select * from `tb_temp_record` where 1 = 2
+
+2017-06-21 00:47:43
+[DEBUG]-[Thread: main]-[com.alibaba.druid.filter.logging.Log4jFilter.statementLog()]: {conn-10001, stmt-20003} executed. select * from `tb_tip` where 1 = 2
+
+2017-06-21 00:47:43
+[DEBUG]-[Thread: main]-[com.alibaba.druid.filter.logging.Log4jFilter.statementLog()]: {conn-10001, stmt-20004} executed. select * from `tb_user` where 1 = 2
+
+2017-06-21 00:47:43
+[DEBUG]-[Thread: main]-[com.alibaba.druid.filter.logging.Log4jFilter.statementLog()]: {conn-10001, stmt-20005} executed. select * from `tb_user_auth` where 1 = 2
+
+2017-06-21 00:47:45
+[DEBUG]-[Thread: main]-[com.alibaba.druid.filter.logging.Log4jFilter.statementLog()]: {conn-10001, pstmt-20006} executed. SELECT a.*
+FROM tb_user_auth a
+WHERE a.tokenKey = '2e0dc1ed76'
+	AND a.verified = 1
+	AND EXISTS (SELECT 1
+		FROM tb_user b
+		WHERE a.userid = b.id
+			AND b.isactive = 1)
+
+2017-06-21 00:47:45
+[INFO]-[Thread: main]-[com.myapp.utils.interceptor.ValidateLoginStatusInterceptor.intercept()]: ValidateInterceptor验证通过，tokenKey为[2e0dc1ed76],tokenTime 为[2017-07-18 23:21:48.0].
+
+2017-06-21 00:47:45
+[DEBUG]-[Thread: main]-[com.alibaba.druid.filter.logging.Log4jFilter.statementLog()]: {conn-10001, pstmt-20007} executed. SELECT a.*
+FROM tb_user_auth a
+WHERE a.tokenKey = '2e0dc1ed76'
+	AND a.verified = 1
+	AND EXISTS (SELECT 1
+		FROM tb_user b
+		WHERE a.userid = b.id
+			AND b.isactive = 1)
+
+2017-06-21 00:47:45
+[DEBUG]-[Thread: main]-[com.alibaba.druid.filter.logging.Log4jFilter.statementLog()]: {conn-10001, pstmt-20008} executed. SELECT nickname, sex, birthday, headurl, healthIssue
+	, number
+FROM tb_kid
+WHERE userid = 7
+ORDER BY number
+
+2017-06-21 00:48:00
+[DEBUG]-[Thread: main]-[com.alibaba.druid.filter.logging.Log4jFilter.statementLog()]: {conn-10001, pstmt-20009} executed. SELECT *
+FROM tb_equipment
+WHERE kidid = NULL
+
+2017-06-21 00:48:59
+[INFO]-[Thread: main]-[com.alibaba.druid.pool.DruidDataSource.init()]: {dataSource-1} inited
+
+2017-06-21 00:48:59
+[DEBUG]-[Thread: main]-[com.alibaba.druid.filter.logging.Log4jFilter.statementLog()]: {conn-10001, stmt-20000} executed. select * from `tb_equipment` where 1 = 2
+
+2017-06-21 00:48:59
+[DEBUG]-[Thread: main]-[com.alibaba.druid.filter.logging.Log4jFilter.statementLog()]: {conn-10001, stmt-20001} executed. select * from `tb_kid` where 1 = 2
+
+2017-06-21 00:48:59
+[DEBUG]-[Thread: main]-[com.alibaba.druid.filter.logging.Log4jFilter.statementLog()]: {conn-10001, stmt-20002} executed. select * from `tb_temp_record` where 1 = 2
+
+2017-06-21 00:48:59
+[DEBUG]-[Thread: main]-[com.alibaba.druid.filter.logging.Log4jFilter.statementLog()]: {conn-10001, stmt-20003} executed. select * from `tb_tip` where 1 = 2
+
+2017-06-21 00:48:59
+[DEBUG]-[Thread: main]-[com.alibaba.druid.filter.logging.Log4jFilter.statementLog()]: {conn-10001, stmt-20004} executed. select * from `tb_user` where 1 = 2
+
+2017-06-21 00:48:59
+[DEBUG]-[Thread: main]-[com.alibaba.druid.filter.logging.Log4jFilter.statementLog()]: {conn-10001, stmt-20005} executed. select * from `tb_user_auth` where 1 = 2
+
+2017-06-21 00:49:01
+[DEBUG]-[Thread: main]-[com.alibaba.druid.filter.logging.Log4jFilter.statementLog()]: {conn-10001, pstmt-20006} executed. SELECT a.*
+FROM tb_user_auth a
+WHERE a.tokenKey = '2e0dc1ed76'
+	AND a.verified = 1
+	AND EXISTS (SELECT 1
+		FROM tb_user b
+		WHERE a.userid = b.id
+			AND b.isactive = 1)
+
+2017-06-21 00:49:01
+[INFO]-[Thread: main]-[com.myapp.utils.interceptor.ValidateLoginStatusInterceptor.intercept()]: ValidateInterceptor验证通过，tokenKey为[2e0dc1ed76],tokenTime 为[2017-07-18 23:21:48.0].
+
+2017-06-21 00:49:01
+[DEBUG]-[Thread: main]-[com.alibaba.druid.filter.logging.Log4jFilter.statementLog()]: {conn-10001, pstmt-20007} executed. SELECT a.*
+FROM tb_user_auth a
+WHERE a.tokenKey = '2e0dc1ed76'
+	AND a.verified = 1
+	AND EXISTS (SELECT 1
+		FROM tb_user b
+		WHERE a.userid = b.id
+			AND b.isactive = 1)
+
+2017-06-21 00:49:01
+[DEBUG]-[Thread: main]-[com.alibaba.druid.filter.logging.Log4jFilter.statementLog()]: {conn-10001, pstmt-20008} executed. SELECT id, nickname, sex, birthday, headurl
+	, healthIssue, number
+FROM tb_kid
+WHERE userid = 7
+ORDER BY number
+
+2017-06-21 00:49:47
+[DEBUG]-[Thread: main]-[com.alibaba.druid.filter.logging.Log4jFilter.statementLog()]: {conn-10001, pstmt-20009} executed. SELECT *
+FROM tb_equipment
+WHERE kidid = 5
+
+2017-06-21 00:53:01
+[INFO]-[Thread: main]-[com.alibaba.druid.pool.DruidDataSource.init()]: {dataSource-1} inited
+
+2017-06-21 00:53:01
+[DEBUG]-[Thread: main]-[com.alibaba.druid.filter.logging.Log4jFilter.statementLog()]: {conn-10001, stmt-20000} executed. select * from `tb_equipment` where 1 = 2
+
+2017-06-21 00:53:01
+[DEBUG]-[Thread: main]-[com.alibaba.druid.filter.logging.Log4jFilter.statementLog()]: {conn-10001, stmt-20001} executed. select * from `tb_kid` where 1 = 2
+
+2017-06-21 00:53:01
+[DEBUG]-[Thread: main]-[com.alibaba.druid.filter.logging.Log4jFilter.statementLog()]: {conn-10001, stmt-20002} executed. select * from `tb_temp_record` where 1 = 2
+
+2017-06-21 00:53:01
+[DEBUG]-[Thread: main]-[com.alibaba.druid.filter.logging.Log4jFilter.statementLog()]: {conn-10001, stmt-20003} executed. select * from `tb_tip` where 1 = 2
+
+2017-06-21 00:53:01
+[DEBUG]-[Thread: main]-[com.alibaba.druid.filter.logging.Log4jFilter.statementLog()]: {conn-10001, stmt-20004} executed. select * from `tb_user` where 1 = 2
+
+2017-06-21 00:53:01
+[DEBUG]-[Thread: main]-[com.alibaba.druid.filter.logging.Log4jFilter.statementLog()]: {conn-10001, stmt-20005} executed. select * from `tb_user_auth` where 1 = 2
+
+2017-06-21 00:53:03
+[DEBUG]-[Thread: main]-[com.alibaba.druid.filter.logging.Log4jFilter.statementLog()]: {conn-10001, pstmt-20006} executed. SELECT a.*
+FROM tb_user_auth a
+WHERE a.tokenKey = '2e0dc1ed76'
+	AND a.verified = 1
+	AND EXISTS (SELECT 1
+		FROM tb_user b
+		WHERE a.userid = b.id
+			AND b.isactive = 1)
+
+2017-06-21 00:53:03
+[INFO]-[Thread: main]-[com.myapp.utils.interceptor.ValidateLoginStatusInterceptor.intercept()]: ValidateInterceptor验证通过，tokenKey为[2e0dc1ed76],tokenTime 为[2017-07-18 23:21:48.0].
+
+2017-06-21 00:53:03
+[DEBUG]-[Thread: main]-[com.alibaba.druid.filter.logging.Log4jFilter.statementLog()]: {conn-10001, pstmt-20007} executed. SELECT a.*
+FROM tb_user_auth a
+WHERE a.tokenKey = '2e0dc1ed76'
+	AND a.verified = 1
+	AND EXISTS (SELECT 1
+		FROM tb_user b
+		WHERE a.userid = b.id
+			AND b.isactive = 1)
+
+2017-06-21 00:53:03
+[DEBUG]-[Thread: main]-[com.alibaba.druid.filter.logging.Log4jFilter.statementLog()]: {conn-10001, pstmt-20008} executed. SELECT id, nickname, sex, birthday, headurl
+	, healthIssue, number
+FROM tb_kid
+WHERE userid = 7
+ORDER BY number
+
+2017-06-21 00:53:03
+[DEBUG]-[Thread: main]-[com.alibaba.druid.filter.logging.Log4jFilter.statementLog()]: {conn-10001, pstmt-20009} executed. SELECT *
+FROM tb_equipment
+WHERE kidid = 5
+
+2017-06-21 00:53:03
+[ERROR]-[Thread: main]-[com.myapp.utils.interceptor.ExceptionIntoLogInterceptor.logWrite()]: 
+---Exception Log Begin---
+Controller:com.myapp.module.kid.controller.KidController
+Method:findKidListAction
+Exception Type:com.jfinal.plugin.activerecord.ActiveRecordException
+Exception Details:
+com.jfinal.plugin.activerecord.ActiveRecordException: The attribute name does not exist: equipNumber
+	at com.jfinal.plugin.activerecord.Model.set(Model.java:135)
+	at com.myapp.bean.Kid.setEquipmentNumber(Kid.java:13)
+	at com.myapp.module.kid.controller.KidController.findKidListAction(KidController.java:201)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:57)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:606)
+	at com.jfinal.aop.Invocation.invoke(Invocation.java:73)
+	at com.myapp.utils.interceptor.ValidateLoginStatusInterceptor.intercept(ValidateLoginStatusInterceptor.java:52)
+	at com.jfinal.aop.Invocation.invoke(Invocation.java:67)
+	at com.myapp.utils.interceptor.ExceptionIntoLogInterceptor.intercept(ExceptionIntoLogInterceptor.java:24)
+	at com.jfinal.aop.Invocation.invoke(Invocation.java:67)
+	at com.jfinal.core.ActionHandler.handle(ActionHandler.java:74)
+	at com.jfinal.ext.handler.ContextPathHandler.handle(ContextPathHandler.java:48)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:57)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:606)
+	at com.jfinal.ext.kit.Reflect.on(Reflect.java:644)
+	at com.jfinal.ext.kit.Reflect.call(Reflect.java:383)
+	at com.jfinal.ext.test.ControllerTestCase.invoke(ControllerTestCase.java:127)
+	at com.myapp.utils.test.JunitTest.findKidListAction(JunitTest.java:102)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:57)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:606)
+	at org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:45)
+	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:15)
+	at org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:42)
+	at org.junit.internal.runners.statements.InvokeMethod.evaluate(InvokeMethod.java:20)
+	at org.junit.internal.runners.statements.RunBefores.evaluate(RunBefores.java:28)
+	at org.junit.runners.ParentRunner.runLeaf(ParentRunner.java:263)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:68)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:47)
+	at org.junit.runners.ParentRunner$3.run(ParentRunner.java:231)
+	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:60)
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:229)
+	at org.junit.runners.ParentRunner.access$000(ParentRunner.java:50)
+	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:222)
+	at org.junit.internal.runners.statements.RunAfters.evaluate(RunAfters.java:30)
+	at org.junit.runners.ParentRunner.run(ParentRunner.java:300)
+	at org.eclipse.jdt.internal.junit4.runner.JUnit4TestReference.run(JUnit4TestReference.java:50)
+	at org.eclipse.jdt.internal.junit.runner.TestExecution.run(TestExecution.java:38)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.runTests(RemoteTestRunner.java:459)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.runTests(RemoteTestRunner.java:675)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.run(RemoteTestRunner.java:382)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.main(RemoteTestRunner.java:192)
+
+2017-06-21 00:57:18
+[INFO]-[Thread: main]-[com.alibaba.druid.pool.DruidDataSource.init()]: {dataSource-1} inited
+
+2017-06-21 00:57:18
+[DEBUG]-[Thread: main]-[com.alibaba.druid.filter.logging.Log4jFilter.statementLog()]: {conn-10001, stmt-20000} executed. select * from `tb_equipment` where 1 = 2
+
+2017-06-21 00:57:18
+[DEBUG]-[Thread: main]-[com.alibaba.druid.filter.logging.Log4jFilter.statementLog()]: {conn-10001, stmt-20001} executed. select * from `tb_kid` where 1 = 2
+
+2017-06-21 00:57:18
+[DEBUG]-[Thread: main]-[com.alibaba.druid.filter.logging.Log4jFilter.statementLog()]: {conn-10001, stmt-20002} executed. select * from `tb_temp_record` where 1 = 2
+
+2017-06-21 00:57:18
+[DEBUG]-[Thread: main]-[com.alibaba.druid.filter.logging.Log4jFilter.statementLog()]: {conn-10001, stmt-20003} executed. select * from `tb_tip` where 1 = 2
+
+2017-06-21 00:57:18
+[DEBUG]-[Thread: main]-[com.alibaba.druid.filter.logging.Log4jFilter.statementLog()]: {conn-10001, stmt-20004} executed. select * from `tb_user` where 1 = 2
+
+2017-06-21 00:57:18
+[DEBUG]-[Thread: main]-[com.alibaba.druid.filter.logging.Log4jFilter.statementLog()]: {conn-10001, stmt-20005} executed. select * from `tb_user_auth` where 1 = 2
+
+2017-06-21 00:57:20
+[DEBUG]-[Thread: main]-[com.alibaba.druid.filter.logging.Log4jFilter.statementLog()]: {conn-10001, pstmt-20006} executed. SELECT a.*
+FROM tb_user_auth a
+WHERE a.tokenKey = '2e0dc1ed76'
+	AND a.verified = 1
+	AND EXISTS (SELECT 1
+		FROM tb_user b
+		WHERE a.userid = b.id
+			AND b.isactive = 1)
+
+2017-06-21 00:57:20
+[INFO]-[Thread: main]-[com.myapp.utils.interceptor.ValidateLoginStatusInterceptor.intercept()]: ValidateInterceptor验证通过，tokenKey为[2e0dc1ed76],tokenTime 为[2017-07-18 23:21:48.0].
+
+2017-06-21 00:57:20
+[DEBUG]-[Thread: main]-[com.alibaba.druid.filter.logging.Log4jFilter.statementLog()]: {conn-10001, pstmt-20007} executed. SELECT a.*
+FROM tb_user_auth a
+WHERE a.tokenKey = '2e0dc1ed76'
+	AND a.verified = 1
+	AND EXISTS (SELECT 1
+		FROM tb_user b
+		WHERE a.userid = b.id
+			AND b.isactive = 1)
+
+2017-06-21 00:57:20
+[DEBUG]-[Thread: main]-[com.alibaba.druid.filter.logging.Log4jFilter.statementLog()]: {conn-10001, pstmt-20008} executed. SELECT id, nickname, sex, birthday, headurl
+	, healthIssue, number
+FROM tb_kid
+WHERE userid = 7
+ORDER BY number
+
+2017-06-21 00:57:20
+[DEBUG]-[Thread: main]-[com.alibaba.druid.filter.logging.Log4jFilter.statementLog()]: {conn-10001, pstmt-20009} executed. SELECT *
+FROM tb_equipment
+WHERE kidid = 5
