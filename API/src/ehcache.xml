@@ -1249,8 +1249,8 @@ Here is an example of CacheManager level resource tuning, which will use up to 4
                http://wuyechun.iteye.com/blog/1749379
     -->
     <!-- 监控平台 -->
-	<cacheManagerPeerListenerFactory
+<!-- 	<cacheManagerPeerListenerFactory
 		class="org.terracotta.ehcachedx.monitor.probe.ProbePeerListenerFactory"
-		properties="monitorAddress=localhost, monitorPort=9889" />     
+		properties="monitorAddress=localhost, monitorPort=9889" />    -->  
      
 </ehcache>
