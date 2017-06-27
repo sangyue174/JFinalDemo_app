@@ -41,7 +41,7 @@ public class AuthCodeController extends Controller {
 			return;
 		}
 		// 校验手机号是否合法
-		if (!PhoneFormatCheckUtils.isChinaPhoneLegal(identifier)) {
+		if (!PhoneFormatCheckUtils.isPhone(identifier)) {
 			this.renderJson(new DataResponse(LevelEnum.ERROR, "手机号不合法，请修改", actionKey));
 			return;
 		}

@@ -59,7 +59,7 @@ public class UserController extends Controller {
 			return;
 		}
 		// 校验手机号是否合法
-		if(!PhoneFormatCheckUtils.isChinaPhoneLegal(identifier)){
+		if(!PhoneFormatCheckUtils.isPhone(identifier)){
 			this.renderJson(new DataResponse(LevelEnum.ERROR, "手机号不合法，请修改", actionKey));
 			return;
 		}
@@ -135,7 +135,7 @@ public class UserController extends Controller {
 		
 		if (IdentityTypeEnum.PHONE.getValue().equals(identityType)) {
 			// 校验手机号是否合法
-			if(!PhoneFormatCheckUtils.isChinaPhoneLegal(identifier)){
+			if(!PhoneFormatCheckUtils.isPhone(identifier)){
 				this.renderJson(new DataResponse(LevelEnum.ERROR, "手机号不合法，请修改", actionKey));
 				return;
 			}
