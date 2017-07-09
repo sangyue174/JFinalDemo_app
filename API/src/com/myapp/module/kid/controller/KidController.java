@@ -1,12 +1,17 @@
 package com.myapp.module.kid.controller;
 
+import java.io.File;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
+import org.apache.commons.io.FilenameUtils;
 import org.apache.commons.lang.StringUtils;
 
 import com.jfinal.aop.Clear;
 import com.jfinal.core.Controller;
+import com.jfinal.kit.PropKit;
 import com.jfinal.upload.UploadFile;
 import com.myapp.bean.Kid;
 import com.myapp.bean.UserAuth;
@@ -87,22 +92,25 @@ public class KidController extends Controller {
 	public void uploadKidImageAction() {
 		UploadFile imageFile = getFile();
 		String actionKey = getAttr("actionKey").toString();// 获取actionKey
-		String headurl = "";
 		if(imageFile == null){
 			this.renderJson(new DataResponse(LevelEnum.ERROR, "上传孩子头像失败，请重试", actionKey));
 			return;
 		}
-		if (imageFile.getUploadPath().endsWith("/")) {
-			headurl = imageFile.getUploadPath() + imageFile.getOriginalFileName();// 头像url
-		} else {
-			headurl = imageFile.getUploadPath() + "/" + imageFile.getOriginalFileName();// 头像url
-		}
-		if(StringUtils.isEmpty(headurl)){
-			this.renderJson(new DataResponse(LevelEnum.ERROR, "上传孩子头像失败，请重试", actionKey));
+		// 重命名文件名
+		try {
+			String filePath = imageFile.getUploadPath() + "/" + imageFile.getFileName();
+			String imageNewName = FilenameUtils.getBaseName(filePath) + System.currentTimeMillis() + "." + FilenameUtils.getExtension(filePath);
+			imageFile.getFile().renameTo(new File(imageFile.getUploadPath() + "/" + imageNewName));
+			Map<String,Object> resultMap = new HashMap<String, Object>();
+			resultMap.put("imageNewName", imageNewName);
+			resultMap.put("imagePath", PropKit.get("imagePath"));
+			this.renderJson(new DataResponse(LevelEnum.SUCCESS, "上传孩子头像成功", actionKey, resultMap));
 			return;
+		} catch (Exception e) {
+			e.printStackTrace();
+			this.renderJson(new DataResponse(LevelEnum.ERROR, "上传孩子头像失败，请重试", actionKey));
+			throw e;
 		}
-		this.renderJson(new DataResponse(LevelEnum.SUCCESS, "上传孩子头像成功", actionKey, headurl));
-		return;
 	}
 
 	/**

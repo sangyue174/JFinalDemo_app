@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50622
 File Encoding         : 65001
 
-Date: 2017-06-18 18:46:52
+Date: 2017-06-23 16:46:23
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -51,13 +51,14 @@ CREATE TABLE `tb_kid` (
   `birthday` date DEFAULT NULL COMMENT '生日',
   `headurl` text COMMENT '头像url',
   `healthIssue` varchar(5) DEFAULT '0' COMMENT '健康问题(0:没有1:有)',
+  `number` int(10) DEFAULT NULL COMMENT '序号',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of tb_kid
 -- ----------------------------
-INSERT INTO `tb_kid` VALUES ('1', '7', '测试孩子昵称2', '1', '2016-06-17', 'http://1234.com', '1');
+INSERT INTO `tb_kid` VALUES ('1', '7', '测试孩子昵称2', '1', '2016-06-17', 'http://1234.com', '1', '1');
 
 -- ----------------------------
 -- Table structure for tb_temp_record

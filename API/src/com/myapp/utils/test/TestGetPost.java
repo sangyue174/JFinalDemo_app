@@ -131,7 +131,7 @@ public class TestGetPost {
 	
 	public static void upload(){  
         List<String> list  = new ArrayList<String>();  //要上传的文件名,如：d:\haha.doc.你要实现自己的业务。我这里就是一个空list.
-        list.add("E:/file/QQ图片20170311022435.jpg");
+        list.add("D:/file/图片test.gif");
         try {  
             String BOUNDARY = "---------7d4a6d158c9"; // 定义数据分隔线  
             URL url = new URL("http://localhost:8080/API/kid/uploadKidImageAction");  
