@@ -134,7 +134,8 @@ public class TestGetPost {
         list.add("D:/file/图片test.gif");
         try {  
             String BOUNDARY = "---------7d4a6d158c9"; // 定义数据分隔线  
-            URL url = new URL("http://localhost:8080/API/kid/uploadKidImageAction");  
+//            URL url = new URL("http://localhost:8080/API/kid/uploadKidImageAction");
+            URL url = new URL("http://47.93.29.50:8001/API/kid/uploadKidImageAction");
             HttpURLConnection conn = (HttpURLConnection) url.openConnection();  
             // 发送POST请求必须设置如下两行  
             conn.setDoOutput(true);  
