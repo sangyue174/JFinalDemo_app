@@ -1,10 +1,15 @@
 package com.myapp.utils.test;
 
-import java.lang.reflect.Field;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.concurrent.BlockingQueue;
+import java.util.concurrent.LinkedBlockingQueue;
+import java.util.concurrent.ThreadPoolExecutor;
+import java.util.concurrent.TimeUnit;
 
 import org.junit.Test;
 
-import com.jfinal.ext.kit.Reflect;
 import com.jfinal.ext.test.ControllerTestCase;
 import com.myapp.bean.User;
 import com.myapp.config.MyAppConfig;
@@ -147,20 +152,20 @@ public class JunitTest extends ControllerTestCase<MyAppConfig> {
 	
 	public static void main(String[] args) {
 		try {
-			JunitTest jnuit = new JunitTest();
-			Class clazz = jnuit.getClass();
-			Field field1 = clazz.getDeclaredField("str");
+//			JunitTest jnuit = new JunitTest();
+//			Class clazz = jnuit.getClass();
+//			Field field1 = clazz.getDeclaredField("str");
 //			System.out.println(field1);
 //			System.out.println(field1.get(jnuit));
 //			field1.set(jnuit, 123);
 //			Reflect.on(field1.get(jnuit));
 			
-			user = new User();
-			user.setId(123);
-			user.setIsactive("1");
-			Field field3 = clazz.getDeclaredField("user");
-			System.out.println(field3.get(jnuit));
-			Reflect.on(field3.get(jnuit));
+//			user = new User();
+//			user.setId(123);
+//			user.setIsactive("1");
+//			Field field3 = clazz.getDeclaredField("user");
+//			System.out.println(field3.get(jnuit));
+//			Reflect.on(field3.get(jnuit));
 			
 //			Method method1 = clazz.getDeclaredMethod("test", String.class);
 //			System.out.println(method1.invoke(jnuit, "sang"));
@@ -180,8 +185,60 @@ public class JunitTest extends ControllerTestCase<MyAppConfig> {
 //				Object o = getMethod.invoke(jnuit);// 执行get方法返回一个Object
 //				System.out.println(o);
 //			}
+
+			final BlockingQueue<Integer> queue = new LinkedBlockingQueue<Integer>(  
+		            100); 
+			final ThreadPoolExecutor threadPool = new ThreadPoolExecutor(6, 6,
+					0L, TimeUnit.MILLISECONDS, new LinkedBlockingQueue<Runnable>());
+//			Timer terminateFlagMonitor = createTerminateFlagMonitor(threadPool);
+			List<Integer> list = new ArrayList<Integer>(Arrays.asList(1, 2, 3, 4, 5, 6, 7, 8, 9, 10));
+			for (final Integer i : list) {
+//				if (threadPool.isShutdown()) {
+//					break;
+//				}
+				threadPool.execute(new Runnable() {
+					@Override
+					public void run() {
+						if (i > 5) {
+							System.out.println(Thread.currentThread() + "aaa" + i);
+							try {
+								queue.put(i);
+								Thread.sleep(1000);
+							} catch (InterruptedException e) {
+								// TODO Auto-generated catch block
+								e.printStackTrace();
+							}
+							return;
+						}
+						System.out.println(Thread.currentThread() + "bbb" + i);
+					}
+
+				});
+			}
+			while(true){
+				System.out.println("queue value is "+queue.take());
+				if(queue.isEmpty()){
+					break;
+				}
+			}
+			threadPool.shutdown();
+			while (!threadPool.isTerminated()) {
+				try {
+					Thread.sleep(1000);
+				} catch (final InterruptedException e) {
+					Thread.currentThread().interrupt();
+				}
+			}
+			System.out.println(123132);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
+	
+	public static void ss(int i){
+		if(i <= 5){
+			return;
+		}
+	}
+	
 }
