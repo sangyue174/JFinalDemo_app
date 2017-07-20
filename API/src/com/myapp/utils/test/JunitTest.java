@@ -1,18 +1,26 @@
 package com.myapp.utils.test;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.concurrent.BlockingQueue;
+import java.util.concurrent.Callable;
 import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 
 import org.junit.Test;
 
+import com.google.common.base.Predicates;
 import com.jfinal.ext.test.ControllerTestCase;
 import com.myapp.bean.User;
 import com.myapp.config.MyAppConfig;
+
+import fr.free.jnizet.retry.Retryer;
+import fr.free.jnizet.retry.RetryerBuilder;
+import fr.free.jnizet.retry.StopStrategies;
+import fr.free.jnizet.retry.WaitStrategies;
 
 public class JunitTest extends ControllerTestCase<MyAppConfig> {
 	private int i = 11;
@@ -188,57 +196,92 @@ public class JunitTest extends ControllerTestCase<MyAppConfig> {
 
 			final BlockingQueue<Integer> queue = new LinkedBlockingQueue<Integer>(  
 		            100); 
+			
 			final ThreadPoolExecutor threadPool = new ThreadPoolExecutor(6, 6,
 					0L, TimeUnit.MILLISECONDS, new LinkedBlockingQueue<Runnable>());
-//			Timer terminateFlagMonitor = createTerminateFlagMonitor(threadPool);
 			List<Integer> list = new ArrayList<Integer>(Arrays.asList(1, 2, 3, 4, 5, 6, 7, 8, 9, 10));
+			Thread t = new Thread(new Runnable(){
+				volatile boolean stopFlag = false;
+				@Override
+				public void run() {
+					while(!stopFlag){
+						try {
+							Thread.sleep(100);
+							Integer m = queue.poll(1000, TimeUnit.MILLISECONDS);
+							if(m != null){
+								System.out.println("queue value is "+m);
+							}
+						} catch (InterruptedException e) {
+							// TODO Auto-generated catch block
+							System.out.println("Thread are interrupted");
+							stopFlag = true;
+						}
+					}
+				}
+			});
+			t.start();
+			
 			for (final Integer i : list) {
-//				if (threadPool.isShutdown()) {
-//					break;
-//				}
+				if (threadPool.isShutdown()) {
+					break;
+				}
 				threadPool.execute(new Runnable() {
 					@Override
 					public void run() {
-						if (i > 5) {
-							System.out.println(Thread.currentThread() + "aaa" + i);
-							try {
-								queue.put(i);
-								Thread.sleep(1000);
-							} catch (InterruptedException e) {
-								// TODO Auto-generated catch block
-								e.printStackTrace();
-							}
-							return;
+						System.out.println(Thread.currentThread() + "aaa" + i);
+						try {
+							queue.put(i);
+							Thread.sleep(200);
+						} catch (InterruptedException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
 						}
-						System.out.println(Thread.currentThread() + "bbb" + i);
+						return;
 					}
-
 				});
 			}
-			while(true){
-				System.out.println("queue value is "+queue.take());
-				if(queue.isEmpty()){
-					break;
-				}
-			}
+		
 			threadPool.shutdown();
 			while (!threadPool.isTerminated()) {
 				try {
-					Thread.sleep(1000);
+					Thread.sleep(200);
 				} catch (final InterruptedException e) {
 					Thread.currentThread().interrupt();
 				}
 			}
-			System.out.println(123132);
+			while(true){
+				if(queue.size() == 0){
+					t.interrupt();
+					break;
+				}
+			}
+			boolean retryFlag = testRetry();
+			System.out.println("finished" + retryFlag);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
 	
-	public static void ss(int i){
-		if(i <= 5){
-			return;
-		}
-	}
+	public static boolean testRetry()  
+	{  
+	    Retryer<Boolean> retryer = RetryerBuilder.<Boolean>newBuilder()  
+	            .retryIfResult(Predicates.equalTo(false)) // 返回false时重试  
+	            .retryIfExceptionOfType(IOException.class) // 抛出IOException时重试  
+	            .withWaitStrategy(WaitStrategies.fixedWait(2000, TimeUnit.MILLISECONDS)) // 200ms后重试  
+	            .withStopStrategy(StopStrategies.stopAfterAttempt(3)) // 重试3次后停止  
+	            .build();  
+	    try {  
+	        return retryer.call(new Callable<Boolean>() {  
+	  
+	            @Override  
+	            public Boolean call() throws Exception {
+	            	System.out.println("return true retry");
+	                return false;  
+	            }  
+	        });  
+	    } catch (Exception e) {  
+	        return false;  
+	    }  
+	} 
 	
 }
