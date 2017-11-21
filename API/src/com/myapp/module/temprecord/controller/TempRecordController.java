@@ -1,5 +1,6 @@
 package com.myapp.module.temprecord.controller;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
@@ -8,11 +9,19 @@ import java.util.Map;
 
 import org.apache.commons.lang.StringUtils;
 
+import com.alibaba.fastjson.JSONArray;
 import com.jfinal.core.Controller;
+import com.jfinal.log.Log4jLog;
+import com.jfinal.plugin.activerecord.Db;
 import com.myapp.bean.Equipment;
+import com.myapp.bean.Kid;
 import com.myapp.bean.TempRecord;
+import com.myapp.bean.UserAuth;
 import com.myapp.module.equipment.service.EquipmentService;
+import com.myapp.module.kid.service.KidService;
 import com.myapp.module.temprecord.service.TempRecordService;
+import com.myapp.module.user.service.UserService;
+import com.myapp.utils.DateStyle;
 import com.myapp.utils.DateUtil;
 import com.myapp.utils.response.DataResponse;
 import com.myapp.utils.response.LevelEnum;
@@ -25,6 +34,9 @@ import com.myapp.utils.response.LevelEnum;
  * @version V1.0
  */
 public class TempRecordController extends Controller {
+	private static final Log4jLog LOG = Log4jLog.getLog(TempRecordController.class);
+	private final String TIME = "time";
+	private final String TEMP = "temp";
 	/**
 	 * 查询温度趋势图
 	 * @title: findTempRecordChartAction
@@ -91,6 +103,80 @@ public class TempRecordController extends Controller {
 			recordList.add(DateUtil.DateToString(tempRecord.getRecordTime(), "yyyyMMdd"));
 		}
 		this.renderJson(new DataResponse(LevelEnum.SUCCESS, "查询成功", actionKey, recordList));
+		return;
+	}
+	
+	/**
+	 * 新增当前设备温度记录
+	 * @title: addTempRecordsAction
+	 * @author sangyue
+	 * @date Nov 16, 2017 6:11:54 PM 
+	 * @version V1.0
+	 */
+	@SuppressWarnings({ "unchecked", "rawtypes" })
+	public void addTempRecordsAction() {
+		String actionKey = getAttr("actionKey").toString();// 获取actionKey
+		String tokenKey = getPara("tokenKey");// 获取actionKey
+		String number = getPara("number");// 设备编号
+		int kidid = getParaToInt("kidid");// 孩子id
+		String records = getPara("records");// 温度记录[{"time":"yyyy-MM-dd HH:mm:ss","temp":"36.6"},{"time":"yyyy-MM-dd HH:mm:ss","temp":"37.6"}]
+		if (StringUtils.isEmpty(number)) {
+			this.renderJson(new DataResponse(LevelEnum.ERROR, "设备编号不可为空，请填写", actionKey));
+			return;
+		}
+		if (StringUtils.isEmpty(records)) {
+			this.renderJson(new DataResponse(LevelEnum.ERROR, "温度记录不可为空，请填写", actionKey));
+			return;
+		}
+		// 校验是否存在该设备
+		Equipment equipment = EquipmentService.findEquipmentByNumber(number);
+		if (equipment == null) {
+			this.renderJson(new DataResponse(LevelEnum.ERROR, "该设备不存在，设备编号[" + number + "]，请联系管理员", actionKey));
+			return;
+		}
+		String isactive = equipment.getIsactive();// 是否有效
+		int equipid = equipment.getId();// 获取设备id
+		if("0".equals(isactive)){
+			this.renderJson(new DataResponse(LevelEnum.ERROR, "当前孩子没有绑定有效设备，设备编号[" + number + "]，请先添加设备", actionKey));
+			return;
+		}
+		
+		// 根据tokenKey查询相关用户信息
+		UserAuth userAuth = UserService.findUserAuthByTokenKey(tokenKey);
+		if (userAuth == null) {
+			this.renderJson(new DataResponse(LevelEnum.ERROR, "未查询到当前tokenKey[" + tokenKey + "]用户，请重试", actionKey));
+			return;
+		}
+		int userid = userAuth.getUserid();
+		
+		// 查询当前用户下是否包含此孩子
+		Kid kid = KidService.findKidByUserAndId(kidid, userid);
+		if(kid == null){
+			this.renderJson(new DataResponse(LevelEnum.ERROR, "未查询到当前tokenKey[" + tokenKey + "]相关的孩子信息，请重试", actionKey));
+			return;
+		}
+		
+		List<Map> recordsList = JSONArray.parseArray(records, Map.class);
+		if(recordsList.size() == 0){
+			this.renderJson(new DataResponse(LevelEnum.ERROR, "温度记录不可为空，请填写", actionKey));
+			return;
+		}
+		List<TempRecord> modelList = new ArrayList<TempRecord>();
+		for(Map<String, String> record : recordsList){
+			TempRecord model = new TempRecord();
+			model.setKidid(kidid);
+			model.setEquipid(equipid);
+			model.setRecordTime(DateUtil.StringToDate(record.get(TIME), DateStyle.YYYY_MM_DD_HH_MM_SS));
+			model.setTemperature(new BigDecimal(record.get(TEMP)));
+			modelList.add(model);
+		}
+		int[] result = Db.batchSave(modelList, 300);
+		if (result.length == recordsList.size()) {
+			LOG.warn("数据未全部保存，请联系管理员, actionKey is " + actionKey
+					+ ", tokenKey is " + tokenKey + ", number is " + number
+					+ ", kidid is " + kidid + ", records is " + records);
+		}
+		this.renderJson(new DataResponse(LevelEnum.SUCCESS, "新增温度记录成功", actionKey));
 		return;
 	}
 

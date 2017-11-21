@@ -132,5 +132,12 @@ public class DataResponse {
 	public void setData(Object data) {
 		this.data = data;
 	}
+	
+	@Override
+	public String toString() {
+		// TODO Auto-generated method stub
+		return "[DataResponse] method is " + method + ", level is " + level
+				+ ", msg is " + msg + ", data is " + data;
+	}
 
 }
