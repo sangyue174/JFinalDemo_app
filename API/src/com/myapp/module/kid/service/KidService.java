@@ -42,7 +42,7 @@ public class KidService {
 	}
 
 	/**
-	 * 根据kidid查询孩子信息
+	 * 根据kidid查询孩子信息（增加温度报警和设备信息相关）
 	 * 
 	 * @title: findKidById
 	 * @author sangyue
@@ -52,11 +52,11 @@ public class KidService {
 	 * @version V1.0
 	 */
 	public static Kid findKidById(int kidid) {
-		String sql = "select nickname, sex, birthday, headurl, healthIssue, number from tb_kid where id = ? ";
+		String sql = "select equipnum, nickname, sex, birthday, headurl, healthIssue, number, maxtime, mintime, isminalarm, ismaxalarm, isnotice from tb_kid where id = ? ";
 		Kid kid = new Kid().findFirst(sql, kidid);
 		return kid;
 	}
-
+	
 	/**
 	 * 根据用户和孩子id查询孩子信息
 	 * 
@@ -84,7 +84,7 @@ public class KidService {
 	 * @version V1.0
 	 */
 	public static List<Kid> findKidListByUserid(int userid) {
-		String sql = "select id, nickname, sex, birthday, headurl, healthIssue, number from tb_kid where userid = ? order by number";
+		String sql = "select id, equipnum, nickname, sex, birthday, headurl, healthIssue, number, maxtime, mintime, isminalarm, ismaxalarm, isnotice from tb_kid where userid = ? order by number";
 		List<Kid> kidList = new Kid().find(sql, userid);
 		return kidList;
 	}

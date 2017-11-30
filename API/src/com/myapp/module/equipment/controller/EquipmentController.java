@@ -24,15 +24,19 @@ import com.myapp.utils.response.LevelEnum;
  */
 public class EquipmentController extends Controller {
 	/**
-	 * 添加设备信息
+	 * 绑定设备和孩子信息
+	 * @title: bindEquipmentWithKidAction
+	 * @author sangyue
+	 * @date Nov 29, 2017 6:19:40 PM 
+	 * @version V1.0
 	 */
-	public void addEquipmentAction() {
+	public void bindEquipmentWithKidAction() {
 		String actionKey = getAttr("actionKey").toString();// 获取actionKey
 		String tokenKey = getPara("tokenKey");// 获取actionKey
 		int kidid = getParaToInt("kidid");// 孩子id
-		String number = getPara("number");// 设备编号
-		String maxtime = StringUtils.isEmpty(getPara("maxtime")) ? "41" : getPara("maxtime");// 最高温度
-		String mintime = StringUtils.isEmpty(getPara("mintime")) ? "37" : getPara("mintime");// 最低温度
+		String equipnum = getPara("equipnum");// 设备编号
+		String maxtime = StringUtils.isEmpty(getPara("maxtime")) ? "37" : getPara("maxtime");// 最高温度
+		String mintime = StringUtils.isEmpty(getPara("mintime")) ? "36" : getPara("mintime");// 最低温度
 		String ismaxalarm = getPara("ismaxalarm");// 是否高温报警(0:否1:是)
 		String isminalarm = getPara("isminalarm");// 是否低温报警(0:否1:是)
 		String isnotice = getPara("isnotice");// 是否接受提醒(0:否1:是)
@@ -40,7 +44,7 @@ public class EquipmentController extends Controller {
 			this.renderJson(new DataResponse(LevelEnum.ERROR, "孩子id不可为空", actionKey));
 			return;
 		}
-		if (StringUtils.isEmpty(number)) {
+		if (StringUtils.isEmpty(equipnum)) {
 			this.renderJson(new DataResponse(LevelEnum.ERROR, "设备编号不可为空", actionKey));
 			return;
 		}
@@ -60,7 +64,7 @@ public class EquipmentController extends Controller {
 		}
 		
 		// 根据设备编号当前设备是否存在
-		Equipment equipment = EquipmentService.findEquipmentByNumber(number);
+		Equipment equipment = EquipmentService.findEquipmentByNumber(equipnum);
 		if(equipment != null){
 			String isactive = equipment.getIsactive();// 是否有效(0:无效 1:有效)
 			if("0".endsWith(isactive)){
@@ -86,7 +90,7 @@ public class EquipmentController extends Controller {
 		Equipment equipmentNew = new Equipment();
 		equipmentNew.setUserid(userid);
 		equipmentNew.setKidid(kidid);
-		equipmentNew.setNumber(number);
+		equipmentNew.setNumber(equipnum);
 		equipmentNew.setMaxtime(new BigDecimal(maxtime));
 		equipmentNew.setMintime(new BigDecimal(mintime));
 		equipmentNew.setIsmaxalarm(ismaxalarm);
@@ -96,10 +100,10 @@ public class EquipmentController extends Controller {
 		//添加设备
 		boolean flag = EquipmentService.saveEquipment(equipmentNew);
 		if (!flag) {
-			this.renderJson(new DataResponse(LevelEnum.ERROR, "设备添加失败，设备编号[" + number + "]", actionKey));
+			this.renderJson(new DataResponse(LevelEnum.ERROR, "设备添加失败，设备编号[" + equipnum + "]", actionKey));
 			return;
 		}
-		this.renderJson(new DataResponse(LevelEnum.SUCCESS, "设备添加成功，设备编号[" + number + "]", actionKey));
+		this.renderJson(new DataResponse(LevelEnum.SUCCESS, "设备添加成功，设备编号[" + equipnum + "]", actionKey));
 		return;
 	}
 	
@@ -108,13 +112,13 @@ public class EquipmentController extends Controller {
 	 */
 	public void deleteEquipmentAction() {
 		String actionKey = getAttr("actionKey").toString();// 获取actionKey
-		String number = getPara("number");
-		if (StringUtils.isEmpty(number)) {
+		String equipnum = getPara("equipnum");
+		if (StringUtils.isEmpty(equipnum)) {
 			this.renderJson(new DataResponse(LevelEnum.ERROR, "设备编号不可为空", actionKey));
 			return;
 		}
 		// 取消该设备
-		int result = EquipmentService.positiveEquipment(number);
+		int result = EquipmentService.positiveEquipment(equipnum);
 		if (result == 1) {
 			this.renderJson(new DataResponse(LevelEnum.SUCCESS, "设备注销成功", actionKey));
 			return;
@@ -132,13 +136,13 @@ public class EquipmentController extends Controller {
 	 */
 	public void activeEquipmentAction() {
 		String actionKey = getAttr("actionKey").toString();// 获取actionKey
-		String number = getPara("number");
-		if (StringUtils.isEmpty(number)) {
+		String equipnum = getPara("equipnum");
+		if (StringUtils.isEmpty(equipnum)) {
 			this.renderJson(new DataResponse(LevelEnum.ERROR, "设备编号不可为空", actionKey));
 			return;
 		}
 		//设备编号激活设备
-		int result = EquipmentService.activeEquipment(number);
+		int result = EquipmentService.activeEquipment(equipnum);
 		if (result == 1) {
 			this.renderJson(new DataResponse(LevelEnum.SUCCESS, "设备激活成功", actionKey));
 			return;
@@ -156,20 +160,20 @@ public class EquipmentController extends Controller {
 	 */
 	public void updateEquipmentAction() {
 		String actionKey = getAttr("actionKey").toString();// 获取actionKey
-		String number = getPara("number");// 设备编号
+		String equipnum = getPara("equipnum");// 设备编号
 		String maxtime = StringUtils.isEmpty(getPara("maxtime")) ? "41" : getPara("maxtime");// 最高温度
 		String mintime = StringUtils.isEmpty(getPara("mintime")) ? "37" : getPara("mintime");// 最低温度
 		String ismaxalarm = getPara("ismaxalarm");// 是否高温报警(0:否1:是)
 		String isminalarm = getPara("isminalarm");// 是否低温报警(0:否1:是)
 		String isnotice = getPara("isnotice");// 是否接受提醒(0:否1:是)
-		if (StringUtils.isEmpty(number)) {
+		if (StringUtils.isEmpty(equipnum)) {
 			this.renderJson(new DataResponse(LevelEnum.ERROR, "设备编号不可为空", actionKey));
 			return;
 		}
 		// 根据设备编号查询设备信息
-		Equipment equipdb = EquipmentService.findEquipmentByNumber(number);
+		Equipment equipdb = EquipmentService.findEquipmentByNumber(equipnum);
 		if(equipdb == null){
-			this.renderJson(new DataResponse(LevelEnum.ERROR, "当前设备不存在，设备编号[" + number + "]，请刷新重试", actionKey));
+			this.renderJson(new DataResponse(LevelEnum.ERROR, "当前设备不存在，设备编号[" + equipnum + "]，请刷新重试", actionKey));
 			return;
 		}
 		int equipid = equipdb.getId();// 获取db中的设备id
@@ -184,10 +188,10 @@ public class EquipmentController extends Controller {
 		//添加设备
 		boolean flag = EquipmentService.updateEquipment(equipment);
 		if (!flag) {
-			this.renderJson(new DataResponse(LevelEnum.ERROR, "修改设备信息失败，设备编号[" + number + "]", actionKey));
+			this.renderJson(new DataResponse(LevelEnum.ERROR, "修改设备信息失败，设备编号[" + equipnum + "]", actionKey));
 			return;
 		}
-		this.renderJson(new DataResponse(LevelEnum.SUCCESS, "修改设备信息成功，设备编号[" + number + "]", actionKey));
+		this.renderJson(new DataResponse(LevelEnum.SUCCESS, "修改设备信息成功，设备编号[" + equipnum + "]", actionKey));
 		return;
 	}
 	
@@ -196,18 +200,18 @@ public class EquipmentController extends Controller {
 	 */
 	public void findEquipmentAction() {
 		String actionKey = getAttr("actionKey").toString();// 获取actionKey
-		String number = getPara("number");// 设备编号
-		if (StringUtils.isEmpty(number)) {
+		String equipnum = getPara("equipnum");// 设备编号
+		if (StringUtils.isEmpty(equipnum)) {
 			this.renderJson(new DataResponse(LevelEnum.ERROR, "设备编号不可为空", actionKey));
 			return;
 		}
 		//根据设备编号查找设备
-		Equipment equipment = EquipmentService.findEquipmentByNumber(number);
+		Equipment equipment = EquipmentService.findEquipmentByNumber(equipnum);
 		if(equipment == null){
-			this.renderJson(new DataResponse(LevelEnum.ERROR, "未查询到该设备，设备编号[" + number + "]", actionKey));
+			this.renderJson(new DataResponse(LevelEnum.ERROR, "未查询到该设备，设备编号[" + equipnum + "]", actionKey));
 			return;
 		}
-		this.renderJson(new DataResponse(LevelEnum.SUCCESS, "查询设备信息成功，设备编号[" + number + "]", actionKey, equipment));
+		this.renderJson(new DataResponse(LevelEnum.SUCCESS, "查询设备信息成功，设备编号[" + equipnum + "]", actionKey, equipment));
 		return;
 		
 	}

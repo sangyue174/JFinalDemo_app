@@ -27,6 +27,24 @@ public abstract class BaseKid<M extends BaseKid<M>> extends Model<M> implements 
 		return get("userid");
 	}
 
+	public M setEquipid(java.lang.Integer equipid) {
+		set("equipid", equipid);
+		return (M)this;
+	}
+
+	public java.lang.Integer getEquipid() {
+		return get("equipid");
+	}
+
+	public M setEquipnum(java.lang.String equipnum) {
+		set("equipnum", equipnum);
+		return (M)this;
+	}
+
+	public java.lang.String getEquipnum() {
+		return get("equipnum");
+	}
+
 	public M setNickname(java.lang.String nickname) {
 		set("nickname", nickname);
 		return (M)this;
@@ -79,6 +97,51 @@ public abstract class BaseKid<M extends BaseKid<M>> extends Model<M> implements 
 
 	public java.lang.Integer getNumber() {
 		return get("number");
+	}
+
+	public M setMaxtime(java.math.BigDecimal maxtime) {
+		set("maxtime", maxtime);
+		return (M)this;
+	}
+
+	public java.math.BigDecimal getMaxtime() {
+		return get("maxtime");
+	}
+
+	public M setMintime(java.math.BigDecimal mintime) {
+		set("mintime", mintime);
+		return (M)this;
+	}
+
+	public java.math.BigDecimal getMintime() {
+		return get("mintime");
+	}
+
+	public M setIsminalarm(java.lang.String isminalarm) {
+		set("isminalarm", isminalarm);
+		return (M)this;
+	}
+
+	public java.lang.String getIsminalarm() {
+		return get("isminalarm");
+	}
+
+	public M setIsmaxalarm(java.lang.String ismaxalarm) {
+		set("ismaxalarm", ismaxalarm);
+		return (M)this;
+	}
+
+	public java.lang.String getIsmaxalarm() {
+		return get("ismaxalarm");
+	}
+
+	public M setIsnotice(java.lang.String isnotice) {
+		set("isnotice", isnotice);
+		return (M)this;
+	}
+
+	public java.lang.String getIsnotice() {
+		return get("isnotice");
 	}
 
 }
