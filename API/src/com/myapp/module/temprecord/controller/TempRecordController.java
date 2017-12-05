@@ -38,7 +38,7 @@ public class TempRecordController extends Controller {
 	private final String TIME = "time";
 	private final String TEMP = "temp";
 	/**
-	 * 查询温度趋势图
+	 * 查询当前孩子温度趋势图
 	 * @title: findTempRecordChartAction
 	 * @author sangyue
 	 * @date Jun 13, 2017 9:44:27 PM 
@@ -46,24 +46,28 @@ public class TempRecordController extends Controller {
 	 */
 	public void findTempRecordChartAction() {
 		String actionKey = getAttr("actionKey").toString();// 获取actionKey
-		String number = getPara("number");// 设备编号
+		String tokenKey = getPara("tokenKey");// 获取actionKey
+		int kidid = getParaToInt("kidid");// 孩子id
 		String date = StringUtils.isEmpty(getPara("date")) ? DateUtil.DateToString(new Date(), "yyyyMMdd"):getPara("date");// 日期(yyyyMMdd格式)，默认当前日期
-		if (StringUtils.isEmpty(number)) {
-			this.renderJson(new DataResponse(LevelEnum.ERROR, "设备标号不可为空，请填写", actionKey));
+		// 根据tokenKey查询相关用户信息
+		UserAuth userAuth = UserService.findUserAuthByTokenKey(tokenKey);
+		if (userAuth == null) {
+			this.renderJson(new DataResponse(LevelEnum.ERROR, "未查询到当前tokenKey[" + tokenKey + "]用户，请重试", actionKey));
 			return;
 		}
-		// 校验是否存在该设备
-		Equipment equipment = EquipmentService.findEquipmentByNumber(number);
-		if (equipment == null) {
-			this.renderJson(new DataResponse(LevelEnum.ERROR, "该设备不存在，设备编号[" + number + "]，请联系管理员", actionKey));
+		int userid = userAuth.getUserid();
+		
+		// 查询当前用户下是否包含此孩子
+		Kid kid = KidService.findKidByUserAndId(kidid, userid);
+		if(kid == null){
+			this.renderJson(new DataResponse(LevelEnum.ERROR, "未查询到当前tokenKey[" + tokenKey + "]相关的孩子信息，请重试", actionKey));
 			return;
 		}
-		int equipid = equipment.getId();// 获取设备id
 		
 		// 根据date查询TempRecord
-		List<TempRecord> tempRecordList = TempRecordService.findTempRecordByDate(equipid, date, date);
+		List<TempRecord> tempRecordList = TempRecordService.findTempRecordByDateAndKid(kidid, date, date);
 		// 根据date查询最大最小温度记录
-		TempRecord maxminRecord = TempRecordService.findMaxMinTempRecordByDate(equipid, date, date);
+		TempRecord maxminRecord = TempRecordService.findMaxMinTempRecordByDateAndKid(kidid, date, date);
 		// 定义返回map
 		Map<String, Object> resultMap = new HashMap<String, Object>();
 		resultMap.put("maxTemp", maxminRecord.getMaxTemp());
@@ -74,7 +78,7 @@ public class TempRecordController extends Controller {
 	}
 	
 	/**
-	 * 查询当前设备涉及的所有日期
+	 * 查询当前孩子涉及的所有日期
 	 * @title: findTempRecordDateAction
 	 * @author sangyue
 	 * @date Jun 15, 2017 12:39:24 AM 
@@ -82,21 +86,25 @@ public class TempRecordController extends Controller {
 	 */
 	public void findTempRecordDateAction() {
 		String actionKey = getAttr("actionKey").toString();// 获取actionKey
-		String number = getPara("number");// 设备编号
-		if (StringUtils.isEmpty(number)) {
-			this.renderJson(new DataResponse(LevelEnum.ERROR, "设备编号不可为空，请填写", actionKey));
+		String tokenKey = getPara("tokenKey");// 获取actionKey
+		int kidid = getParaToInt("kidid");// 孩子id
+		// 根据tokenKey查询相关用户信息
+		UserAuth userAuth = UserService.findUserAuthByTokenKey(tokenKey);
+		if (userAuth == null) {
+			this.renderJson(new DataResponse(LevelEnum.ERROR, "未查询到当前tokenKey[" + tokenKey + "]用户，请重试", actionKey));
 			return;
 		}
-		// 校验是否存在该设备
-		Equipment equipment = EquipmentService.findEquipmentByNumber(number);
-		if (equipment == null) {
-			this.renderJson(new DataResponse(LevelEnum.ERROR, "该设备不存在，设备编号[" + number + "]，请联系管理员", actionKey));
-			return;
-		}
-		int equipid = equipment.getId();// 获取设备id
+		int userid = userAuth.getUserid();
 		
-		// 根据equipid查询设备涉及的所有日期
-		List<TempRecord> tempRecordList = TempRecordService.findTempRecordDateGroupbyRecordTime(equipid);
+		// 查询当前用户下是否包含此孩子
+		Kid kid = KidService.findKidByUserAndId(kidid, userid);
+		if(kid == null){
+			this.renderJson(new DataResponse(LevelEnum.ERROR, "未查询到当前tokenKey[" + tokenKey + "]相关的孩子信息，请重试", actionKey));
+			return;
+		}
+		
+		// 根据kidid查询设备涉及的所有日期
+		List<TempRecord> tempRecordList = TempRecordService.findTempRecordDateByKidGroupbyRecordTime(kidid);
 		// 循环将tempRecord取出并存在list中返回给app
 		List<String> recordList = new ArrayList<String>();
 		for (TempRecord tempRecord : tempRecordList) {
@@ -117,11 +125,15 @@ public class TempRecordController extends Controller {
 	public void addTempRecordsAction() {
 		String actionKey = getAttr("actionKey").toString();// 获取actionKey
 		String tokenKey = getPara("tokenKey");// 获取actionKey
-		String number = getPara("number");// 设备编号
+		String equipnum = getPara("equipnum");// 设备编号
 		int kidid = getParaToInt("kidid");// 孩子id
 		String records = getPara("records");// 温度记录[{"time":"yyyy-MM-dd HH:mm:ss","temp":"36.6"},{"time":"yyyy-MM-dd HH:mm:ss","temp":"37.6"}]
-		if (StringUtils.isEmpty(number)) {
+		if (StringUtils.isEmpty(equipnum)) {
 			this.renderJson(new DataResponse(LevelEnum.ERROR, "设备编号不可为空，请填写", actionKey));
+			return;
+		}
+		if (kidid == 0) {
+			this.renderJson(new DataResponse(LevelEnum.ERROR, "孩子id不可为空，请填写", actionKey));
 			return;
 		}
 		if (StringUtils.isEmpty(records)) {
@@ -129,15 +141,15 @@ public class TempRecordController extends Controller {
 			return;
 		}
 		// 校验是否存在该设备
-		Equipment equipment = EquipmentService.findEquipmentByNumber(number);
+		Equipment equipment = EquipmentService.findEquipmentByEquipnum(equipnum);
 		if (equipment == null) {
-			this.renderJson(new DataResponse(LevelEnum.ERROR, "该设备不存在，设备编号[" + number + "]，请联系管理员", actionKey));
+			this.renderJson(new DataResponse(LevelEnum.ERROR, "该设备不存在，设备编号[" + equipnum + "]，请联系管理员", actionKey));
 			return;
 		}
 		String isactive = equipment.getIsactive();// 是否有效
 		int equipid = equipment.getId();// 获取设备id
 		if("0".equals(isactive)){
-			this.renderJson(new DataResponse(LevelEnum.ERROR, "当前孩子没有绑定有效设备，设备编号[" + number + "]，请先添加设备", actionKey));
+			this.renderJson(new DataResponse(LevelEnum.ERROR, "当前设备未激活，设备编号[" + equipnum + "]，请联系管理员", actionKey));
 			return;
 		}
 		
@@ -166,6 +178,7 @@ public class TempRecordController extends Controller {
 			TempRecord model = new TempRecord();
 			model.setKidid(kidid);
 			model.setEquipid(equipid);
+			model.setEquipnum(equipnum);
 			model.setRecordTime(DateUtil.StringToDate(record.get(TIME), DateStyle.YYYY_MM_DD_HH_MM_SS));
 			model.setTemperature(new BigDecimal(record.get(TEMP)));
 			modelList.add(model);
@@ -173,7 +186,7 @@ public class TempRecordController extends Controller {
 		int[] result = Db.batchSave(modelList, 300);
 		if (result.length == recordsList.size()) {
 			LOG.warn("数据未全部保存，请联系管理员, actionKey is " + actionKey
-					+ ", tokenKey is " + tokenKey + ", number is " + number
+					+ ", tokenKey is " + tokenKey + ", equipnum is " + equipnum
 					+ ", kidid is " + kidid + ", records is " + records);
 		}
 		this.renderJson(new DataResponse(LevelEnum.SUCCESS, "新增温度记录成功", actionKey));

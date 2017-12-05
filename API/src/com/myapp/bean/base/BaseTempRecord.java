@@ -36,6 +36,15 @@ public abstract class BaseTempRecord<M extends BaseTempRecord<M>> extends Model<
 		return get("equipid");
 	}
 
+	public M setEquipnum(java.lang.String equipnum) {
+		set("equipnum", equipnum);
+		return (M)this;
+	}
+
+	public java.lang.String getEquipnum() {
+		return get("equipnum");
+	}
+
 	public M setRecordTime(java.util.Date recordTime) {
 		set("recordTime", recordTime);
 		return (M)this;

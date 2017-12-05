@@ -23,12 +23,12 @@ public class EquipmentService {
 
 	/**
 	 * 取消该设备
-	 * @param number
+	 * @param equipnum
 	 * @return 
 	 */
-	public static int positiveEquipment(String number) {
-		String sql = "update tb_equipment set isactive = '0' where number = ? ";
-		return Db.update(sql, number);
+	public static int positiveEquipment(String equipnum) {
+		String sql = "update tb_equipment set isactive = '0' where equipnum = ? ";
+		return Db.update(sql, equipnum);
 	}
 	
 	/**
@@ -36,13 +36,13 @@ public class EquipmentService {
 	 * @title: activeEquipment
 	 * @author sangyue
 	 * @date Jun 18, 2017 6:38:19 PM
-	 * @param number
+	 * @param equipnum
 	 * @return 
 	 * @version V1.0
 	 */
-	public static int activeEquipment(String number) {
-		String sql = "update tb_equipment set isactive = '1' where number = ? ";
-		return Db.update(sql, number);
+	public static int activeEquipment(String equipnum) {
+		String sql = "update tb_equipment set isactive = '1' where equipnum = ? ";
+		return Db.update(sql, equipnum);
 	}
 	
 	/**
@@ -63,9 +63,9 @@ public class EquipmentService {
 	 * @param equipmentId
 	 * @return
 	 */
-	public static Equipment findEquipmentByNumber(String number) {
-		String sql = "select id, kidid, number, maxtime, mintime, isminalarm, ismaxalarm, isnotice, isactive from tb_equipment where number = ? ";
-		return new Equipment().findFirst(sql, number);
+	public static Equipment findEquipmentByEquipnum(String equipnum) {
+		String sql = "select id, equipnum, isactive from tb_equipment where equipnum = ? ";
+		return new Equipment().findFirst(sql, equipnum);
 	}
 
 }

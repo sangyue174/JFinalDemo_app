@@ -68,8 +68,39 @@ public class KidService {
 	 * @version V1.0
 	 */
 	public static Kid findKidByUserAndId(int kidid, int userid) {
-		String sql = "select nickname, sex, birthday, headurl, healthIssue, number from tb_kid where id = ? and userid = ? ";
+		String sql = "select id, nickname, sex, birthday, headurl, healthIssue, number, equipid, equipnum from tb_kid where id = ? and userid = ? ";
 		Kid kid = new Kid().findFirst(sql, kidid, userid);
+		return kid;
+	}
+	
+	/**
+	 * 根据用户和设备编号查询孩子信息
+	 * @title: findKidByEquipnumAndUser
+	 * @author sangyue
+	 * @date Dec 4, 2017 2:48:47 PM
+	 * @param kidid
+	 * @param userid
+	 * @return 
+	 * @version V1.0
+	 */
+	public static Kid findKidByEquipnumAndUser(String equipnum, int userid) {
+		String sql = "select nickname, sex, birthday, headurl, healthIssue, number from tb_kid where equipnum = ? and userid = ? ";
+		Kid kid = new Kid().findFirst(sql, equipnum, userid);
+		return kid;
+	}
+	
+	/**
+	 * 根据设备编号查询孩子信息
+	 * @title: findKidByEquipnum
+	 * @author sangyue
+	 * @date Dec 4, 2017 3:06:26 PM
+	 * @param equipnum
+	 * @return 
+	 * @version V1.0
+	 */
+	public static Kid findKidByEquipnum(String equipnum) {
+		String sql = "select userid, id, nickname, sex, birthday, headurl, healthIssue, number from tb_kid where equipnum = ?";
+		Kid kid = new Kid().findFirst(sql, equipnum);
 		return kid;
 	}
 	

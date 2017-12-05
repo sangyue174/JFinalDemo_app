@@ -43,7 +43,7 @@ public class TempRecordService {
 	}
 
 	/**
-	 * 根据时间查询TempRecord
+	 * 根据时间和设备id查询TempRecord
 	 * 
 	 * @title: findTempRecordByDate
 	 * @author sangyue
@@ -60,9 +60,28 @@ public class TempRecordService {
 				startDate, endDate);
 		return tempRecordList;
 	}
+	
+	/**
+	 * 根据时间和孩子查询TempRecord
+	 * @title: findTempRecordByDateAndKid
+	 * @author sangyue
+	 * @date Dec 4, 2017 6:11:51 PM
+	 * @param kidid
+	 * @param startDate
+	 * @param endDate
+	 * @return 
+	 * @version V1.0
+	 */
+	public static List<TempRecord> findTempRecordByDateAndKid(Integer kidid,
+			String startDate, String endDate) {
+		String sql = "select recordTime, temperature from tb_temp_record where kidid = ? and Date(recordTime) between ? and ? ";
+		List<TempRecord> tempRecordList = new TempRecord().find(sql, kidid,
+				startDate, endDate);
+		return tempRecordList;
+	}
 
 	/**
-	 * 根据时间查询最高最低TempRecord
+	 * 根据时间设备id查询最高最低TempRecord
 	 * 
 	 * @title: findMaxMinTempRecordByDate
 	 * @author sangyue
@@ -82,6 +101,25 @@ public class TempRecordService {
 	}
 	
 	/**
+	 * 根据时间和孩子查询最高最低TempRecord
+	 * @title: findMaxMinTempRecordByDateAndKid
+	 * @author sangyue
+	 * @date Dec 4, 2017 6:13:05 PM
+	 * @param kidid
+	 * @param startDate
+	 * @param endDate
+	 * @return 
+	 * @version V1.0
+	 */
+	public static TempRecord findMaxMinTempRecordByDateAndKid(Integer kidid,
+			String startDate, String endDate) {
+		String sql = "select max(temperature) maxTemp, min(temperature) minTemp from tb_temp_record where kidid = ? and Date(recordTime) between ? and ? ";
+		TempRecord tempRecord = new TempRecord().findFirst(sql, kidid,
+				startDate, endDate);
+		return tempRecord;
+	}
+	
+	/**
 	 * 查询当前设备涉及的所有日期
 	 * @title: findTempRecordDate
 	 * @author sangyue
@@ -93,6 +131,21 @@ public class TempRecordService {
 	public static List<TempRecord> findTempRecordDateGroupbyRecordTime(Integer equipid) {
 		String sql = "select Date(recordTime) recordTime from tb_temp_record where equipid = ? group by Date(recordTime) order by Date(recordTime) ";
 		List<TempRecord> tempRecordList = new TempRecord().find(sql, equipid);
+		return tempRecordList;
+	}
+	
+	/**
+	 * 查询孩子涉及的所有日期
+	 * @title: findTempRecordDateByKidGroupbyRecordTime
+	 * @author sangyue
+	 * @date Dec 4, 2017 6:22:06 PM
+	 * @param equipid
+	 * @return 
+	 * @version V1.0
+	 */
+	public static List<TempRecord> findTempRecordDateByKidGroupbyRecordTime(Integer kidid) {
+		String sql = "select Date(recordTime) recordTime from tb_temp_record where kidid = ? group by Date(recordTime) order by Date(recordTime) ";
+		List<TempRecord> tempRecordList = new TempRecord().find(sql, kidid);
 		return tempRecordList;
 	}
 
