@@ -76,6 +76,14 @@ public class EquipmentController extends Controller {
 				this.renderJson(new DataResponse(actionKey, LevelEnum.ERROR, "004", "当前设备已经和其他用户孩子绑定，无法继续绑定", null));
 				return;
 			}
+			// 清空同用户下原先孩子绑定的设备信息，add by sangyue at 2017-12-8 14:50:02
+			kidTemp.setEquipid(null);
+			kidTemp.setEquipnum(null);
+			boolean flag = KidService.updateKid(kidTemp);
+			if (!flag) {
+				this.renderJson(new DataResponse(LevelEnum.ERROR, "清空同用户下原先孩子绑定的设备信息失败，设备编号[" + equipnum + "]，请联系管理员", actionKey));
+				return;
+			}
 		}
 		
 		// 根据设备编号查询设备信息
