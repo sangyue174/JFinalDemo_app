@@ -45,7 +45,7 @@ public class MessageUtil {
 		req.setSmsTemplateCode("SMS_70590485");// 验证码模板名称
 		try {
 			AlibabaAliqinFcSmsNumSendResponse rsp = client.execute(req);
-			log.debug("验证码信息，手机号：【" + number + ", 验证码：【" + code + "】，返回内容：" + rsp.getBody());
+			log.info("验证码信息，手机号：【" + number + ", 验证码：【" + code + "】，返回内容：" + rsp.getBody());
 			String errCode = rsp.getResult() == null ? "1" : rsp.getResult().getErrCode();
 			if ("0".equals(errCode)) {
 				result = true;
@@ -57,6 +57,6 @@ public class MessageUtil {
 	}
 	
 	public static void main(String[] args) {
-		MessageUtil.sendSupadataCode("123", "18615566651");
+		MessageUtil.sendSupadataCode("0023", "18615566651");
 	}
 }
